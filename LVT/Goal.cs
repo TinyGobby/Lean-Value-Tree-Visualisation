@@ -4,10 +4,10 @@ using System.Text;
 
 namespace LVT
 {
-    class Goal
+    public class Goal
     {
-        public string title { get; set; }
-        public List<Bet> bets { get; set; }
+        public string Title { get; set; }
+        public List<Bet> Bets { get; set; }
 
     }
 }

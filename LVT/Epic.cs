@@ -4,10 +4,10 @@ using System.Text;
 
 namespace LVT
 {
-    class Epic
+    public class Epic
     {
-        public string description { get; set; }
-        public string deadline { get; set; }
+        public string Description { get; set; }
+        public string Deadline { get; set; }
 
     }
 }

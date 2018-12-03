@@ -4,12 +4,12 @@ using System.Text;
 
 namespace LVT
 {
-    class Measure
+    public class Measure
     {
-        public string description { get; set; }
-        public string deadline { get; set; }
-        public int amount { get; set; }
-        public string units { get; set; }
+        public string Description { get; set; }
+        public string Deadline { get; set; }
+        public int Amount { get; set; }
+        public string Units { get; set; }
 
     }
 }
