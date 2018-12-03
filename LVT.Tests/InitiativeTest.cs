@@ -17,9 +17,19 @@ namespace Tests
         public void getTitle()
         {
             string expectedInitialTitle = "untitled";
-            string result = testedObject.getTitle();
+            string result = testedObject.Title;
 
-            Assert.AreEqual(result, expectedInitialTitle);
+            Assert.AreEqual(expectedInitialTitle, result);
+        }
+
+        [Test]
+        public void setTitle()
+        {
+            string newTitle = "Test";
+            testedObject.Title = newTitle;
+            string result = testedObject.Title;
+
+            Assert.AreEqual(newTitle, result);
         }
     }
 }
