@@ -6,14 +6,20 @@ namespace LVT
 {
     public class Initiative
     {
-        public string title { get; set; }
+        public Initiative()
+        {
+            _title = "untitled";
+        }
+
+        public string Title
+        {
+            get { return _title; }
+            set { _title = value; }
+        }
+
         public List<Measure> measures { get; set; }
         public List<Epic> epics { get; set; }
 
-        public string getTitle()
-        {
-            return "untitled";
-        }
- 
+        private string _title;
     }
 }
