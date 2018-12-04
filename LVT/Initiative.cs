@@ -9,6 +9,7 @@ namespace LVT
         public Initiative()
         {
             _title = "untitled";
+            _measures = new List<Measure>();
         }
 
         public string Title
@@ -17,9 +18,15 @@ namespace LVT
             set { _title = value; }
         }
 
-        public List<Measure> measures { get; set; }
+        public List<Measure> Measures
+        {
+            get { return _measures; }
+            set { _measures = value; }
+        }
+
         public List<Epic> epics { get; set; }
 
         private string _title;
+        private List<Measure> _measures;
     }
 }
