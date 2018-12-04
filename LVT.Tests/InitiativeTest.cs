@@ -102,10 +102,19 @@ namespace Tests
         }
 
         [Test]
-        public void isNotBottomOfTree()
+        public void isNotBottomOfEpicTree()
         {
             Epic testEpic = new Epic();
             testedObject.Epics.Add(testEpic);
+
+            Assert.False(testedObject.isBottomOfTree());
+        }
+
+        public void isNotBottomOfMeasureTree()
+        {
+            Measure testMeasure = new Measure();
+            testedObject.Measures.Add(testMeasure);
+
             Assert.False(testedObject.isBottomOfTree());
         }
     }
