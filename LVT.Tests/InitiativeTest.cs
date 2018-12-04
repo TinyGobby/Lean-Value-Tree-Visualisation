@@ -110,9 +110,38 @@ namespace Tests
         }
 
         [Test]
-        public void returnsNode()
+        public void returnsNodeIfBottomOfTree()
         {
-            
+            List<string> nodeList = new List<string>();
+            List<string> result = testedObject.checkNode(nodeList);
+
+            Assert.IsNotEmpty(result);
+        }
+
+        [Test]
+        public void generateNodeID()
+        {
+            List<string> nodeList = new List<string>();
+            string expected = "initiative1";
+            string result = testedObject.generateNodeID(nodeList);
+
+            Assert.AreEqual(expected, result);
+        }
+
+        [Test]
+        public void generateNodeIDWhenThereAreAlreadyNodes()
+        {
+            List<string> nodeList = new List<string>();
+            string initialNode = "initiative1";
+            string secondNode = "initiative2"; // skipping test for two nodes as this will be covered in this test
+            nodeList.Add(initialNode);
+            nodeList.Add(secondNode);
+
+            string expected = "initiative3";
+            string result = testedObject.generateNodeID(nodeList);
+
+
+            Assert.AreEqual(expected, result);
         }
     }
 }
