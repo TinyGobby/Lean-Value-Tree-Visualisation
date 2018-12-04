@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using LVT.LVT.Services;
+using NUnit.Framework;
 
 namespace LVT.Tests
 {
@@ -8,7 +9,9 @@ namespace LVT.Tests
         [Test]
         public void ParseJsonLVT_ReturnsLVTObject()
         {
-            LeanValueTree SingleBranchLVT = Program.ParseJsonLVT();
+            JsonParser Parser = new JsonParser();
+            LeanValueTree SingleBranchLVT = Parser.ParseJsonLVT(@"C:\Users\beckerfs\Documents\Projects\LVT\Lean-Value-Tree-Visualisation\LVT.Tests\TestLVT.json");
+            
             Assert.IsInstanceOf(typeof(LeanValueTree), SingleBranchLVT);
         }
     }
@@ -16,13 +19,13 @@ namespace LVT.Tests
     [TestFixture]
     public class TestsLVTVisionObject
     {
-        LeanValueTree SingleBranchLVT;
         Vision VisionObj;
 
         [SetUp]
         public void Setup()
         {
-            SingleBranchLVT = Program.ParseJsonLVT();
+            JsonParser Parser = new JsonParser();
+            LeanValueTree SingleBranchLVT = Parser.ParseJsonLVT(@"C:\Users\beckerfs\Documents\Projects\LVT\Lean-Value-Tree-Visualisation\LVT.Tests\TestLVT.json");
             VisionObj = SingleBranchLVT.Vision;
         }
 
@@ -48,20 +51,20 @@ namespace LVT.Tests
     [TestFixture]
     public class TestsLVTGoalObject
     {
-        LeanValueTree SingleBranchLVT;
         Goal GoalObj;
 
         [SetUp]
         public void Setup()
         {
-            SingleBranchLVT = Program.ParseJsonLVT();
+            JsonParser Parser = new JsonParser();
+            LeanValueTree SingleBranchLVT = Parser.ParseJsonLVT(@"C:\Users\beckerfs\Documents\Projects\LVT\Lean-Value-Tree-Visualisation\LVT.Tests\TestLVT.json");
             GoalObj = SingleBranchLVT.Vision.Goals[0];
         }
 
         [Test]
         public void SingleBranchLVT_Goal_IsTypeOfGoal()
         {
-            Assert.IsInstanceOf(typeof(Bet), GoalObj,"testObj");
+            Assert.IsInstanceOf(typeof(Goal), GoalObj,"testObj");
         }
 
         [Test]
@@ -81,13 +84,13 @@ namespace LVT.Tests
     [TestFixture]
     public class TestsLVTBetObject
     {
-        LeanValueTree SingleBranchLVT;
         Bet BetObj;
 
         [SetUp]
         public void Setup()
         {
-            SingleBranchLVT = Program.ParseJsonLVT();
+            JsonParser Parser = new JsonParser();
+            LeanValueTree SingleBranchLVT = Parser.ParseJsonLVT(@"C:\Users\beckerfs\Documents\Projects\LVT\Lean-Value-Tree-Visualisation\LVT.Tests\TestLVT.json");
             BetObj = SingleBranchLVT.Vision.Goals[0].Bets[0];
         }
 
@@ -113,13 +116,13 @@ namespace LVT.Tests
     [TestFixture]
     public class TestsLVTInitiativeObject
     {
-        LeanValueTree SingleBranchLVT;
         Initiative InitiativeObj;
 
         [SetUp]
         public void Setup()
         {
-            SingleBranchLVT = Program.ParseJsonLVT();
+            JsonParser Parser = new JsonParser();
+            LeanValueTree SingleBranchLVT = Parser.ParseJsonLVT(@"C:\Users\beckerfs\Documents\Projects\LVT\Lean-Value-Tree-Visualisation\LVT.Tests\TestLVT.json");
             InitiativeObj = SingleBranchLVT.Vision.Goals[0].Bets[0].Initiatives[0];
         }
         [Test]
@@ -150,13 +153,13 @@ namespace LVT.Tests
     [TestFixture]
     public class TestsLVTMeasureObj
     {
-        LeanValueTree SingleBranchLVT;
         Measure MeasureObj;
 
         [SetUp]
         public void Setup()
         {
-            SingleBranchLVT = Program.ParseJsonLVT();
+            JsonParser Parser = new JsonParser();
+            LeanValueTree SingleBranchLVT = Parser.ParseJsonLVT(@"C:\Users\beckerfs\Documents\Projects\LVT\Lean-Value-Tree-Visualisation\LVT.Tests\TestLVT.json");
             MeasureObj = SingleBranchLVT.Vision.Goals[0].Bets[0].Initiatives[0].Measures[0];
         }
         [Test]
@@ -193,13 +196,13 @@ namespace LVT.Tests
     [TestFixture]
     public class TestsLVTEpicObj
     {
-        LeanValueTree SingleBranchLVT;
         Epic EpicObj;
 
         [SetUp]
         public void Setup()
         {
-            SingleBranchLVT = Program.ParseJsonLVT();
+            JsonParser Parser = new JsonParser();
+            LeanValueTree SingleBranchLVT = Parser.ParseJsonLVT(@"C:\Users\beckerfs\Documents\Projects\LVT\Lean-Value-Tree-Visualisation\LVT.Tests\TestLVT.json");
             EpicObj = SingleBranchLVT.Vision.Goals[0].Bets[0].Initiatives[0].Epics[0];
         }
 

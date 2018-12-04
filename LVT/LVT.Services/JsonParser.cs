@@ -7,7 +7,7 @@ using System.Text;
 
 namespace LVT.LVT.Services
 {
-    class JsonParser : IJsonToLVTParser
+    public class JsonParser : IJsonToLVTParser
     {
         public LeanValueTree ParseJsonLVT(string Path)
         {
