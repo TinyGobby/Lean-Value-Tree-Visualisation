@@ -3,16 +3,14 @@
 namespace LVT.Tests
 {
     [TestFixture]
-    public class ParseJSONLVT
+    public class ParseJSONLVTTest
     {
-
         [Test]
         public void ParseJsonLVT_ReturnsLVTObject()
         {
             LeanValueTree SingleBranchLVT = Program.ParseJsonLVT();
             Assert.IsInstanceOf(typeof(LeanValueTree), SingleBranchLVT);
         }
-
     }
 
     [TestFixture]
@@ -30,7 +28,6 @@ namespace LVT.Tests
 
         [Test]
         public void SingleBranchLVT_Vision_HasTitle()
-
         {
             Assert.AreEqual("visionTitle", VisionObj.Title);
         }
@@ -43,7 +40,6 @@ namespace LVT.Tests
 
         [Test]
         public void SingleBranchLVT_Vision_HasOneGoal()
-
         {
             Assert.AreEqual(1, VisionObj.Goals.Count);
         }
@@ -65,7 +61,7 @@ namespace LVT.Tests
         [Test]
         public void SingleBranchLVT_Goal_IsTypeOfGoal()
         {
-            Assert.IsInstanceOf(typeof(Goal), GoalObj);
+            Assert.IsInstanceOf(typeof(Bet), GoalObj,"testObj");
         }
 
         [Test]
@@ -77,11 +73,9 @@ namespace LVT.Tests
 
         [Test]
         public void SingleBranchLVT_Goal_HasOneBet()
-
         {
             Assert.AreEqual(1, GoalObj.Bets.Count);
         }
-
     }
 
     [TestFixture]
@@ -96,6 +90,7 @@ namespace LVT.Tests
             SingleBranchLVT = Program.ParseJsonLVT();
             BetObj = SingleBranchLVT.Vision.Goals[0].Bets[0];
         }
+
         [Test]
         public void SingleBranchLVT_Bet_IsTypeOfBet()
         {
@@ -110,7 +105,6 @@ namespace LVT.Tests
 
         [Test]
         public void SingleBranchLVT_Bet_HasOneInitiative()
-
         {
             Assert.AreEqual(1, BetObj.Initiatives.Count);
         }
@@ -136,21 +130,18 @@ namespace LVT.Tests
 
         [Test]
         public void SingleBranchLVT_Initiative_HasTitle()
-
         {
             Assert.AreEqual("initiativeTitle", InitiativeObj.Title);
         }
 
         [Test]
         public void SingleBranchLVT_Initative_HasOneMeasure()
-
         {
             Assert.AreEqual(1, InitiativeObj.Measures.Count);
         }
 
         [Test]
         public void SingleBranchLVT_Initative_HasOneEpic()
-
         {
             Assert.AreEqual(1, InitiativeObj.Epics.Count);
         }
@@ -197,7 +188,6 @@ namespace LVT.Tests
         {
             Assert.AreEqual("measureUnits", MeasureObj.Units);
         }
-
     }
 
     [TestFixture]
@@ -212,6 +202,7 @@ namespace LVT.Tests
             SingleBranchLVT = Program.ParseJsonLVT();
             EpicObj = SingleBranchLVT.Vision.Goals[0].Bets[0].Initiatives[0].Epics[0];
         }
+
         [Test]
         public void SingleBranchLVT_Epic_IsTypeOfEpic()
         {
@@ -229,8 +220,5 @@ namespace LVT.Tests
         {
             Assert.AreEqual("epicDeadline", EpicObj.Deadline);
         }
-    }
-
-
-    
+    }  
 }
