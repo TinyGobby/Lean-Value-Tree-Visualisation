@@ -122,7 +122,7 @@ namespace Tests
         public void generateNodeID()
         {
             List<string> nodeList = new List<string>();
-            string expected = "initiative1";
+            string expected = "initiative0";
             string result = testedObject.generateNodeID(nodeList);
 
             Assert.AreEqual(expected, result);
@@ -132,16 +132,29 @@ namespace Tests
         public void generateNodeIDWhenThereAreAlreadyNodes()
         {
             List<string> nodeList = new List<string>();
-            string initialNode = "initiative1";
-            string secondNode = "initiative2"; // skipping test for two nodes as this will be covered in this test
+            string initialNode = "initiative0";
+            string secondNode = "initiative1"; // skipping test for two nodes as this will be covered in this test
             nodeList.Add(initialNode);
             nodeList.Add(secondNode);
 
-            string expected = "initiative3";
+            string expected = "initiative2";
             string result = testedObject.generateNodeID(nodeList);
 
 
             Assert.AreEqual(expected, result);
+        }
+
+        [Test]
+        public void addNodeIdToArray()
+        {
+            List<string> nodeList = new List<string>();
+            string initialNode = "initiative0";
+            nodeList.Add(initialNode);
+
+            string expected = "initiative1";
+            List<string> result = testedObject.checkNode(nodeList);
+
+            Assert.Contains(expected, result);
         }
     }
 }

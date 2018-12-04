@@ -46,7 +46,8 @@ namespace LVT
         {
             if (isBottomOfTree())
             {
-                nodeList.Add("testString");
+                string nodeID = generateNodeID(nodeList);
+                nodeList.Add(nodeID);
             }
 
             return nodeList;
@@ -54,7 +55,12 @@ namespace LVT
 
         public string generateNodeID(List<string> nodeList)
         {
-            return "initiative1";
+            
+
+            int position = nodeList.Count;
+
+            return $"initiative{position}";
+
         }
 
         private string _title;
