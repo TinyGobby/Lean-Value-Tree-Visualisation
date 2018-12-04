@@ -20,9 +20,9 @@ namespace Tests
         public void TestGetTitle()
         {
             string expectedInitialTitle = "untitled";
-            string result = testedObject.Title;
+            string actual = testedObject.Title;
 
-            Assert.AreEqual(expectedInitialTitle, result);
+            Assert.AreEqual(expectedInitialTitle, actual);
         }
 
         [Test]
@@ -30,17 +30,17 @@ namespace Tests
         {
             string newTitle = "Test";
             testedObject.Title = newTitle;
-            string result = testedObject.Title;
+            string actual = testedObject.Title;
 
-            Assert.AreEqual(newTitle, result);
+            Assert.AreEqual(newTitle, actual);
         }
 
         [Test]
         public void TestGetMeasures()
         {
-            List<Measure> result = testedObject.Measures;
+            List<Measure> actual = testedObject.Measures;
 
-            Assert.IsEmpty(result);
+            Assert.IsEmpty(actual);
         }
 
         [Test]
@@ -48,9 +48,9 @@ namespace Tests
         {
             Measure testMeasure = new Measure();
             testedObject.Measures.Add(testMeasure);
-            Measure result = testedObject.Measures[0];
+            Measure actual = testedObject.Measures[0];
 
-            Assert.AreEqual(testMeasure, result);
+            Assert.AreEqual(testMeasure, actual);
         }
 
         [Test]
@@ -60,18 +60,18 @@ namespace Tests
             Measure testMeasure2 = new Measure();
             testedObject.Measures.Add(testMeasure);
             testedObject.Measures.Add(testMeasure2);
-            List<Measure> result = testedObject.Measures;
+            List<Measure> actual = testedObject.Measures;
 
-            Assert.Contains(testMeasure, result);
-            Assert.Contains(testMeasure2, result);
+            Assert.Contains(testMeasure, actual);
+            Assert.Contains(testMeasure2, actual);
         }
 
         [Test]
         public void TestGetEpics()
         {
-            List<Epic> result = testedObject.Epics;
+            List<Epic> actual = testedObject.Epics;
 
-            Assert.IsEmpty(result);
+            Assert.IsEmpty(actual);
         }
 
         [Test]
@@ -79,9 +79,9 @@ namespace Tests
         {
             Epic testEpic = new Epic();
             testedObject.Epics.Add(testEpic);
-            Epic result = testedObject.Epics[0];
+            Epic actual = testedObject.Epics[0];
 
-            Assert.AreEqual(testEpic, result);
+            Assert.AreEqual(testEpic, actual);
         }
 
         [Test]
@@ -91,10 +91,10 @@ namespace Tests
             Epic testEpic2 = new Epic();
             testedObject.Epics.Add(testEpic);
             testedObject.Epics.Add(testEpic2);
-            List<Epic> result = testedObject.Epics;
+            List<Epic> actual = testedObject.Epics;
 
-            Assert.Contains(testEpic, result);
-            Assert.Contains(testEpic2, result);
+            Assert.Contains(testEpic, actual);
+            Assert.Contains(testEpic2, actual);
         }
 
         [Test]
@@ -115,9 +115,9 @@ namespace Tests
         public void TestGenerateNodeID()
         {
             string expected = "initiative0";
-            string result = testedObject.GenerateNodeID(nodeList);
+            string actual = testedObject.GenerateNodeID(nodeList);
 
-            Assert.AreEqual(expected, result);
+            Assert.AreEqual(expected, actual);
         }
 
         [Test]
@@ -129,10 +129,10 @@ namespace Tests
             nodeList.Add(secondNode);
 
             string expected = "initiative2";
-            string result = testedObject.GenerateNodeID(nodeList);
+            string actual = testedObject.GenerateNodeID(nodeList);
 
 
-            Assert.AreEqual(expected, result);
+            Assert.AreEqual(expected, actual);
         }
 
         [Test]
@@ -144,17 +144,17 @@ namespace Tests
             nodeList.Add(initialInitiativeNode);
 
             string expected = "initiative1";
-            string result = testedObject.GenerateNodeID(nodeList);
+            string actual = testedObject.GenerateNodeID(nodeList);
 
-            Assert.AreEqual(expected, result);
+            Assert.AreEqual(expected, actual);
         }
 
         [Test]
         public void TestReturnsNodeIfBottomOfTree()
         {
-            List<string> result = testedObject.CheckNode(nodeList);
+            List<string> actual = testedObject.CheckNode(nodeList);
 
-            Assert.IsNotEmpty(result);
+            Assert.IsNotEmpty(actual);
         }
 
         [Test]
@@ -164,9 +164,25 @@ namespace Tests
             nodeList.Add(initialNode);
 
             string expected = "initiative1";
-            List<string> result = testedObject.CheckNode(nodeList);
+            List<string> actual = testedObject.CheckNode(nodeList);
 
-            Assert.Contains(expected, result);
+            Assert.Contains(expected, actual);
         }
+
+        [Test]
+        public void TestCalculateEdge()
+        {
+            string previousNode = "goal0";
+            string currentNode = "initiative0";
+            List<string> expected = new List<string>();
+            expected.Add(previousNode);
+            expected.Add(currentNode);
+
+            List<string> edgeList = new List<string>();
+
+            List<string> actual = testedObject.CalculateEdge(edgeList, previousNode);
+
+            Assert.AreEqual(expected, actual);
+;        }
     }
 }
