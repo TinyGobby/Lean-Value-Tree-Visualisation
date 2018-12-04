@@ -10,6 +10,7 @@ namespace LVT
         {
             _title = "untitled";
             _measures = new List<Measure>();
+            _epics = new List<Epic>();
         }
 
         public string Title
@@ -24,9 +25,14 @@ namespace LVT
             set { _measures = value; }
         }
 
-        public List<Epic> epics { get; set; }
+        public List<Epic> Epics
+        {
+            get { return _epics; }
+            set { _epics = value; }
+        }
 
         private string _title;
         private List<Measure> _measures;
+        private List<Epic> _epics;
     }
 }

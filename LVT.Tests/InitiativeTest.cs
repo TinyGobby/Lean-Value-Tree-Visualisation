@@ -49,7 +49,6 @@ namespace Tests
             Measure result = testedObject.Measures[0];
 
             Assert.AreEqual(testMeasure, result);
-            
         }
 
         [Test]
@@ -63,6 +62,37 @@ namespace Tests
 
             Assert.Contains(testMeasure, result);
             Assert.Contains(testMeasure2, result);
+        }
+
+        [Test]
+        public void getEpics()
+        {
+            List<Epic> result = testedObject.Epics;
+
+            Assert.IsEmpty(result);
+        }
+
+        [Test]
+        public void setEpics()
+        {
+            Epic testEpic = new Epic();
+            testedObject.Epics.Add(testEpic);
+            Epic result = testedObject.Epics[0];
+
+            Assert.AreEqual(testEpic, result);
+        }
+
+        [Test]
+        public void setMultipleEpics()
+        {
+            Epic testEpic = new Epic();
+            Epic testEpic2 = new Epic();
+            testedObject.Epics.Add(testEpic);
+            testedObject.Epics.Add(testEpic2);
+            List<Epic> result = testedObject.Epics;
+
+            Assert.Contains(testEpic, result);
+            Assert.Contains(testEpic2, result);
         }
     }
 }
