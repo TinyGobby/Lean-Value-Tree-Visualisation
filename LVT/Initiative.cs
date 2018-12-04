@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Text.RegularExpressions;
 
 namespace LVT
 {
@@ -55,11 +56,19 @@ namespace LVT
 
         public string generateNodeID(List<string> nodeList)
         {
-            
+            int count = 0;
+            Regex rx = new Regex(@"\b(initiative)");
 
-            int position = nodeList.Count;
+            foreach(string node in nodeList)
+            {
+                if (rx.IsMatch(node))
+                {
+                    count++;
+                    Console.WriteLine(count);
+                }
+            }
 
-            return $"initiative{position}";
+            return $"initiative{count}";
 
         }
 
