@@ -194,13 +194,12 @@ namespace Tests
             edge.Add(previousNode);
             edge.Add(currentNode);
 
-            List<List<string>> expected = new List<List<string>>;
+            List<List<string>> expected = new List<List<string>>();
             expected.Add(edge);
 
             List<List<string>> actual = testedObject.AddToEdgeList(edgeList, edge);
 
-            Assert.AreEqual(expected, actual)
-
+            Assert.AreEqual(expected, actual);
         }
     }
 }
