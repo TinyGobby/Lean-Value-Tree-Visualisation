@@ -62,5 +62,10 @@ namespace LVT
         }
 
         private readonly string _name;
+
+        public List<string> CalculateEdge(List<string> edgeList, string previousNode)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
