@@ -7,12 +7,13 @@ namespace LVT.Tests
     public class ParseJSONLVTTest
     {
         [Test]
-        public void ParseJsonLVT_ReturnsLVTObject()
+        public void ParseJsonLVTTests()
         {
             JsonParser Parser = new JsonParser();
             LeanValueTree SingleBranchLVT = Parser.ParseJsonLVT(@"C:\Users\beckerfs\Documents\Projects\LVT\Lean-Value-Tree-Visualisation\LVT.Tests\TestLVT.json");
             
-            Assert.IsInstanceOf(typeof(LeanValueTree), SingleBranchLVT);
+            Assert.IsInstanceOf(typeof(LeanValueTree), SingleBranchLVT, "ParseJsonLVT should return LeanValueTree object");
+            Assert.AreNotEqual(null, SingleBranchLVT.Vision, "ParseJsonLVT should populate objects inside the LVT");
         }
     }
 
@@ -30,21 +31,11 @@ namespace LVT.Tests
         }
 
         [Test]
-        public void SingleBranchLVT_Vision_HasTitle()
+        public void SingleBranchLVT_Vision_Tests()
         {
-            Assert.AreEqual("visionTitle", VisionObj.Title);
-        }
-
-        [Test]
-        public void SingleBranchLVT_Vision_IsTypeOfVision()
-        {
-            Assert.IsInstanceOf(typeof(Vision), VisionObj);
-        }
-
-        [Test]
-        public void SingleBranchLVT_Vision_HasOneGoal()
-        {
-            Assert.AreEqual(1, VisionObj.Goals.Count);
+            Assert.AreEqual("visionTitle", VisionObj.Title, "Vision should have title");
+            Assert.IsInstanceOf(typeof(Vision), VisionObj, "Test Vision should be instance of Vision Class");
+            Assert.AreEqual(1, VisionObj.Goals.Count, "Test Vision should have one goal");
         }
     }
 
@@ -62,22 +53,11 @@ namespace LVT.Tests
         }
 
         [Test]
-        public void SingleBranchLVT_Goal_IsTypeOfGoal()
+        public void SingleBranchLVT_GoalTests()
         {
-            Assert.IsInstanceOf(typeof(Goal), GoalObj,"testObj");
-        }
-
-        [Test]
-        public void SingleBranchLVT_Goal_HasTitle()
-
-        {
-            Assert.AreEqual("goalTitle", GoalObj.Title);
-        }
-
-        [Test]
-        public void SingleBranchLVT_Goal_HasOneBet()
-        {
-            Assert.AreEqual(1, GoalObj.Bets.Count);
+            Assert.IsInstanceOf(typeof(Goal), GoalObj,"Test Goal should be instance of Goal class");
+            Assert.AreEqual("goalTitle", GoalObj.Title, "Test Goal should have title");
+            Assert.AreEqual(1, GoalObj.Bets.Count, "Test Goal should have one Bet");
         }
     }
 

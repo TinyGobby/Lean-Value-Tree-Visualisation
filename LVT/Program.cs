@@ -12,7 +12,6 @@ namespace LVT
         {
             JsonParser Parser = new JsonParser();
             LeanValueTree newTree = Parser.ParseJsonLVT(@"C:\Users\beckerfs\Documents\Projects\LVT\Lean-Value-Tree-Visualisation\LVT\SingleBranchLVT.json");
-            Console.WriteLine(newTree.Vision.Title);
         }
     }
 }
