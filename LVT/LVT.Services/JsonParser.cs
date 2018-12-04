@@ -1,9 +1,6 @@
 ﻿using LVT.LVT.Interfaces;
 using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Text;
 
 namespace LVT.LVT.Services
 {
@@ -17,5 +14,11 @@ namespace LVT.LVT.Services
                 return (LeanValueTree)serializer.Deserialize(file, typeof(LeanValueTree));
             }
         }
+        public LeanValueTree ParseJsonLVTFromStream(StreamReader stream)
+        {
+            JsonSerializer serializer = new JsonSerializer();
+            return (LeanValueTree)serializer.Deserialize(stream, typeof(LeanValueTree));
+        }
+
     }
 }

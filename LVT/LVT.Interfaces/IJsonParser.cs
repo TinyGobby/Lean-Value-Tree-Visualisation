@@ -1,11 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
+using System.IO;
 
 namespace LVT.LVT.Interfaces
 {
     public interface IJsonToLVTParser
     {
-        LeanValueTree ParseJsonLVT(string path);
+        LeanValueTree ParseJsonLVT(String filePath);
+        LeanValueTree ParseJsonLVTFromStream(StreamReader stream);
     }
 }

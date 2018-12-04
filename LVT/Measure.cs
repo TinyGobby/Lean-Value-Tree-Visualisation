@@ -11,5 +11,14 @@ namespace LVT
         public int Amount { get; set; }
         public string Units { get; set; }
 
+        public Measure(string description, string deadline, int amount, string units)
+        {
+            Description = description;
+            Deadline = deadline;
+            Amount = amount;
+            Units = units;
+        }
+
+
     }
 }
