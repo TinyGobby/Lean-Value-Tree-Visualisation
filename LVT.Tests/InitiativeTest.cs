@@ -94,5 +94,19 @@ namespace Tests
             Assert.Contains(testEpic, result);
             Assert.Contains(testEpic2, result);
         }
+
+        [Test]
+        public void isBottomOfTree()
+        {
+            Assert.True(testedObject.isBottomOfTree());
+        }
+
+        [Test]
+        public void isNotBottomOfTree()
+        {
+            Epic testEpic = new Epic();
+            testedObject.Epics.Add(testEpic);
+            Assert.False(testedObject.isBottomOfTree());
+        }
     }
 }
