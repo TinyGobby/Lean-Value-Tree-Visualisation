@@ -42,6 +42,20 @@ namespace LVT
                 return false;
             }
         }
+        public List<string> checkNode(List<string> nodeList)
+        {
+            if (isBottomOfTree())
+            {
+                nodeList.Add("testString");
+            }
+
+            return nodeList;
+        }
+
+        public string generateNodeID(List<string> nodeList)
+        {
+            return "initiative1";
+        }
 
         private string _title;
         private List<Measure> _measures;
