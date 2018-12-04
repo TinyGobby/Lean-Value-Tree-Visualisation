@@ -17,7 +17,7 @@ namespace Tests
         }
 
         [Test]
-        public void getTitle()
+        public void TestGetTitle()
         {
             string expectedInitialTitle = "untitled";
             string result = testedObject.Title;
@@ -26,7 +26,7 @@ namespace Tests
         }
 
         [Test]
-        public void setTitle()
+        public void TestSetTitle()
         {
             string newTitle = "Test";
             testedObject.Title = newTitle;
@@ -36,7 +36,7 @@ namespace Tests
         }
 
         [Test]
-        public void getMeasures()
+        public void TestGetMeasures()
         {
             List<Measure> result = testedObject.Measures;
 
@@ -44,7 +44,7 @@ namespace Tests
         }
 
         [Test]
-        public void setMeasures()
+        public void TestSetMeasures()
         {
             Measure testMeasure = new Measure();
             testedObject.Measures.Add(testMeasure);
@@ -54,7 +54,7 @@ namespace Tests
         }
 
         [Test]
-        public void setMultipleMeasures()
+        public void TestSetMultipleMeasures()
         {
             Measure testMeasure = new Measure();
             Measure testMeasure2 = new Measure();
@@ -67,7 +67,7 @@ namespace Tests
         }
 
         [Test]
-        public void getEpics()
+        public void TestGetEpics()
         {
             List<Epic> result = testedObject.Epics;
 
@@ -75,7 +75,7 @@ namespace Tests
         }
 
         [Test]
-        public void setEpics()
+        public void TestSetEpics()
         {
             Epic testEpic = new Epic();
             testedObject.Epics.Add(testEpic);
@@ -85,7 +85,7 @@ namespace Tests
         }
 
         [Test]
-        public void setMultipleEpics()
+        public void TestSetMultipleEpics()
         {
             Epic testEpic = new Epic();
             Epic testEpic2 = new Epic();
@@ -98,30 +98,30 @@ namespace Tests
         }
 
         [Test]
-        public void isBottomOfTree()
+        public void TestIsBottomOfTree()
         {
-            Assert.True(testedObject.isBottomOfTree());
+            Assert.True(testedObject.IsBottomOfTree());
         }
 
         [Test]
-        public void isNotBottomOfEpicTree()
+        public void TestIsNotBottomOfEpicTree()
         {
             Epic testEpic = new Epic();
             testedObject.Epics.Add(testEpic);
-            Assert.False(testedObject.isBottomOfTree());
+            Assert.False(testedObject.IsBottomOfTree());
         }
 
         [Test]
-        public void generateNodeID()
+        public void TestGenerateNodeID()
         {
             string expected = "initiative0";
-            string result = testedObject.generateNodeID(nodeList);
+            string result = testedObject.GenerateNodeID(nodeList);
 
             Assert.AreEqual(expected, result);
         }
 
         [Test]
-        public void generateNodeIDWhenThereAreAlreadyInitiativeNodes()
+        public void TestGenerateNodeIDWhenThereAreAlreadyInitiativeNodes()
         {
             string initialNode = "initiative0";
             string secondNode = "initiative1"; // skipping test for two nodes as this will be covered in this test
@@ -129,14 +129,14 @@ namespace Tests
             nodeList.Add(secondNode);
 
             string expected = "initiative2";
-            string result = testedObject.generateNodeID(nodeList);
+            string result = testedObject.GenerateNodeID(nodeList);
 
 
             Assert.AreEqual(expected, result);
         }
 
         [Test]
-        public void generateNodeIDWhenThereAreAlreadyOtherNodes()
+        public void TestGenerateNodeIDWhenThereAreAlreadyOtherNodes()
         {
             string initialInitiativeNode = "initiative0";
             string initialOtherNode = "measure0"; 
@@ -144,27 +144,27 @@ namespace Tests
             nodeList.Add(initialInitiativeNode);
 
             string expected = "initiative1";
-            string result = testedObject.generateNodeID(nodeList);
+            string result = testedObject.GenerateNodeID(nodeList);
 
             Assert.AreEqual(expected, result);
         }
 
         [Test]
-        public void returnsNodeIfBottomOfTree()
+        public void TestReturnsNodeIfBottomOfTree()
         {
-            List<string> result = testedObject.checkNode(nodeList);
+            List<string> result = testedObject.CheckNode(nodeList);
 
             Assert.IsNotEmpty(result);
         }
 
         [Test]
-        public void addNodeIdToArray()
+        public void TestAddNodeIdToArray()
         {
             string initialNode = "initiative0";
             nodeList.Add(initialNode);
 
             string expected = "initiative1";
-            List<string> result = testedObject.checkNode(nodeList);
+            List<string> result = testedObject.CheckNode(nodeList);
 
             Assert.Contains(expected, result);
         }
