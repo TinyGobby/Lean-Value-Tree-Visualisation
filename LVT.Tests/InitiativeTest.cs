@@ -7,11 +7,13 @@ namespace Tests
     public class InitiativeTest
     {
         private Initiative testedObject;
+        private List<string> nodeList;
 
         [SetUp]
         public void Setup()
         {
             testedObject = new Initiative();
+            nodeList = new List<string>();
         }
 
         [Test]
@@ -110,18 +112,8 @@ namespace Tests
         }
 
         [Test]
-        public void returnsNodeIfBottomOfTree()
-        {
-            List<string> nodeList = new List<string>();
-            List<string> result = testedObject.checkNode(nodeList);
-
-            Assert.IsNotEmpty(result);
-        }
-
-        [Test]
         public void generateNodeID()
         {
-            List<string> nodeList = new List<string>();
             string expected = "initiative0";
             string result = testedObject.generateNodeID(nodeList);
 
@@ -129,9 +121,8 @@ namespace Tests
         }
 
         [Test]
-        public void generateNodeIDWhenThereAreAlreadyNodes()
+        public void generateNodeIDWhenThereAreAlreadyInitiativeNodes()
         {
-            List<string> nodeList = new List<string>();
             string initialNode = "initiative0";
             string secondNode = "initiative1"; // skipping test for two nodes as this will be covered in this test
             nodeList.Add(initialNode);
@@ -145,9 +136,30 @@ namespace Tests
         }
 
         [Test]
+        public void generateNodeIDWhenThereAreAlreadyOtherNodes()
+        {
+            string initialInitiativeNode = "initiative0";
+            string initialOtherNode = "measure0"; 
+            nodeList.Add(initialOtherNode);
+            nodeList.Add(initialInitiativeNode);
+
+            string expected = "initiative1";
+            string result = testedObject.generateNodeID(nodeList);
+
+            Assert.AreEqual(expected, result);
+        }
+
+        [Test]
+        public void returnsNodeIfBottomOfTree()
+        {
+            List<string> result = testedObject.checkNode(nodeList);
+
+            Assert.IsNotEmpty(result);
+        }
+
+        [Test]
         public void addNodeIdToArray()
         {
-            List<string> nodeList = new List<string>();
             string initialNode = "initiative0";
             nodeList.Add(initialNode);
 
