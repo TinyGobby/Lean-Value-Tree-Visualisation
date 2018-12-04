@@ -58,14 +58,25 @@ namespace LVT
             }
 
             return $"{_name}{count}";
-
         }
 
-        private readonly string _name;
+        public List<string> CalculateEdge(string currentNode, string previousNode)
+        {
+            List<string> edge = new List<string>();
 
-        public List<string> CalculateEdge(List<string> edgeList, string previousNode)
+            edge.Add(previousNode);
+
+            edge.Add(currentNode);
+
+            return edge;
+            
+        }
+
+        public List<List<string>> AddToEdgeList(List<List<string>> edgeList, List<string> edge)
         {
             throw new NotImplementedException();
         }
+
+        private readonly string _name;
     }
 }
