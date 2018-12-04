@@ -63,18 +63,17 @@ namespace LVT
         public List<string> CalculateEdge(string currentNode, string previousNode)
         {
             List<string> edge = new List<string>();
-
             edge.Add(previousNode);
-
             edge.Add(currentNode);
 
             return edge;
-            
         }
 
         public List<List<string>> AddToEdgeList(List<List<string>> edgeList, List<string> edge)
         {
-            throw new NotImplementedException();
+            edgeList.Add(edge);
+
+            return edgeList;
         }
 
         private readonly string _name;
