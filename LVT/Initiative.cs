@@ -31,6 +31,11 @@ namespace LVT
             set { _epics = value; }
         }
 
+        public bool isBottomOfTree()
+        {
+            return true;
+        }
+
         private string _title;
         private List<Measure> _measures;
         private List<Epic> _epics;
