@@ -110,19 +110,12 @@ namespace Tests
             Assert.False(testedObject.isBottomOfTree());
         }
 
-        [Test]
         public void isNotBottomOfMeasureTree()
         {
             Measure testMeasure = new Measure();
             testedObject.Measures.Add(testMeasure);
 
             Assert.False(testedObject.isBottomOfTree());
-        }
-
-        [Test]
-        public void returnsNode()
-        {
-            
         }
     }
 }
