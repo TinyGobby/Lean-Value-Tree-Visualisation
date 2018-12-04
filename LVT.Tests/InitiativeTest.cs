@@ -51,5 +51,18 @@ namespace Tests
             Assert.AreEqual(testMeasure, result);
             
         }
+
+        [Test]
+        public void setMultipleMeasures()
+        {
+            Measure testMeasure = new Measure();
+            Measure testMeasure2 = new Measure();
+            testedObject.Measures.Add(testMeasure);
+            testedObject.Measures.Add(testMeasure2);
+            List<Measure> result = testedObject.Measures;
+
+            Assert.Contains(testMeasure, result);
+            Assert.Contains(testMeasure2, result);
+        }
     }
 }
