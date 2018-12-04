@@ -33,7 +33,14 @@ namespace LVT
 
         public bool isBottomOfTree()
         {
-            return true;
+            if (_epics.Count == 0 && _measures.Count == 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         private string _title;
