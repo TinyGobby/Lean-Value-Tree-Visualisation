@@ -1,5 +1,6 @@
 ﻿using NUnit.Framework;
 using LVT;
+using System.Collections.Generic;
 
 namespace Tests
 {
@@ -30,6 +31,14 @@ namespace Tests
             string result = testedObject.Title;
 
             Assert.AreEqual(newTitle, result);
+        }
+
+        [Test]
+        public void checkForMeasures()
+        {
+            List<Measure> result = testedObject.Measures;
+
+            Assert.IsEmpty(result);
         }
     }
 }
