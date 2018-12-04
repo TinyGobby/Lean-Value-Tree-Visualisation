@@ -9,32 +9,21 @@ namespace LVT
     {
         public Initiative()
         {
-            _title = "untitled";
-            _measures = new List<Measure>();
-            _epics = new List<Epic>();
+            _name = "initiative";
+            Title = "untitled";
+            Measures = new List<Measure>();
+            Epics = new List<Epic>();
         }
 
-        public string Title
-        {
-            get { return _title; }
-            set { _title = value; }
-        }
+        public string Title { get; set; }
 
-        public List<Measure> Measures
-        {
-            get { return _measures; }
-            set { _measures = value; }
-        }
+        public List<Measure> Measures { get; set; }
 
-        public List<Epic> Epics
-        {
-            get { return _epics; }
-            set { _epics = value; }
-        }
+        public List<Epic> Epics { get; set; }
 
-        public bool isBottomOfTree()
+        public bool IsBottomOfTree()
         {
-            if (_epics.Count == 0 && _measures.Count == 0)
+            if (Epics.Count == 0 && Measures.Count == 0)
             {
                 return true;
             }
@@ -43,21 +32,21 @@ namespace LVT
                 return false;
             }
         }
-        public List<string> checkNode(List<string> nodeList)
+        public List<string> CheckNode(List<string> nodeList)
         {
-            if (isBottomOfTree())
+            if (IsBottomOfTree())
             {
-                string nodeID = generateNodeID(nodeList);
+                string nodeID = GenerateNodeID(nodeList);
                 nodeList.Add(nodeID);
             }
 
             return nodeList;
         }
 
-        public string generateNodeID(List<string> nodeList)
+        public string GenerateNodeID(List<string> nodeList)
         {
             int count = 0;
-            Regex rx = new Regex(@"\b(initiative)");
+            Regex rx = new Regex(@"\b("+ _name +")");
 
             foreach(string node in nodeList)
             {
@@ -68,12 +57,10 @@ namespace LVT
                 }
             }
 
-            return $"initiative{count}";
+            return $"{_name}{count}";
 
         }
 
-        private string _title;
-        private List<Measure> _measures;
-        private List<Epic> _epics;
+        private readonly string _name;
     }
 }
