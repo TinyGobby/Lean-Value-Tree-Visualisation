@@ -4,7 +4,7 @@ using System.Text;
 
 namespace LVT
 {
-    class LeanValueTree
+    public class LeanValueTree
     {
         public Vision Vision{ get; set;}
     }
