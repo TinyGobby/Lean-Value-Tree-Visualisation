@@ -8,13 +8,9 @@ namespace LVT
 
         static void Main(string[] args)
         {
-            //StreamReader file = File.OpenText(@"C:\Users\beckerfs\Documents\Projects\LVT\Lean-Value-Tree-Visualisation\LVT\SingleBranchLVT.json");
-            //JsonParser Parser = new JsonParser();
-            //LeanValueTree newTree = Parser.ParseJsonLVTFromStream(file);
-            Measure test = new Measure("blah", "blub", 3, "blib");
-            System.Console.WriteLine(test.Amount);
-            System.Console.WriteLine(test.Deadline);
-            System.Console.WriteLine(test.Units);
+            StreamReader file = File.OpenText(@"C:\Users\patils3\source\repos\Lean-Value-Tree-Visualisation\LVT\SingleBranchLVT.json");
+            JsonParser Parser = new JsonParser();
+            LeanValueTree newTree = Parser.ParseJsonLVTFromStream(file);  
         }
     }
 }
