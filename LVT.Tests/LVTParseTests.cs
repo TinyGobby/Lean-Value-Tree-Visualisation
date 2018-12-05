@@ -1,7 +1,6 @@
 ﻿using LVT.LVT.Services;
 using NUnit.Framework;
 using System.IO;
-// TODO: tests for typeof in strongly typed language needed? : Ask Kieron/Dan for review
 namespace LVT.Tests
 {
     [TestFixture]
@@ -9,7 +8,7 @@ namespace LVT.Tests
     {
         [Test]
         public void ParseJsonLVT()
-        {
+        {   //this opens the TestLVT file stored in the project's resources
             Stream TestStream = new MemoryStream(Properties.Resources.TestLVT);
             StreamReader TestStreamReader = new StreamReader(TestStream);
 
