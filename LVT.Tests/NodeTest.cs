@@ -4,15 +4,15 @@ using System.Collections.Generic;
 
 namespace Tests
 {
-    public class InitiativeTest
+    public class NodeTest
     {
-        private Initiative testedObject;
+        private Node testedObject;
         private List<string> nodeList;
 
         [SetUp]
         public void Setup()
         {
-            testedObject = new Initiative();
+            testedObject = new Node();
             nodeList = new List<string>();
         }
 
@@ -114,7 +114,7 @@ namespace Tests
         [Test]
         public void TestGenerateNodeID()
         {
-            string expected = "initiative0";
+            string expected = "node0";
             string actual = testedObject.GenerateNodeID(nodeList);
 
             Assert.AreEqual(expected, actual);
@@ -123,12 +123,12 @@ namespace Tests
         [Test]
         public void TestGenerateNodeIDWhenThereAreAlreadyInitiativeNodes()
         {
-            string initialNode = "initiative0";
-            string secondNode = "initiative1"; // skipping test for two nodes as this will be covered in this test
+            string initialNode = "node0";
+            string secondNode = "node1"; // skipping test for two nodes as this will be covered in this test
             nodeList.Add(initialNode);
             nodeList.Add(secondNode);
 
-            string expected = "initiative2";
+            string expected = "node2";
             string actual = testedObject.GenerateNodeID(nodeList);
 
 
@@ -138,12 +138,12 @@ namespace Tests
         [Test]
         public void TestGenerateNodeIDWhenThereAreAlreadyOtherNodes()
         {
-            string initialInitiativeNode = "initiative0";
+            string initialNode = "node0";
             string initialOtherNode = "measure0"; 
             nodeList.Add(initialOtherNode);
-            nodeList.Add(initialInitiativeNode);
+            nodeList.Add(initialNode);
 
-            string expected = "initiative1";
+            string expected = "node1";
             string actual = testedObject.GenerateNodeID(nodeList);
 
             Assert.AreEqual(expected, actual);
@@ -160,10 +160,10 @@ namespace Tests
         [Test]
         public void TestAddNodeIdToArray()
         {
-            string initialNode = "initiative0";
+            string initialNode = "node0";
             nodeList.Add(initialNode);
 
-            string expected = "initiative1";
+            string expected = "node1";
             List<string> actual = testedObject.CheckNode(nodeList);
 
             Assert.Contains(expected, actual);
@@ -173,7 +173,7 @@ namespace Tests
         public void TestCalculateEdge()
         {
             string previousNode = "goal0";
-            string currentNode = "initiative0";
+            string currentNode = "node0";
             List<string> expected = new List<string>();
             expected.Add(previousNode);
             expected.Add(currentNode);
@@ -189,7 +189,7 @@ namespace Tests
             List<List<string>> edgeList = new List<List<string>>();
 
             string previousNode = "goal0";
-            string currentNode = "initiative0";
+            string currentNode = "node0";
             List<string> edge = new List<string>();
             edge.Add(previousNode);
             edge.Add(currentNode);
