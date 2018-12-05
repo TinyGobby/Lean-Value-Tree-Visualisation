@@ -1,4 +1,5 @@
 ﻿using LVT.LVT.Services;
+using System;
 using System.IO;
 
 namespace LVT
@@ -8,9 +9,13 @@ namespace LVT
 
         static void Main(string[] args)
         {
-            StreamReader file = File.OpenText(@"C:\Users\patils3\source\repos\Lean-Value-Tree-Visualisation\LVT\SingleBranchLVT.json");
+            StreamReader file = File.OpenText(@"C:\Users\beckerfs\Documents\Projects\LVT\Lean-Value-Tree-Visualisation\LVT\SingleBranchLVT.json");
             JsonParser Parser = new JsonParser();
-            LeanValueTree newTree = Parser.ParseJsonLVTFromStream(file);  
+            LeanValueTree newTree = Parser.ParseJsonLVTFromStream(file);
+            Console.WriteLine(newTree);
+            Console.WriteLine(newTree.Vision.Title);
+            Console.WriteLine(newTree.Vision.Goals[0]);
+            Console.WriteLine(newTree.Vision.Goals[0].Bets[0]);
         }
     }
 }

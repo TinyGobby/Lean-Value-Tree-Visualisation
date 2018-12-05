@@ -1,7 +1,7 @@
 ﻿using LVT.LVT.Services;
 using NUnit.Framework;
 using System.IO;
-// TODO: tests for typeof in strongly typed language are needed? : Ask Kieron/Dan for review
+// TODO: tests for typeof in strongly typed language needed? : Ask Kieron/Dan for review
 namespace LVT.Tests
 {
     [TestFixture]
