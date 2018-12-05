@@ -14,6 +14,9 @@ namespace LVT
             StreamReader file = File.OpenText(@"C:\Users\beckerfs\Documents\Projects\LVT\Lean-Value-Tree-Visualisation\LVT\SingleBranchLVT.json");
             JsonParser Parser = new JsonParser();
             LeanValueTree newTree = Parser.ParseJsonLVTFromStream(file);
+            VisionPresenter VP = new VisionPresenter();
+            string PrettyVision = VP.VisualizeToString(newTree.Vision);
+            Console.WriteLine(PrettyVision);
             //this is an example of what is returned when you access the object:
             //Console.WriteLine(newTree);
             //Console.WriteLine(newTree.Vision.Title);
