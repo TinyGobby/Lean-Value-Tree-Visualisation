@@ -7,7 +7,7 @@ namespace LVT
     class Bet
     {
         public string title { get; set; }
-        public List<Initiative> initiatives { get; set; }
+        public List<Node> initiatives { get; set; }
 
     }
 }
