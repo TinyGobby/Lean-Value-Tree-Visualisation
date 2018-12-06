@@ -4,11 +4,11 @@ using System.Text;
 
 namespace LVT
 {
-    class Initiative
+    public class Initiative
     {
-        public string title { get; set; }
-        public List<Measure> measures { get; set; }
-        public List<Epic> epics { get; set; }
+        public string Title { get; set; }
+        public List<Measure> Measures { get; set; }
+        public List<Epic> Epics { get; set; }
 
     }
 }

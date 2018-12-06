@@ -4,10 +4,14 @@ using System.Text;
 
 namespace LVT
 {
-    class Vision
+    public class Vision
     {
-        public string title { get; set; }
-        public List<Goal> goals { get; set; }
+        public string Title { get; set; }
+        public List<Goal> Goals { get; set; }
 
+        public Vision(string title, List<Goal> goals) {
+            Title = title;
+            Goals = goals;
+        }
     }
 }
