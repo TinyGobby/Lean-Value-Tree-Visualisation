@@ -192,5 +192,12 @@ namespace Tests
 
             Assert.AreEqual(expected, actual);
         }
+
+        [Test]
+        public void TestChangePreviousNode()
+        {
+            testedObject.ChangePreviousNode(previousNode);
+            Assert.AreEqual(testedObject, previousNode);
+        }
     }
 }
