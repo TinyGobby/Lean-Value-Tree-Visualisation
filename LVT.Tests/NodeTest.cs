@@ -13,6 +13,7 @@ namespace Tests
         private Node currentNode;
         private Node initialNode;
         private Node secondNode;
+        private ListHandler listHandler;
 
         [SetUp]
         public void Setup()
@@ -24,6 +25,7 @@ namespace Tests
             currentNode = new Node();
             initialNode = new Node();
             secondNode = new Node();
+            listHandler = new ListHandler();
         }
 
         [Test]
@@ -196,8 +198,33 @@ namespace Tests
         [Test]
         public void TestChangePreviousNode()
         {
-            testedObject.ChangePreviousNode(previousNode);
+            previousNode = testedObject.ChangePreviousNode(previousNode);
             Assert.AreEqual(testedObject, previousNode);
+        }
+
+        [Test]
+        public void TestPassingUpTheTree()
+        {
+            initialNode.NodeId = "bet0";
+
+            listHandler.NodeList.Add(initialNode);
+            listHandler.PreviousNode = initialNode;
+
+            ListHandler actual;
+            actual = testedObject.RecursiveTreeCrawler(listHandler);
+
+            ListHandler expected = new ListHandler();
+            List<Node> edge = new List<Node>();
+
+            edge.Add(initialNode);
+            edge.Add(testedObject);
+
+            expected.NodeList = edge;
+            expected.EdgeList.Add(edge);
+            expected.PreviousNode = initialNode;
+
+            Assert.AreEqual(expected, actual);
+
         }
     }
 }
