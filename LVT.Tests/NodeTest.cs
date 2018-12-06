@@ -8,6 +8,7 @@ namespace Tests
     {
         private Node testedObject;
         private List<Node> nodeList;
+        private List<List<Node>> edgeList;
         private Node previousNode;
         private Node currentNode;
         private Node initialNode;
@@ -18,6 +19,7 @@ namespace Tests
         {
             testedObject = new Node();
             nodeList = new List<Node>();
+            edgeList = new List<List<Node>>();
             previousNode = new Node();
             currentNode = new Node();
             initialNode = new Node();
@@ -159,27 +161,6 @@ namespace Tests
             Assert.AreEqual(expected, actual);
         }
 
-        //[Test]
-        //public void TestReturnsNodeIfBottomOfTree()
-        //{
-        //    List<Node> actual = testedObject.CheckNode(nodeList);
-
-        //    Assert.IsNotEmpty(actual);
-        //}
-
-        //[Test]
-        //public void TestAddNodeIdToArray()
-        //{
-        //    Node initialNode = new Node();
-        //    initialNode.NodeId = "node0";
-        //    nodeList.Add(initialNode);
-
-        //    string expected = "node1";
-        //    List<Node> actual = testedObject.CheckNode(nodeList);
-
-        //    Assert.Contains(expected, actual);
-        //}
-
         [Test]
         public void TestCalculateEdge()
         {
@@ -199,13 +180,10 @@ namespace Tests
         [Test]
         public void TestAddToEdgeList()
         {
-            List<List<Node>> edgeList = new List<List<Node>>();
-
             previousNode.NodeId = "goal0";
             currentNode.NodeId = "node0";
             List<Node> edge = new List<Node>();
-            edge.Add(previousNode);
-            edge.Add(currentNode);
+            edge = testedObject.CalculateEdge(currentNode, previousNode);
 
             List<List<Node>> expected = new List<List<Node>>();
             expected.Add(edge);
