@@ -84,5 +84,15 @@ namespace LVT
         }
 
         private readonly string _name;
+
+        public Node ChangePreviousNode(Node previousNode)
+        {
+            return this;
+        }
+
+        public ListHandler RecursiveTreeCrawler(ListHandler listHandler)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
