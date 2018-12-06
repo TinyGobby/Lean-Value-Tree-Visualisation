@@ -25,7 +25,7 @@ namespace LVT
 
         public bool IsBottomOfTree()
         {
-            if (Epics.Count == 0 && Measures.Count == 0)
+            if (Measures.Count == 0)
             {
                 return true;
             }
@@ -34,17 +34,6 @@ namespace LVT
                 return false;
             }
         }
-
-        //public List<Node> CheckNode(List<Node> nodeList)
-        //{
-        //    if (IsBottomOfTree())
-        //    {
-        //        string nodeID = GenerateNodeID(nodeList);
-        //        nodeList.Add(nodeID);
-        //    }
-
-        //    return nodeList;
-        //}
 
         public string GenerateNodeID(List<Node> nodeList)
         {
@@ -94,13 +83,22 @@ namespace LVT
         public ListHandler RecursiveTreeCrawler(ListHandler listHandler)
         {
             GenerateNodeID(listHandler.NodeList);
-            listHandler.EdgeList.Add(CalculateEdge(this, listHandler.PreviousNode));
-            ChangePreviousNode(listHandler.PreviousNode);
+            if (listHandler.PreviousNode.NodeId != null)
+            {
+                listHandler.EdgeList.Add(CalculateEdge(this, listHandler.PreviousNode));
+            }
+            listHandler.PreviousNode = ChangePreviousNode(listHandler.PreviousNode);
             listHandler.NodeList.Add(this);
 
+            if (!IsBottomOfTree())
+            {
+                foreach (Node node in Measures)
+                {
+                    listHandler = node.RecursiveTreeCrawler(listHandler);
+                }
+            }
+
             return listHandler;
-
         }
-
     }
 }
