@@ -15,6 +15,8 @@ namespace LVT
             Epics = new List<Epic>();
         }
 
+        public string NodeId { get; set; }
+
         public string Title { get; set; }
 
         public List<Measure> Measures { get; set; }
@@ -32,44 +34,49 @@ namespace LVT
                 return false;
             }
         }
-        public List<string> CheckNode(List<string> nodeList)
-        {
-            if (IsBottomOfTree())
-            {
-                string nodeID = GenerateNodeID(nodeList);
-                nodeList.Add(nodeID);
-            }
 
-            return nodeList;
-        }
+        //public List<Node> CheckNode(List<Node> nodeList)
+        //{
+        //    if (IsBottomOfTree())
+        //    {
+        //        string nodeID = GenerateNodeID(nodeList);
+        //        nodeList.Add(nodeID);
+        //    }
 
-        public string GenerateNodeID(List<string> nodeList)
+        //    return nodeList;
+        //}
+
+        public string GenerateNodeID(List<Node> nodeList)
         {
             int count = 0;
             Regex rx = new Regex(@"\b("+ _name +")");
 
-            foreach(string node in nodeList)
+            foreach(Node node in nodeList)
             {
-                if (rx.IsMatch(node))
+                string id = node.NodeId;
+
+                if (rx.IsMatch(id))
                 {
                     count++;
                     Console.WriteLine(count);
                 }
             }
 
-            return $"{_name}{count}";
+            NodeId = $"{_name}{count}";
+
+            return NodeId;
         }
 
-        public List<string> CalculateEdge(string currentNode, string previousNode)
+        public List<Node> CalculateEdge(Node currentNode, Node previousNode)
         {
-            List<string> edge = new List<string>();
+            List<Node> edge = new List<Node>();
             edge.Add(previousNode);
             edge.Add(currentNode);
 
             return edge;
         }
 
-        public List<List<string>> AddToEdgeList(List<List<string>> edgeList, List<string> edge)
+        public List<List<Node>> AddToEdgeList(List<List<Node>> edgeList, List<Node> edge)
         {
             edgeList.Add(edge);
 

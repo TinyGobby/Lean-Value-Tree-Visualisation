@@ -7,13 +7,21 @@ namespace Tests
     public class NodeTest
     {
         private Node testedObject;
-        private List<string> nodeList;
+        private List<Node> nodeList;
+        private Node previousNode;
+        private Node currentNode;
+        private Node initialNode;
+        private Node secondNode;
 
         [SetUp]
         public void Setup()
         {
             testedObject = new Node();
-            nodeList = new List<string>();
+            nodeList = new List<Node>();
+            previousNode = new Node();
+            currentNode = new Node();
+            initialNode = new Node();
+            secondNode = new Node();
         }
 
         [Test]
@@ -73,6 +81,7 @@ namespace Tests
 
             Assert.IsEmpty(actual);
         }
+        
 
         [Test]
         public void TestSetEpics()
@@ -123,14 +132,13 @@ namespace Tests
         [Test]
         public void TestGenerateNodeIDWhenThereAreAlreadyInitiativeNodes()
         {
-            string initialNode = "node0";
-            string secondNode = "node1"; // skipping test for two nodes as this will be covered in this test
+            initialNode.NodeId = "node0";
+            secondNode.NodeId = "node1"; // skipping test for two nodes as this will be covered in this test
             nodeList.Add(initialNode);
             nodeList.Add(secondNode);
 
             string expected = "node2";
             string actual = testedObject.GenerateNodeID(nodeList);
-
 
             Assert.AreEqual(expected, actual);
         }
@@ -138,8 +146,10 @@ namespace Tests
         [Test]
         public void TestGenerateNodeIDWhenThereAreAlreadyOtherNodes()
         {
-            string initialNode = "node0";
-            string initialOtherNode = "measure0"; 
+            initialNode.NodeId = "node0";
+            Node initialOtherNode = new Node();
+            initialOtherNode.NodeId = "measure0"; 
+
             nodeList.Add(initialOtherNode);
             nodeList.Add(initialNode);
 
@@ -149,36 +159,39 @@ namespace Tests
             Assert.AreEqual(expected, actual);
         }
 
-        [Test]
-        public void TestReturnsNodeIfBottomOfTree()
-        {
-            List<string> actual = testedObject.CheckNode(nodeList);
+        //[Test]
+        //public void TestReturnsNodeIfBottomOfTree()
+        //{
+        //    List<Node> actual = testedObject.CheckNode(nodeList);
 
-            Assert.IsNotEmpty(actual);
-        }
+        //    Assert.IsNotEmpty(actual);
+        //}
 
-        [Test]
-        public void TestAddNodeIdToArray()
-        {
-            string initialNode = "node0";
-            nodeList.Add(initialNode);
+        //[Test]
+        //public void TestAddNodeIdToArray()
+        //{
+        //    Node initialNode = new Node();
+        //    initialNode.NodeId = "node0";
+        //    nodeList.Add(initialNode);
 
-            string expected = "node1";
-            List<string> actual = testedObject.CheckNode(nodeList);
+        //    string expected = "node1";
+        //    List<Node> actual = testedObject.CheckNode(nodeList);
 
-            Assert.Contains(expected, actual);
-        }
+        //    Assert.Contains(expected, actual);
+        //}
 
         [Test]
         public void TestCalculateEdge()
         {
-            string previousNode = "goal0";
-            string currentNode = "node0";
-            List<string> expected = new List<string>();
+            previousNode.NodeId = "goal0";
+            currentNode.NodeId = "node0";
+
+            List<Node> expected = new List<Node>();
+
             expected.Add(previousNode);
             expected.Add(currentNode);
 
-            List<string> actual = testedObject.CalculateEdge(currentNode, previousNode);
+            List<Node> actual = testedObject.CalculateEdge(currentNode, previousNode);
 
             Assert.AreEqual(expected, actual);
         }
@@ -186,18 +199,18 @@ namespace Tests
         [Test]
         public void TestAddToEdgeList()
         {
-            List<List<string>> edgeList = new List<List<string>>();
+            List<List<Node>> edgeList = new List<List<Node>>();
 
-            string previousNode = "goal0";
-            string currentNode = "node0";
-            List<string> edge = new List<string>();
+            previousNode.NodeId = "goal0";
+            currentNode.NodeId = "node0";
+            List<Node> edge = new List<Node>();
             edge.Add(previousNode);
             edge.Add(currentNode);
 
-            List<List<string>> expected = new List<List<string>>();
+            List<List<Node>> expected = new List<List<Node>>();
             expected.Add(edge);
 
-            List<List<string>> actual = testedObject.AddToEdgeList(edgeList, edge);
+            List<List<Node>> actual = testedObject.AddToEdgeList(edgeList, edge);
 
             Assert.AreEqual(expected, actual);
         }
