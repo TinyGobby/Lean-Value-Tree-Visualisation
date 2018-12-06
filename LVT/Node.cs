@@ -57,6 +57,7 @@ namespace LVT
 
         public ListHandler RecursiveTreeCrawler(ListHandler listHandler)
         {
+            // Returns an object with a list of all nodes and all edges between nodes
             GenerateNodeID(listHandler.NodeList);
             listHandler.EdgeList = UpdateEdgeList(listHandler.EdgeList, listHandler.PreviousNode);
             listHandler.PreviousNode = this;
