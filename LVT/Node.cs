@@ -11,17 +11,17 @@ namespace LVT
         {
             _name = "node";
             Title = "untitled";
-            Measures = new List<Measure>();
-            Epics = new List<Epic>();
+            Measures = new List<Node>();
+            Epics = new List<Node>();
         }
 
         public string NodeId { get; set; }
 
         public string Title { get; set; }
 
-        public List<Measure> Measures { get; set; }
+        public List<Node> Measures { get; set; }
 
-        public List<Epic> Epics { get; set; }
+        public List<Node> Epics { get; set; }
 
         public bool IsBottomOfTree()
         {
@@ -76,6 +76,7 @@ namespace LVT
             return edge;
         }
 
+        // Remove
         public List<List<Node>> AddToEdgeList(List<List<Node>> edgeList, List<Node> edge)
         {
             edgeList.Add(edge);
@@ -92,7 +93,14 @@ namespace LVT
 
         public ListHandler RecursiveTreeCrawler(ListHandler listHandler)
         {
-            throw new NotImplementedException();
+            GenerateNodeID(listHandler.NodeList);
+            listHandler.EdgeList.Add(CalculateEdge(this, listHandler.PreviousNode));
+            ChangePreviousNode(listHandler.PreviousNode);
+            listHandler.NodeList.Add(this);
+
+            return listHandler;
+
         }
+
     }
 }

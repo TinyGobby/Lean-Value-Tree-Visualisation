@@ -47,68 +47,68 @@ namespace Tests
             Assert.AreEqual(newTitle, actual);
         }
 
-        [Test]
-        public void TestGetMeasures()
-        {
-            List<Measure> actual = testedObject.Measures;
+        //[Test]
+        //public void TestGetMeasures()
+        //{
+        //    List<Measure> actual = testedObject.Measures;
 
-            Assert.IsEmpty(actual);
-        }
+        //    Assert.IsEmpty(actual);
+        //}
 
-        [Test]
-        public void TestSetMeasures()
-        {
-            Measure testMeasure = new Measure();
-            testedObject.Measures.Add(testMeasure);
-            Measure actual = testedObject.Measures[0];
+        //[Test]
+        //public void TestSetMeasures()
+        //{
+        //    Measure testMeasure = new Measure();
+        //    testedObject.Measures.Add(testMeasure);
+        //    Measure actual = testedObject.Measures[0];
 
-            Assert.AreEqual(testMeasure, actual);
-        }
+        //    Assert.AreEqual(testMeasure, actual);
+        //}
 
-        [Test]
-        public void TestSetMultipleMeasures()
-        {
-            Measure testMeasure = new Measure();
-            Measure testMeasure2 = new Measure();
-            testedObject.Measures.Add(testMeasure);
-            testedObject.Measures.Add(testMeasure2);
-            List<Measure> actual = testedObject.Measures;
+        //[Test]
+        //public void TestSetMultipleMeasures()
+        //{
+        //    Measure testMeasure = new Measure();
+        //    Measure testMeasure2 = new Measure();
+        //    testedObject.Measures.Add(testMeasure);
+        //    testedObject.Measures.Add(testMeasure2);
+        //    List<Measure> actual = testedObject.Measures;
 
-            Assert.Contains(testMeasure, actual);
-            Assert.Contains(testMeasure2, actual);
-        }
+        //    Assert.Contains(testMeasure, actual);
+        //    Assert.Contains(testMeasure2, actual);
+        //}
 
-        [Test]
-        public void TestGetEpics()
-        {
-            List<Epic> actual = testedObject.Epics;
+        //[Test]
+        //public void TestGetEpics()
+        //{
+        //    List<Epic> actual = testedObject.Epics;
 
-            Assert.IsEmpty(actual);
-        }
+        //    Assert.IsEmpty(actual);
+        //}
         
 
-        [Test]
-        public void TestSetEpics()
-        {
-            Epic testEpic = new Epic();
-            testedObject.Epics.Add(testEpic);
-            Epic actual = testedObject.Epics[0];
+        //[Test]
+        //public void TestSetEpics()
+        //{
+        //    Epic testEpic = new Epic();
+        //    testedObject.Epics.Add(testEpic);
+        //    Epic actual = testedObject.Epics[0];
 
-            Assert.AreEqual(testEpic, actual);
-        }
+        //    Assert.AreEqual(testEpic, actual);
+        //}
 
-        [Test]
-        public void TestSetMultipleEpics()
-        {
-            Epic testEpic = new Epic();
-            Epic testEpic2 = new Epic();
-            testedObject.Epics.Add(testEpic);
-            testedObject.Epics.Add(testEpic2);
-            List<Epic> actual = testedObject.Epics;
+        //[Test]
+        //public void TestSetMultipleEpics()
+        //{
+        //    Epic testEpic = new Epic();
+        //    Epic testEpic2 = new Epic();
+        //    testedObject.Epics.Add(testEpic);
+        //    testedObject.Epics.Add(testEpic2);
+        //    List<Epic> actual = testedObject.Epics;
 
-            Assert.Contains(testEpic, actual);
-            Assert.Contains(testEpic2, actual);
-        }
+        //    Assert.Contains(testEpic, actual);
+        //    Assert.Contains(testEpic2, actual);
+        //}
 
         [Test]
         public void TestIsBottomOfTree()
@@ -116,13 +116,13 @@ namespace Tests
             Assert.True(testedObject.IsBottomOfTree());
         }
 
-        [Test]
-        public void TestIsNotBottomOfEpicTree()
-        {
-            Epic testEpic = new Epic();
-            testedObject.Epics.Add(testEpic);
-            Assert.False(testedObject.IsBottomOfTree());
-        }
+        //[Test]
+        //public void TestIsNotBottomOfEpicTree()
+        //{
+        //    Epic testEpic = new Epic();
+        //    testedObject.Epics.Add(testEpic);
+        //    Assert.False(testedObject.IsBottomOfTree());
+        //}
 
         [Test]
         public void TestGenerateNodeID()
@@ -210,21 +210,23 @@ namespace Tests
             listHandler.NodeList.Add(initialNode);
             listHandler.PreviousNode = initialNode;
 
-            ListHandler actual;
-            actual = testedObject.RecursiveTreeCrawler(listHandler);
+            ListHandler result;
+            result = testedObject.RecursiveTreeCrawler(listHandler);
 
-            ListHandler expected = new ListHandler();
-            List<Node> edge = new List<Node>();
+            Assert.AreEqual(testedObject, result.NodeList[1]);
+            Assert.Contains(testedObject, result.EdgeList[0]);
+        }
 
-            edge.Add(initialNode);
-            edge.Add(testedObject);
+        [Test]
+        public void TestPassingDownTheTree()
+        {
+            testedObject.Measures.Add(secondNode);
 
-            expected.NodeList = edge;
-            expected.EdgeList.Add(edge);
-            expected.PreviousNode = initialNode;
+            ListHandler result;
+            result = testedObject.RecursiveTreeCrawler(listHandler);
 
-            Assert.AreEqual(expected, actual);
-
+            Assert.AreEqual(2, result.NodeList.Count);
+            Assert.AreEqual(1, result.EdgeList.Count);
         }
     }
 }
