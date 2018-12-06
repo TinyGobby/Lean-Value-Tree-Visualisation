@@ -22,14 +22,7 @@ namespace LVT
 
         public bool IsNotBottomOfTree()
         {
-            if (InternalNodeList.Count == 0)
-            {
-                return false;
-            }
-            else
-            {
-                return true;
-            }
+            return InternalNodeList.Count != 0;
         }
 
         public string GenerateNodeID(List<Node> nodeList)
@@ -56,35 +49,24 @@ namespace LVT
         {
             if (previousNode.NodeId == null) return edgeList;
 
-            List<Node> edge = new List<Node>();
-
-            edge.Add(previousNode);
-            edge.Add(this);
+            List<Node> edge = new List<Node> { previousNode, this };
             edgeList.Add(edge);
 
             return edgeList;
-        }
-
-        public Node UpdatePreviousNode(Node previousNode)
-        {
-            return this;
         }
 
         public ListHandler RecursiveTreeCrawler(ListHandler listHandler)
         {
             GenerateNodeID(listHandler.NodeList);
             listHandler.EdgeList = UpdateEdgeList(listHandler.EdgeList, listHandler.PreviousNode);
-            listHandler.PreviousNode = UpdatePreviousNode(listHandler.PreviousNode);
+            listHandler.PreviousNode = this;
             listHandler.NodeList.Add(this);
-
-            if (IsNotBottomOfTree())
-            {
+            
                 foreach (Node node in InternalNodeList)
                 {
                     listHandler = node.RecursiveTreeCrawler(listHandler);
-                    listHandler.PreviousNode = UpdatePreviousNode(listHandler.PreviousNode);
+                    listHandler.PreviousNode = this;
                 }
-            }
 
             return listHandler;
         }
