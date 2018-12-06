@@ -11,27 +11,24 @@ namespace LVT
         {
             _name = "node";
             Title = "untitled";
-            Measures = new List<Node>();
-            Epics = new List<Node>();
+            InternalNodeList = new List<Node>();
         }
 
         public string NodeId { get; set; }
 
         public string Title { get; set; }
 
-        public List<Node> Measures { get; set; }
+        public List<Node> InternalNodeList { get; set; }
 
-        public List<Node> Epics { get; set; }
-
-        public bool IsBottomOfTree()
+        public bool IsNotBottomOfTree()
         {
-            if (Measures.Count == 0)
+            if (InternalNodeList.Count == 0)
             {
-                return true;
+                return false;
             }
             else
             {
-                return false;
+                return true;
             }
         }
 
@@ -47,7 +44,6 @@ namespace LVT
                 if (rx.IsMatch(id))
                 {
                     count++;
-                    Console.WriteLine(count);
                 }
             }
 
@@ -56,26 +52,20 @@ namespace LVT
             return NodeId;
         }
 
-        public List<Node> CalculateEdge(Node currentNode, Node previousNode)
+        public List<List<Node>> UpdateEdgeList(List<List<Node>> edgeList, Node previousNode)
         {
+            if (previousNode.NodeId == null) return edgeList;
+
             List<Node> edge = new List<Node>();
+
             edge.Add(previousNode);
-            edge.Add(currentNode);
-
-            return edge;
-        }
-
-        // Remove
-        public List<List<Node>> AddToEdgeList(List<List<Node>> edgeList, List<Node> edge)
-        {
+            edge.Add(this);
             edgeList.Add(edge);
 
             return edgeList;
         }
 
-        private readonly string _name;
-
-        public Node ChangePreviousNode(Node previousNode)
+        public Node UpdatePreviousNode(Node previousNode)
         {
             return this;
         }
@@ -83,22 +73,22 @@ namespace LVT
         public ListHandler RecursiveTreeCrawler(ListHandler listHandler)
         {
             GenerateNodeID(listHandler.NodeList);
-            if (listHandler.PreviousNode.NodeId != null)
-            {
-                listHandler.EdgeList.Add(CalculateEdge(this, listHandler.PreviousNode));
-            }
-            listHandler.PreviousNode = ChangePreviousNode(listHandler.PreviousNode);
+            listHandler.EdgeList = UpdateEdgeList(listHandler.EdgeList, listHandler.PreviousNode);
+            listHandler.PreviousNode = UpdatePreviousNode(listHandler.PreviousNode);
             listHandler.NodeList.Add(this);
 
-            if (!IsBottomOfTree())
+            if (IsNotBottomOfTree())
             {
-                foreach (Node node in Measures)
+                foreach (Node node in InternalNodeList)
                 {
                     listHandler = node.RecursiveTreeCrawler(listHandler);
+                    listHandler.PreviousNode = UpdatePreviousNode(listHandler.PreviousNode);
                 }
             }
 
             return listHandler;
         }
+
+        private readonly string _name;
     }
 }

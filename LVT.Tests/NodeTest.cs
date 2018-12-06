@@ -1,8 +1,7 @@
-﻿using NUnit.Framework;
-using LVT;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using NUnit.Framework;
 
-namespace Tests
+namespace LVT.Tests
 {
     public class NodeTest
     {
@@ -10,7 +9,6 @@ namespace Tests
         private List<Node> nodeList;
         private List<List<Node>> edgeList;
         private Node previousNode;
-        private Node currentNode;
         private Node initialNode;
         private Node secondNode;
         private ListHandler listHandler;
@@ -22,7 +20,6 @@ namespace Tests
             nodeList = new List<Node>();
             edgeList = new List<List<Node>>();
             previousNode = new Node();
-            currentNode = new Node();
             initialNode = new Node();
             secondNode = new Node();
             listHandler = new ListHandler();
@@ -47,82 +44,19 @@ namespace Tests
             Assert.AreEqual(newTitle, actual);
         }
 
-        //[Test]
-        //public void TestGetMeasures()
-        //{
-        //    List<Measure> actual = testedObject.Measures;
-
-        //    Assert.IsEmpty(actual);
-        //}
-
-        //[Test]
-        //public void TestSetMeasures()
-        //{
-        //    Measure testMeasure = new Measure();
-        //    testedObject.Measures.Add(testMeasure);
-        //    Measure actual = testedObject.Measures[0];
-
-        //    Assert.AreEqual(testMeasure, actual);
-        //}
-
-        //[Test]
-        //public void TestSetMultipleMeasures()
-        //{
-        //    Measure testMeasure = new Measure();
-        //    Measure testMeasure2 = new Measure();
-        //    testedObject.Measures.Add(testMeasure);
-        //    testedObject.Measures.Add(testMeasure2);
-        //    List<Measure> actual = testedObject.Measures;
-
-        //    Assert.Contains(testMeasure, actual);
-        //    Assert.Contains(testMeasure2, actual);
-        //}
-
-        //[Test]
-        //public void TestGetEpics()
-        //{
-        //    List<Epic> actual = testedObject.Epics;
-
-        //    Assert.IsEmpty(actual);
-        //}
-        
-
-        //[Test]
-        //public void TestSetEpics()
-        //{
-        //    Epic testEpic = new Epic();
-        //    testedObject.Epics.Add(testEpic);
-        //    Epic actual = testedObject.Epics[0];
-
-        //    Assert.AreEqual(testEpic, actual);
-        //}
-
-        //[Test]
-        //public void TestSetMultipleEpics()
-        //{
-        //    Epic testEpic = new Epic();
-        //    Epic testEpic2 = new Epic();
-        //    testedObject.Epics.Add(testEpic);
-        //    testedObject.Epics.Add(testEpic2);
-        //    List<Epic> actual = testedObject.Epics;
-
-        //    Assert.Contains(testEpic, actual);
-        //    Assert.Contains(testEpic2, actual);
-        //}
-
         [Test]
-        public void TestIsBottomOfTree()
+        public void TestIsNotBottomOfTree()
         {
-            Assert.True(testedObject.IsBottomOfTree());
+            Assert.False(testedObject.IsNotBottomOfTree());
         }
 
-        //[Test]
-        //public void TestIsNotBottomOfEpicTree()
-        //{
-        //    Epic testEpic = new Epic();
-        //    testedObject.Epics.Add(testEpic);
-        //    Assert.False(testedObject.IsBottomOfTree());
-        //}
+        [Test]
+        public void TestIsNotBottomOfTreeWhenThereAreLowerNodes()
+        {
+            testedObject.InternalNodeList.Add(secondNode);
+
+            Assert.True(testedObject.IsNotBottomOfTree());
+        }
 
         [Test]
         public void TestGenerateNodeID()
@@ -134,10 +68,10 @@ namespace Tests
         }
 
         [Test]
-        public void TestGenerateNodeIDWhenThereAreAlreadyInitiativeNodes()
+        public void TestGenerateNodeIDWhenThereAreAlreadyNodes()
         {
             initialNode.NodeId = "node0";
-            secondNode.NodeId = "node1"; // skipping test for two nodes as this will be covered in this test
+            secondNode.NodeId = "node1";
             nodeList.Add(initialNode);
             nodeList.Add(secondNode);
 
@@ -148,11 +82,11 @@ namespace Tests
         }
 
         [Test]
-        public void TestGenerateNodeIDWhenThereAreAlreadyOtherNodes()
+        public void TestGenerateNodeIDWhenThereAreOtherNodesWithDifferentNames()
         {
             initialNode.NodeId = "node0";
-            Node initialOtherNode = new Node();
-            initialOtherNode.NodeId = "measure0"; 
+            Node initialOtherNode = new Node {NodeId = "measure0"};
+
 
             nodeList.Add(initialOtherNode);
             nodeList.Add(initialNode);
@@ -167,38 +101,18 @@ namespace Tests
         public void TestCalculateEdge()
         {
             previousNode.NodeId = "goal0";
-            currentNode.NodeId = "node0";
+            List<Node> edge = new List<Node> { previousNode, testedObject };
+            List<List<Node>> expected = new List<List<Node>> { edge };
 
-            List<Node> expected = new List<Node>();
-
-            expected.Add(previousNode);
-            expected.Add(currentNode);
-
-            List<Node> actual = testedObject.CalculateEdge(currentNode, previousNode);
+            List<List<Node>> actual = testedObject.UpdateEdgeList(edgeList, previousNode);
 
             Assert.AreEqual(expected, actual);
         }
 
         [Test]
-        public void TestAddToEdgeList()
+        public void TestUpdatePreviousNode()
         {
-            previousNode.NodeId = "goal0";
-            currentNode.NodeId = "node0";
-            List<Node> edge = new List<Node>();
-            edge = testedObject.CalculateEdge(currentNode, previousNode);
-
-            List<List<Node>> expected = new List<List<Node>>();
-            expected.Add(edge);
-
-            List<List<Node>> actual = testedObject.AddToEdgeList(edgeList, edge);
-
-            Assert.AreEqual(expected, actual);
-        }
-
-        [Test]
-        public void TestChangePreviousNode()
-        {
-            previousNode = testedObject.ChangePreviousNode(previousNode);
+            previousNode = testedObject.UpdatePreviousNode(previousNode);
             Assert.AreEqual(testedObject, previousNode);
         }
 
@@ -210,23 +124,68 @@ namespace Tests
             listHandler.NodeList.Add(initialNode);
             listHandler.PreviousNode = initialNode;
 
-            ListHandler result;
-            result = testedObject.RecursiveTreeCrawler(listHandler);
+            ListHandler result = testedObject.RecursiveTreeCrawler(listHandler);
 
             Assert.AreEqual(testedObject, result.NodeList[1]);
             Assert.Contains(testedObject, result.EdgeList[0]);
+
+            Assert.AreEqual("bet0",result.NodeList[0].NodeId);
+            Assert.AreEqual("node0",result.NodeList[1].NodeId);
+
+            Assert.AreEqual("bet0", result.EdgeList[0][0].NodeId);
+            Assert.AreEqual("node0", result.EdgeList[0][1].NodeId);
         }
 
         [Test]
         public void TestPassingDownTheTree()
         {
-            testedObject.Measures.Add(secondNode);
+            testedObject.InternalNodeList.Add(secondNode);
 
-            ListHandler result;
-            result = testedObject.RecursiveTreeCrawler(listHandler);
+            ListHandler result = testedObject.RecursiveTreeCrawler(listHandler);
 
             Assert.AreEqual(2, result.NodeList.Count);
             Assert.AreEqual(1, result.EdgeList.Count);
+
+            Assert.AreEqual("node0", result.NodeList[0].NodeId);
+            Assert.AreEqual("node1", result.NodeList[1].NodeId);
+
+            Assert.AreEqual("node0", result.EdgeList[0][0].NodeId);
+            Assert.AreEqual("node1", result.EdgeList[0][1].NodeId);
+        }
+
+        [Test]
+        public void TestPassingDownTheTreeWithMultipleNodes()
+        {
+            testedObject.InternalNodeList.Add(initialNode);
+            testedObject.InternalNodeList.Add(secondNode);
+
+            ListHandler result = testedObject.RecursiveTreeCrawler(listHandler);
+
+            Assert.AreEqual(3, result.NodeList.Count);
+            Assert.AreEqual(2, result.EdgeList.Count);
+
+            Assert.AreEqual("node2", result.NodeList[2].NodeId);
+
+            Assert.AreEqual("node0", result.EdgeList[1][0].NodeId);
+            Assert.AreEqual("node2", result.EdgeList[1][1].NodeId);
+        }
+
+        [Test]
+        public void TestPassingDownTheTreeWithMultipleBranches()
+        {
+            secondNode.InternalNodeList.Add(new Node());
+            secondNode.InternalNodeList.Add(new Node());
+
+            testedObject.InternalNodeList.Add(secondNode);
+            testedObject.InternalNodeList.Add(new Node());
+
+            ListHandler result = testedObject.RecursiveTreeCrawler(listHandler);
+
+            Assert.AreEqual(5, result.NodeList.Count);
+            Assert.AreEqual(4, result.EdgeList.Count);
+
+            Assert.AreEqual("node0", result.EdgeList[3][0].NodeId);
+            Assert.AreEqual("node4", result.EdgeList[3][1].NodeId);
         }
     }
 }
