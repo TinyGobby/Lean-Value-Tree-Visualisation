@@ -1,8 +1,7 @@
 {
   "profiles": {
     "LVT": {
-      "commandName": "Project",
-      "commandLineArgs": "-v hweta"
+      "commandName": "Project"
     }
   }
 }
