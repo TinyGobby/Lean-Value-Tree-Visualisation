@@ -47,25 +47,6 @@ namespace LVT.Tests
         }
 
         [Test]
-        [Category("IsNotBottomOfTree")]
-        public void EmptyInternalList()
-        {
-            bool result = testedObject.IsNotBottomOfTree();
-            Assert.False(result, "Should return False with a default empty list");
-        }
-
-        [Test]
-        [Category("IsNotBottomOfTree")]
-        public void WithNodesInInternalList()
-        {
-            // Simulating a lowe nodes in the tree
-            testedObject.InternalNodeList.Add(secondNode);
-            bool result = testedObject.IsNotBottomOfTree();
-
-            Assert.True(result, "With items in the internal list this should return True");
-        }
-
-        [Test]
         [Category("GenerateNodeID")]
         public void EmptyNodeList()
         {
@@ -122,18 +103,18 @@ namespace LVT.Tests
         }
 
         [Test]
-        [Category("RecursiveTreeCrawler")]
-        public void PassingUpTheTree()
+        [Category("UpdateListHandler")]
+        public void CorrectlyUpdateListHandler()
         {
-            // Simulating being second in the tree without lower nodes
             initialNode.NodeId = "bet0";
             listHandler.NodeList.Add(initialNode);
             listHandler.PreviousNode = initialNode;
 
-            ListHandler result = testedObject.RecursiveTreeCrawler(listHandler);
+            ListHandler result = testedObject.UpdateListHandler(listHandler);
 
             Assert.AreEqual(testedObject, result.NodeList[1], "NodeList should contain node being tested at end of list");
             Assert.Contains(testedObject, result.EdgeList[0], "EdgeList should contain copy of node being tested (as current node)");
+            Assert.AreEqual(testedObject, result.PreviousNode, "The PreviousNode should have been replaced by the node being tested");
 
             Assert.AreEqual("bet0", result.NodeList[0].NodeId, "bet0 should remain as first in NodeList");
             Assert.AreEqual("node0", result.NodeList[1].NodeId, "Node being tested should be added as second node in NodeList");
@@ -154,6 +135,7 @@ namespace LVT.Tests
             Assert.AreEqual(2, result.NodeList.Count, "NodeList should hold both nodes");
             Assert.AreEqual(1, result.EdgeList.Count, "EdgeList should hold one edge");
             Assert.AreEqual(2, result.EdgeList[0].Count, "Edge should be two nodes long");
+            Assert.AreEqual(testedObject, result.PreviousNode, "The PreviousNode should be the node being tested");
 
             Assert.AreEqual("node0", result.NodeList[0].NodeId, "First node should be first in NodeList");
             Assert.AreEqual("node1", result.NodeList[1].NodeId, "Second node should be second in NodeList");
