@@ -12,13 +12,13 @@ namespace LVT.LVT.Services
         public string VisualizeToString(Initiative initiative, string parentNode)
         {
             MeasurePresenter MP = new MeasurePresenter();
-            IEnumerable<String> measuresStrings = initiative.Measures.Select(measure => MP.VisualizeToString(measure, initiative.Title));
+            IEnumerable<String> measuresStrings = initiative.Measures.Select(measure => MP.VisualizeToString(measure, initiative.NodeID));
             string prettyMeasures = string.Join(",", measuresStrings);
             EpicPresenter EP = new EpicPresenter();
-            IEnumerable<String> epicsStrings = initiative.Epics.Select(epic => EP.VisualizeToString(epic, initiative.Title));
+            IEnumerable<String> epicsStrings = initiative.Epics.Select(epic => EP.VisualizeToString(epic, initiative.NodeID));
             string prettyEpics = string.Join(",", epicsStrings);
 
-            return "[{ v: '" + initiative.Title + "', f: 'Initiative" + "<div style=\"font-style:italic\">" + initiative.Title + "</div>'}, " + $"'{parentNode}'], " + $"{prettyMeasures}, " + prettyEpics;
+            return "[{ v: '" + initiative.NodeID + "', f: 'Initiative" + "<div style=\"font-style:italic\">" + initiative.Title + "</div>'}, " + $"'{parentNode}'], " + $"{prettyMeasures}, " + prettyEpics;
         }
 
         // this is not used

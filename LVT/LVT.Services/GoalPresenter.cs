@@ -13,10 +13,10 @@ namespace LVT.LVT.Services
         public string VisualizeToString(Goal goal, string parentNode)
         {
             BetPresenter BP = new BetPresenter();
-            IEnumerable<String> betsStrings = goal.Bets.Select(bet => BP.VisualizeToString(bet, goal.Title));
+            IEnumerable<String> betsStrings = goal.Bets.Select(bet => BP.VisualizeToString(bet, goal.NodeID));
             string prettyBets = string.Join(",", betsStrings);
 
-            return "[{ v: '" + goal.Title + "', f: 'Goal" + "<div style=\"font-style:italic\">" + goal.Title + "</div>'}, " + $"'{parentNode}'], " + prettyBets;
+            return "[{ v: '" + goal.NodeID + "', f: 'Goal" + "<div style=\"font-style:italic\">" + goal.Title + "</div>'}, " + $"'{parentNode}'], " + prettyBets;
 
         }
 

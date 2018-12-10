@@ -6,12 +6,17 @@ namespace LVT
 {
     public class Vision
     {
-        public string Title { get; set; }
-        public List<Goal> Goals { get; set; }
-
-        public Vision(string title, List<Goal> goals) {
+        public Vision (string title, List<Goal> goals)
+        {
+            NodeID = Guid.NewGuid().ToString();
             Title = title;
             Goals = goals;
         }
+
+        public string NodeID { get; }
+        public string Title { get; set; }
+        public List<Goal> Goals { get; set; }
+
+      
     }
 }

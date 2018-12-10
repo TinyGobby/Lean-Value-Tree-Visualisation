@@ -24,9 +24,7 @@ namespace LVT
             // this needs to be moved to separate function
 
             Directory.CreateDirectory("C:\\temp");
-
             string content = Properties.Resources.TemplatePart1 + OrgaChart + Properties.Resources.TemplatePart2;
-
             File.WriteAllText(@"C:\temp\LVT.html", content);
             Console.WriteLine(@"Your tree has been saved to C:\temp\LVT.html");
 

@@ -14,10 +14,10 @@ namespace LVT.LVT.Services
         public string VisualizeToString(Vision vision, string parentNode = "")
         {
             GoalPresenter GP = new GoalPresenter();
-            IEnumerable<String> goalsStrings = vision.Goals.Select(goal => GP.VisualizeToString(goal, vision.Title));
+            IEnumerable<String> goalsStrings = vision.Goals.Select(goal => GP.VisualizeToString(goal, vision.NodeID));
             string prettyGoals = string.Join(",", goalsStrings);
 
-            return "[[{ v: '" + vision.Title + "', f: 'Vision" + "<div style=\"font-style:italic\">" + vision.Title + "</div>'}, " + $"'{parentNode}'], " + prettyGoals + "]";
+            return "[[{ v: '" + vision.NodeID + "', f: 'Vision" + "<div style=\"font-style:italic\">" + vision.Title + "</div>'}, " + $"'{parentNode}'], " + prettyGoals + "]";
         }
 
         // this is not used

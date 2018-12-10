@@ -12,10 +12,10 @@ namespace LVT.LVT.Services
         public string VisualizeToString(Bet bet, string parentNode)
         {
             InitiativePresenter IP = new InitiativePresenter();
-            IEnumerable<String> initiativesStrings = bet.Initiatives.Select(initiative => IP.VisualizeToString(initiative, bet.Title));
+            IEnumerable<String> initiativesStrings = bet.Initiatives.Select(initiative => IP.VisualizeToString(initiative, bet.NodeID));
             string prettyInitiatives = string.Join(",", initiativesStrings);
 
-            return "[{ v: '" + bet.Title + "', f: 'Bet" + "<div style=\"font-style:italic\">" + bet.Title + "</div>'}, " + $"'{parentNode}'], " + prettyInitiatives;
+            return "[{ v: '" + bet.NodeID + "', f: 'Bet" + "<div style=\"font-style:italic\">" + bet.Title + "</div>'}, " + $"'{parentNode}'], " + prettyInitiatives;
 
         }
 
