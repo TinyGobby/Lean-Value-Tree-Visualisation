@@ -10,6 +10,6 @@ namespace LVT.LVT.Interfaces
     public interface IVisualizer<T>
         where T: class
     {
-     string VisualizeToString(T toVisualise);
+     string VisualizeToString(T toVisualise, string parentNode);
     }
 }

@@ -1,13 +1,30 @@
 ﻿using LVT.LVT.Interfaces;
 using System;
+using System.Collections.Generic;
 
 namespace LVT.LVT.Services
 {
     public class MeasurePresenter : IVisualizer<Measure>
     {
-        public string VisualizeToString(Measure measure)
+        protected List<string[]> measureRowData = new List<string[]>();
+
+        public string VisualizeToString(Measure measure, string parentNode)
         {
-            return $"## I am a measure with these attributes: Amount: {measure.Amount}, Deadline: {measure.Deadline}, Description: {measure.Description}, Units: {measure.Units} ##";
+            return "[{ v: '" + measure.Amount + measure.Units + "', f: 'Measure<div style=\"font-style:italic\">" + $"{measure.Description}" + "</div>" +
+                                                                                   "<div style=\"font-style:italic\">" + $"{measure.Deadline}" + "</div>" +
+                                                                                   "<div style=\"font-style:italic\">" + $"{measure.Amount}" + "</div>" +
+                                                                                   "<div style=\"font-style:italic\">" + $"{measure.Units}" + "</div>" +
+                                                                                   "'}, " + $"'{parentNode}']";
+        }
+
+        // this is not used
+        public List<string[]> VisualizeToList(Measure measure, string initiativeTitle)
+        {
+            string[] measurePropsData = {$"Amount: {measure.Amount}, Deadline: {measure.Deadline}, Description: {measure.Description}, Units: {measure.Units}", $"{initiativeTitle}"};
+
+            measureRowData.Add(measurePropsData);
+
+            return measureRowData;
         }
     }
 }

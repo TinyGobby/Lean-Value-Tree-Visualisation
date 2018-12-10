@@ -69,5 +69,48 @@ namespace LVT.Properties {
                 return ((byte[])(obj));
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;!DOCTYPE html&gt;
+        ///
+        ///&lt;html lang=&quot;en&quot; xmlns=&quot;http://www.w3.org/1999/xhtml&quot;&gt;
+        ///&lt;head&gt;
+        ///    &lt;meta charset=&quot;utf-8&quot; /&gt;
+        ///    &lt;title&gt;LVT Visualisation&lt;/title&gt;
+        ///    &lt;script type=&quot;text/javascript&quot; src=&quot;https://www.gstatic.com/charts/loader.js&quot;&gt;&lt;/script&gt;
+        ///    &lt;script type=&quot;text/javascript&quot;&gt;
+        ///        google.charts.load(&apos;current&apos;, { packages: [&quot;orgchart&quot;] });
+        ///        google.charts.setOnLoadCallback(drawChart);
+        ///
+        ///        function drawChart() {
+        ///            var data = new google.visualization.DataTable();
+        ///            dat [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string TemplatePart1 {
+            get {
+                return ResourceManager.GetString("TemplatePart1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to );
+        ///
+        ///            // Create the chart.
+        ///            var chart = new google.visualization.OrgChart(document.getElementById(&apos;chart_div&apos;));
+        ///            // Draw the chart, setting the allowHtml option to true for the tooltips.
+        ///            chart.draw(data, { allowHtml: true });
+        ///        }
+        ///    &lt;/script&gt;
+        ///&lt;/head&gt;
+        ///&lt;body&gt;
+        ///    &lt;div id=&quot;chart_div&quot;&gt;&lt;/div&gt;
+        ///&lt;/body&gt;
+        ///&lt;/html&gt;.
+        /// </summary>
+        internal static string TemplatePart2 {
+            get {
+                return ResourceManager.GetString("TemplatePart2", resourceCulture);
+            }
+        }
     }
 }
