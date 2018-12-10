@@ -2,7 +2,7 @@
   "profiles": {
     "LVT": {
       "commandName": "Project",
-      "commandLineArgs": "C:\\Users\\patils3\\source\\repos\\Lean-Value-Tree-Visualisation\\LVT\\SingleBranchLVT.txt"
+      "commandLineArgs": "C:\\Users\\patils3\\source\\repos\\Lean-Value-Tree-Visualisation\\LVT\\SingleBranchLVT.json"
     }
   }
 }
