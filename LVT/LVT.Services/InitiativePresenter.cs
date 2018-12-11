@@ -7,6 +7,11 @@ namespace LVT.LVT.Services
 {
     public class InitiativePresenter : IVisualizer<Initiative>
     {
+        //private IVisualizer<Epic> _epicpre;
+        //public InitiativePresenter(IVisualizer<Epic> epicpre)
+        //{
+        //    _epicpre = epicpre;
+        //}
         protected List<string[]> initiativeRowData = new List<string[]>();
 
         public string VisualizeToString(Initiative initiative, string parentNode)
