@@ -14,7 +14,7 @@ namespace LVT.LVT.Services
         {
             string result = "[{ v: '" + goal.NodeID + "', f: 'Goal" + "<div style=\"font-style:italic\">" + goal.Title + "</div>'}, " + $"'{parentNode}']";
 
-            if (goal.Bets.Count() >= 1)
+            if (goal.Bets != null && goal.Bets.Count() >= 1)
             {
                 result = result + " , " + ProcessBets(goal, goal.NodeID);
             };

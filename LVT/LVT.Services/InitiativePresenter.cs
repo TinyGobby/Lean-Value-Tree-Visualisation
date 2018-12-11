@@ -17,14 +17,14 @@ namespace LVT.LVT.Services
         {
             string result = "[{ v: '" + initiative.NodeID + "', f: 'Initiative" + "<div style=\"font-style:italic\">" + initiative.Title + "</div>'}, " + $"'{parentNode}']";
 
-            if (initiative.Measures.Count() >= 1)
+            if (initiative.Measures != null && initiative.Measures.Count() >= 1)
             {
                 Console.WriteLine(result);
                 result = result + " , " + ProcessMeasures(initiative, initiative.NodeID);
                 Console.WriteLine(result);
             };
 
-            if (initiative.Epics.Count() >= 1)
+            if (initiative.Epics != null && initiative.Epics.Count() >= 1)
             {
                 result = result + " , " + ProcessEpics(initiative, initiative.NodeID);
             };

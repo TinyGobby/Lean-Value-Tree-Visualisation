@@ -15,7 +15,7 @@ namespace LVT.LVT.Services
         {
             string result = "[[{ v: '" + vision.NodeID + "', f: 'Vision" + "<div style=\"font-style:italic\">" + vision.Title + "</div>'}, " + $"'{parentNode}']";
 
-            if (vision.Goals.Count() >= 1)
+            if (vision.Goals != null && vision.Goals.Count() >= 1)
             {
                 result = result + " , " + ProcessGoals(vision, vision.NodeID);
             };
