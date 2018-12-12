@@ -7,12 +7,6 @@ namespace LVT.LVT.Services
 {
     public class InitiativePresenter : IVisualizer<Initiative>
     {
-        //private IVisualizer<Epic> _epicpre;
-        //public InitiativePresenter(IVisualizer<Epic> epicpre)
-        //{
-        //    _epicpre = epicpre;
-        //}
-
         public string VisualizeToString(Initiative initiative, string parentNode)
         {
             string result = "[{ v: '" + initiative.NodeID + "', f: 'Initiative" + "<div style=\"font-style:italic\">" + initiative.Title + "</div>'}, " + $"'{parentNode}']";
