@@ -1,4 +1,5 @@
-﻿using LVT.LVT.Services;
+﻿using LVT.LVT.Interfaces;
+using LVT.LVT.Services;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -28,8 +29,14 @@ namespace LVT
         }
 
         public static void CreateLVTHtml(LeanValueTree tree)
-        {
-            VisionPresenter VP = new VisionPresenter();
+        {   // this had to be added because we decided to inject the dependencies into each class for testing
+            EpicPresenter EP = new EpicPresenter();
+            MeasurePresenter MP = new MeasurePresenter();
+            InitiativePresenter IP = new InitiativePresenter(EP, MP);
+            BetPresenter BP = new BetPresenter(IP);
+            GoalPresenter GP = new GoalPresenter(BP);
+            VisionPresenter VP = new VisionPresenter(GP);
+
             Directory.CreateDirectory("C:\\temp");
             string OrgaChart = VP.VisualizeToString(tree.Vision);
             SaveToDisk(OrgaChart);

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace LVT.LVT.Services
 {
-    public class MeasurePresenter : IVisualizer<Measure>
+    public class MeasurePresenter : IMeasurePresenter
     {
         protected List<string[]> measureRowData = new List<string[]>();
 

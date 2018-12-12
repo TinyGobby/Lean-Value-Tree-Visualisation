@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace LVT.LVT.Services
 {
-    public class EpicPresenter : IVisualizer<Epic> 
+    public class EpicPresenter : IEpicPresenter
 
     {
         protected List<string[]> epicRowData = new List<string[]>();

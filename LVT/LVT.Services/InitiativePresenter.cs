@@ -5,8 +5,17 @@ using System.Linq;
 
 namespace LVT.LVT.Services
 {
-    public class InitiativePresenter : IVisualizer<Initiative>
+    public class InitiativePresenter : IInitiativePresenter
     {
+        private IMeasurePresenter _mp;
+        private IEpicPresenter _ep;
+
+        public InitiativePresenter(IEpicPresenter ep, IMeasurePresenter mp)
+        {
+            _ep = ep;
+            _mp = mp;
+        }
+
         public string VisualizeToString(Initiative initiative, string parentNode)
         {
             string result = "[{ v: '" + initiative.NodeID + "', f: 'Initiative" + "<div style=\"font-style:italic\">" + initiative.Title + "</div>'}, " + $"'{parentNode}']";
@@ -28,16 +37,14 @@ namespace LVT.LVT.Services
 
         public string ProcessMeasures(Initiative initiative, string initiativeTitle)
         {
-            MeasurePresenter MP = new MeasurePresenter();
-            IEnumerable<String> measuresStrings = initiative.Measures.Select(measure => MP.VisualizeToString(measure, initiative.NodeID)); ;
+            IEnumerable<String> measuresStrings = initiative.Measures.Select(measure => _mp.VisualizeToString(measure, initiative.NodeID)); ;
 
             return string.Join(", ", measuresStrings);
         }
 
         private string ProcessEpics(Initiative initiative, string initiativeTitle)
         {
-            EpicPresenter EP = new EpicPresenter();
-            IEnumerable<String> epicsStrings = initiative.Epics.Select(epic => EP.VisualizeToString(epic, initiative.NodeID));
+            IEnumerable<String> epicsStrings = initiative.Epics.Select(epic => _ep.VisualizeToString(epic, initiative.NodeID));
 
             return string.Join(", ", epicsStrings);
         }

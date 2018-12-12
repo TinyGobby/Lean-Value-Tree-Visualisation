@@ -6,12 +6,12 @@ namespace LVT
 {
     public class Initiative
     {
-        public Initiative(string title, List<Measure> measures, List<Epic> epics)
+        public Initiative(string title)
         {
             NodeID = Guid.NewGuid().ToString();
             Title = title;
-            Measures = measures;
-            Epics = epics;
+            List<Measure> Measures = new List<Measure>();
+            List<Epic> Epics = new List<Epic>();
         }
 
         public string NodeID { get; }

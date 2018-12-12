@@ -13,7 +13,6 @@ namespace LVT.Tests
         {
             var EP = new EpicPresenter();
             var epic = new Epic("testDescription", "testDeadline");
-            string result = EP.VisualizeToString(epic, "parentNode");
             string NodeID = epic.NodeID;
             string Description = epic.Description;
             string Deadline = epic.Deadline;
@@ -21,6 +20,8 @@ namespace LVT.Tests
             string expected = "[{ v: '" + NodeID + "', f: 'Epic" + "<div style=\"font-style:italic\">" + $"{Description}" + "</div>" +
                                                                    "<div style=\"font-style:italic\">" + $"{Deadline}" + "</div>" +
                                                                    "'}, " + $"'{ParentNode}']";
+
+            string result = EP.VisualizeToString(epic, "parentNode");
 
             Assert.AreEqual(expected, result);
 

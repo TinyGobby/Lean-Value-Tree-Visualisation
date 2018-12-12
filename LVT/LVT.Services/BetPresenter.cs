@@ -5,11 +5,11 @@ using System.Linq;
 
 namespace LVT.LVT.Services
 {
-    public class BetPresenter : IVisualizer<Bet>
+    public class BetPresenter : IBetPresenter
     {
-        private IVisualizer<Initiative> _ip;
+        private IInitiativePresenter _ip;
 
-        public BetPresenter(IVisualizer<Initiative> ip)
+        public BetPresenter(IInitiativePresenter ip)
         {
             _ip = ip;
         }
@@ -28,7 +28,6 @@ namespace LVT.LVT.Services
 
         private string ProcessInitiatives(Bet bet, string nodeID)
         {
-            _ip = new InitiativePresenter();
             IEnumerable<String> initiativesStrings = bet.Initiatives.Select(initiative => _ip.VisualizeToString(initiative, bet.NodeID));
 
             return string.Join(", ", initiativesStrings);

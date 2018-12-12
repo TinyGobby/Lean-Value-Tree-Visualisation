@@ -6,9 +6,14 @@ using System.Text;
 
 namespace LVT.LVT.Services
 {
-    public class GoalPresenter : IVisualizer<Goal>
+    public class GoalPresenter : IGoalPresenter
     {
-        protected List<string[]> goalRowData = new List<string[]>();
+        private IBetPresenter _bp;
+
+        public GoalPresenter(IBetPresenter bp)
+        {
+            _bp = bp;
+        }
 
         public string VisualizeToString(Goal goal, string parentNode)
         {
@@ -24,8 +29,7 @@ namespace LVT.LVT.Services
 
         private string ProcessBets(Goal goal, string nodeID)
         {
-            BetPresenter BP = new BetPresenter();
-            IEnumerable<String> betsStrings = goal.Bets.Select(bet => BP.VisualizeToString(bet, goal.NodeID));
+            IEnumerable<String> betsStrings = goal.Bets.Select(bet => _bp.VisualizeToString(bet, goal.NodeID));
 
             return string.Join(", ", betsStrings);
         }

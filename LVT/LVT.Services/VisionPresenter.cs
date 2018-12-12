@@ -7,9 +7,14 @@ using System.Text;
 
 namespace LVT.LVT.Services
 {
-    public class VisionPresenter : IVisualizer<Vision>
+    public class VisionPresenter : IVisionPresenter
     {
-        protected List<string[]> LVTRowData = new List<string[]>();
+        private IGoalPresenter _gp;
+
+        public VisionPresenter(IGoalPresenter gp)
+        {
+            _gp = gp;
+        }
 
         public string VisualizeToString(Vision vision, string parentNode = "")
         {
@@ -25,13 +30,11 @@ namespace LVT.LVT.Services
 
         private string ProcessGoals(Vision vision, string nodeID)
         {
-            GoalPresenter GP = new GoalPresenter();
-            IEnumerable<String> goalsStrings = vision.Goals.Select(goal => GP.VisualizeToString(goal, vision.NodeID));
+            IEnumerable<String> goalsStrings = vision.Goals.Select(goal => _gp.VisualizeToString(goal, vision.NodeID));
 
             return string.Join(", ", goalsStrings);
         }
     }
 }
-
 
 

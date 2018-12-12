@@ -4,7 +4,7 @@ using System.Text;
 
 namespace LVT.Tests
 {
-    class InitiativePresentorTests
+    class InitiativePresenterTests
     {
     }
 }
