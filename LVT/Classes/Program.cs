@@ -17,23 +17,30 @@ namespace LVT
             StreamReader file = File.OpenText(@"C:\Users\beckerfs\Documents\Projects\LVT\Lean-Value-Tree-Visualisation\LVT\TwoGoalsTwoBetsLVT.json");
             JsonParser Parser = new JsonParser();
             LeanValueTree newTree = Parser.ParseJsonLVTFromStream(file);
-            VisionPresenter VP = new VisionPresenter();
-            string OrgaChart = VP.VisualizeToString(newTree.Vision);
-            
+            CreateLVTHtml(newTree);
             //Console.WriteLine(OrgaChart);
-
-            // this needs to be moved to separate function
-
-            Directory.CreateDirectory("C:\\temp");
-            string content = Properties.Resources.TemplatePart1 + OrgaChart + Properties.Resources.TemplatePart2;
-            File.WriteAllText(@"C:\temp\LVT.html", content);
-            Console.WriteLine(@"Your tree has been saved to C:\temp\LVT.html");
 
             //this is an example of what is returned when you access the object:
             //Console.WriteLine(newTree);
             //Console.WriteLine(newTree.Vision.Title);
             //Console.WriteLine(newTree.Vision.Goals[0]);
             //Console.WriteLine(newTree.Vision.Goals[0].Bets[0]);
+        }
+
+        // this should probably be moved to services
+        public static void CreateLVTHtml(LeanValueTree tree)
+        {
+            VisionPresenter VP = new VisionPresenter();
+            Directory.CreateDirectory("C:\\temp");
+            string OrgaChart = VP.VisualizeToString(tree.Vision);
+            SaveToDisk(OrgaChart);
+        }
+
+        public static void SaveToDisk(string chartdata)
+        {
+            string content = Properties.Resources.TemplatePart1 + chartdata + Properties.Resources.TemplatePart2;
+            File.WriteAllText(@"C:\temp\LVT.html", content);
+            Console.WriteLine(@"Your tree has been saved to C:\temp\LVT.html");
         }
     }
 }
