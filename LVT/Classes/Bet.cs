@@ -6,11 +6,11 @@ namespace LVT
 {
     public class Bet
     {
-        public Bet(string title, List<Initiative> initiatives)
+        public Bet(string title)
         {
             NodeID = Guid.NewGuid().ToString();
             Title = title;
-            Initiatives = initiatives;
+            List<Initiative> Initiatives = new List<Initiative>();
         }
 
         public string NodeID { get; }
