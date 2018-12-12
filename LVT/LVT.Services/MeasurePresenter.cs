@@ -16,15 +16,5 @@ namespace LVT.LVT.Services
                                                                                    "<div style=\"font-style:italic\">" + $"{measure.Units}" + "</div>" +
                                                                                    "'}, " + $"'{parentNode}']";
         }
-
-        // this is not used
-        public List<string[]> VisualizeToList(Measure measure, string initiativeTitle)
-        {
-            string[] measurePropsData = {$"Amount: {measure.Amount}, Deadline: {measure.Deadline}, Description: {measure.Description}, Units: {measure.Units}", $"{initiativeTitle}"};
-
-            measureRowData.Add(measurePropsData);
-
-            return measureRowData;
-        }
     }
 }
