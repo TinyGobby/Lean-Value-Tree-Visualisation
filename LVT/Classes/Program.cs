@@ -17,12 +17,6 @@ namespace LVT
             StreamReader file = File.OpenText(@"C:\Users\beckerfs\Documents\Projects\LVT\Lean-Value-Tree-Visualisation\LVT\TwoGoalsTwoBetsLVT.json");
             LeanValueTree newTree = ParseLVTData(file);
             CreateLVTHtml(newTree);
-
-            //this is an example of what is returned when you access the object:
-            //Console.WriteLine(newTree);
-            //Console.WriteLine(newTree.Vision.Title);
-            //Console.WriteLine(newTree.Vision.Goals[0]);
-            //Console.WriteLine(newTree.Vision.Goals[0].Bets[0]);
         }
 
         // the below should probably be moved to services
@@ -43,7 +37,7 @@ namespace LVT
 
         public static void SaveToDisk(string chartdata)
         {
-            string content = Properties.Resources.TemplatePart1 + chartdata + Properties.Resources.TemplatePart2;
+            string content = Properties.Resources.TemplateHTMLHeader + chartdata + Properties.Resources.TemplateHTMLFooter;
             File.WriteAllText(@"C:\temp\LVT.html", content);
             Console.WriteLine(@"Your tree has been saved to C:\temp\LVT.html");
         }
