@@ -9,13 +9,6 @@ namespace LVT.LVT.Services
 {
     public class VisionPresenter : IVisionPresenter
     {
-        private IGoalPresenter _gp;
-
-        public VisionPresenter(IGoalPresenter gp)
-        {
-            _gp = gp;
-        }
-
         public string VisualizeToString(Vision vision, string parentNode = "")
         {
             string result = "[[{ v: '" + vision.NodeID + "', f: 'Vision" + "<div style=\"font-style:italic\">" + vision.Title + "</div>'}, " + $"'{parentNode}']";
@@ -30,7 +23,8 @@ namespace LVT.LVT.Services
 
         private string ProcessGoals(Vision vision, string nodeID)
         {
-            IEnumerable<String> goalsStrings = vision.Goals.Select(goal => _gp.VisualizeToString(goal, vision.NodeID));
+            GoalPresenter GP = new GoalPresenter();
+            IEnumerable<String> goalsStrings = vision.Goals.Select(goal => GP.VisualizeToString(goal, vision.NodeID));
 
             return string.Join(", ", goalsStrings);
         }

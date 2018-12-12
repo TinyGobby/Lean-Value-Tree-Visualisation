@@ -7,13 +7,6 @@ namespace LVT.LVT.Services
 {
     public class BetPresenter : IBetPresenter
     {
-        private IInitiativePresenter _ip;
-
-        public BetPresenter(IInitiativePresenter ip)
-        {
-            _ip = ip;
-        }
-
         public string VisualizeToString(Bet bet, string parentNode)
         {
             string result = "[{ v: '" + bet.NodeID + "', f: 'Bet" + "<div style=\"font-style:italic\">" + bet.Title + "</div>'}, " + $"'{parentNode}']";
@@ -28,7 +21,8 @@ namespace LVT.LVT.Services
 
         private string ProcessInitiatives(Bet bet, string nodeID)
         {
-            IEnumerable<String> initiativesStrings = bet.Initiatives.Select(initiative => _ip.VisualizeToString(initiative, bet.NodeID));
+            InitiativePresenter IP = new InitiativePresenter();
+            IEnumerable<String> initiativesStrings = bet.Initiatives.Select(initiative => IP.VisualizeToString(initiative, bet.NodeID));
 
             return string.Join(", ", initiativesStrings);
         }

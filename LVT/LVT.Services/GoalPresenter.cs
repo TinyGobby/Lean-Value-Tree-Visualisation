@@ -8,13 +8,6 @@ namespace LVT.LVT.Services
 {
     public class GoalPresenter : IGoalPresenter
     {
-        private IBetPresenter _bp;
-
-        public GoalPresenter(IBetPresenter bp)
-        {
-            _bp = bp;
-        }
-
         public string VisualizeToString(Goal goal, string parentNode)
         {
             string result = "[{ v: '" + goal.NodeID + "', f: 'Goal" + "<div style=\"font-style:italic\">" + goal.Title + "</div>'}, " + $"'{parentNode}']";
@@ -29,7 +22,8 @@ namespace LVT.LVT.Services
 
         private string ProcessBets(Goal goal, string nodeID)
         {
-            IEnumerable<String> betsStrings = goal.Bets.Select(bet => _bp.VisualizeToString(bet, goal.NodeID));
+            BetPresenter BP = new BetPresenter();
+            IEnumerable<String> betsStrings = goal.Bets.Select(bet => BP.VisualizeToString(bet, goal.NodeID));
 
             return string.Join(", ", betsStrings);
         }
