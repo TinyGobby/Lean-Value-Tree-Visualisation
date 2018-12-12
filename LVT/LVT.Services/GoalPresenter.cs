@@ -16,7 +16,7 @@ namespace LVT.LVT.Services
 
             if (goal.Bets != null && goal.Bets.Count() >= 1)
             {
-                result = result + " , " + ProcessBets(goal, goal.NodeID);
+                result = result + ", " + ProcessBets(goal, goal.NodeID);
             };
 
             return result;

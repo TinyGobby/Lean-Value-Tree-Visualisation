@@ -17,7 +17,7 @@ namespace LVT.LVT.Services
 
             if (vision.Goals != null && vision.Goals.Count() >= 1)
             {
-                result = result + " , " + ProcessGoals(vision, vision.NodeID);
+                result = result + ", " + ProcessGoals(vision, vision.NodeID);
             };
 
             return result + "]";
