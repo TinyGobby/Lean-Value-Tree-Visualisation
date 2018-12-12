@@ -15,10 +15,8 @@ namespace LVT
             //will no longer be an issue when we start the program from the command line with the file location as argument
             //StreamReader file = File.OpenText(@"C:\Users\beckerfs\Documents\Projects\LVT\Lean-Value-Tree-Visualisation\LVT\SingleBranchLVT.json");
             StreamReader file = File.OpenText(@"C:\Users\beckerfs\Documents\Projects\LVT\Lean-Value-Tree-Visualisation\LVT\TwoGoalsTwoBetsLVT.json");
-            JsonParser Parser = new JsonParser();
-            LeanValueTree newTree = Parser.ParseJsonLVTFromStream(file);
+            LeanValueTree newTree = ParseLVTData(file);
             CreateLVTHtml(newTree);
-            //Console.WriteLine(OrgaChart);
 
             //this is an example of what is returned when you access the object:
             //Console.WriteLine(newTree);
@@ -27,7 +25,14 @@ namespace LVT
             //Console.WriteLine(newTree.Vision.Goals[0].Bets[0]);
         }
 
-        // this should probably be moved to services
+        // the below should probably be moved to services
+
+        public static LeanValueTree ParseLVTData(StreamReader file)
+        {
+            JsonParser Parser = new JsonParser();
+            return Parser.ParseJsonLVTFromStream(file);
+        }
+
         public static void CreateLVTHtml(LeanValueTree tree)
         {
             VisionPresenter VP = new VisionPresenter();
