@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "LVT": {
+      "commandName": "Project",
+      "commandLineArgs": "C:\\Users\\harrispn\\source\\repos\\leanValueTree\\LVT\\SingleBranchLVT.json"
+    }
+  }
+}

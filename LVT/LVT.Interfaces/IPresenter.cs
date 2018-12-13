@@ -17,6 +17,6 @@ namespace LVT.LVT.Interfaces
     public interface IEpicPresenter : IPresenter<Epic> { }
     public interface IInitiativePresenter : IPresenter<Initiative> { }
     public interface IBetPresenter : IPresenter<Bet> { }
-    public interface IGoalPresenter : IPresenter<Goal> { }
-    public interface IVisionPresenter : IPresenter<Vision> { }
+    public interface IGoalPresenter : IPresenter<IGoal> { }
+    public interface IVisionPresenter : IPresenter<IVision> { }
 }

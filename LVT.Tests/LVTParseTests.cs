@@ -1,6 +1,8 @@
 ﻿using LVT.LVT.Services;
 using NUnit.Framework;
 using System.IO;
+using LVT.LVT.Interfaces;
+
 namespace LVT.Tests
 {
     [TestFixture]
@@ -41,23 +43,23 @@ namespace LVT.Tests
 
             Assert.AreEqual("visionTitle", VisionObj.Title, "Vision should have title");
             Assert.IsInstanceOf(typeof(Vision), VisionObj, "Test Vision should be instance of Vision Class");
-            Assert.AreEqual(1, VisionObj.Goals.Count, "Test Vision should have one goal");
+            Assert.AreEqual(1, VisionObj.NodeList.Count, "Test Vision should have one goal");
         }
 
         [Test]
         public void SingleBranchLVT_Goal()
         {
-            Goal GoalObj = SingleBranchLVT.Vision.Goals[0];
+            IGoal GoalObj = SingleBranchLVT.Vision.NodeList[0];
 
             Assert.IsInstanceOf(typeof(Goal), GoalObj, "Test Goal should be instance of Goal class");
             Assert.AreEqual("goalTitle", GoalObj.Title, "Test Goal should have title");
-            Assert.AreEqual(1, GoalObj.Bets.Count, "Test Goal should have one Bet");
+            Assert.AreEqual(1, GoalObj.NodeList.Count, "Test Goal should have one Bet");
         }
 
         [Test]
         public void SingleBranchLVT_Bet()
         {
-            Bet BetObj = SingleBranchLVT.Vision.Goals[0].Bets[0];
+            Bet BetObj = SingleBranchLVT.Vision.NodeList[0].NodeList[0];
 
             Assert.IsInstanceOf(typeof(Bet), BetObj, "Test Bet should be instance of Bet class");
             Assert.AreEqual("betTitle", BetObj.Title, "Test Bet should have a title");
@@ -67,7 +69,7 @@ namespace LVT.Tests
         [Test]
         public void SingleBranchLVT_Initiative()
         {
-            Initiative InitiativeObj = SingleBranchLVT.Vision.Goals[0].Bets[0].Initiatives[0];
+            Initiative InitiativeObj = SingleBranchLVT.Vision.NodeList[0].NodeList[0].Initiatives[0];
 
             Assert.IsInstanceOf(typeof(Initiative), InitiativeObj, "Test Initiative should be instance of Iniative class");
             Assert.AreEqual("initiativeTitle", InitiativeObj.Title, "Test Initiative should have title");
@@ -78,7 +80,7 @@ namespace LVT.Tests
         [Test]
         public void SingleBranchLVT_Measure()
         {
-            Measure MeasureObj = SingleBranchLVT.Vision.Goals[0].Bets[0].Initiatives[0].Measures[0];
+            Measure MeasureObj = SingleBranchLVT.Vision.NodeList[0].NodeList[0].Initiatives[0].Measures[0];
 
             Assert.IsInstanceOf(typeof(Measure), MeasureObj, "Test Measure is instance of Measure class");
             Assert.AreEqual("measureDescription", MeasureObj.Description, "Test Measure has a description");
@@ -90,7 +92,7 @@ namespace LVT.Tests
         [Test]
         public void SingleBranchLVT_Epic()
         {
-            Epic EpicObj = SingleBranchLVT.Vision.Goals[0].Bets[0].Initiatives[0].Epics[0];
+            Epic EpicObj = SingleBranchLVT.Vision.NodeList[0].NodeList[0].Initiatives[0].Epics[0];
 
             Assert.IsInstanceOf(typeof(Epic), EpicObj, "Test Epic is instance of Epic class");
             Assert.AreEqual("epicDescription", EpicObj.Description, "Test Epic has a description");

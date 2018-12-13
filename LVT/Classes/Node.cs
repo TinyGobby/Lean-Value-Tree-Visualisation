@@ -3,20 +3,18 @@ using System.Collections.Generic;
 using System.Text;
 using LVT.LVT.Interfaces;
 
-namespace LVT
+namespace LVT.Classes
 {
-    public class Goal : IGoal
+    public class Node
     {
-        public Goal(string title, List<Bet> bets)
+        public Node(string title, List<Vision> nodeList)
         {
             NodeID = Guid.NewGuid().ToString();
             Title = title;
-            NodeList = bets;
+            NodeList = nodeList;
         }
-
         public string NodeID { get; }
         public string Title { get; set; }
-        public List<Bet> NodeList { get; set; }
-
+        public List<Vision> NodeList { get; set; }
     }
 }
