@@ -10,24 +10,29 @@ namespace LVT.LVT.Services
         private IMeasurePresenter _mp;
         private IEpicPresenter _ep;
 
-        public InitiativePresenter(IEpicPresenter ep, IMeasurePresenter mp)
+        public InitiativePresenter(IEpicPresenter ep = null, IMeasurePresenter mp = null)
         {
-            _ep = ep;
-            _mp = mp;
+            if (ep == null)
+            {
+                _ep = new EpicPresenter();
+            }
+
+            if (mp == null)
+            {
+                _mp = new MeasurePresenter();
+            }
         }
 
         public string VisualizeToString(Initiative initiative, string parentNode)
         {
             string result = "[{ v: '" + initiative.NodeID + "', f: 'Initiative" + "<div style=\"font-style:italic\">" + initiative.Title + "</div>'}, " + $"'{parentNode}']";
 
-            if (initiative.Measures != null && initiative.Measures.Count() >= 1)
+            if (initiative.Measures.Count() >= 1)
             {
-                Console.WriteLine(result);
                 result = result + " , " + ProcessMeasures(initiative, initiative.NodeID);
-                Console.WriteLine(result);
             };
 
-            if (initiative.Epics != null && initiative.Epics.Count() >= 1)
+            if (initiative.Epics.Count() >= 1)
             {
                 result = result + " , " + ProcessEpics(initiative, initiative.NodeID);
             };

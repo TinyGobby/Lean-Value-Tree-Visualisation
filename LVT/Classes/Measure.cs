@@ -20,7 +20,5 @@ namespace LVT
             Amount = amount;
             Units = units;
         }
-
-
     }
 }

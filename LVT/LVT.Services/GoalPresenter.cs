@@ -10,16 +10,19 @@ namespace LVT.LVT.Services
     {
         private IBetPresenter _bp;
 
-        public GoalPresenter(IBetPresenter bp)
+        public GoalPresenter(IBetPresenter bp = null)
         {
-            _bp = bp;
+            if (bp == null)
+            {
+                _bp = new BetPresenter();
+            }
         }
 
         public string VisualizeToString(Goal goal, string parentNode)
         {
             string result = "[{ v: '" + goal.NodeID + "', f: 'Goal" + "<div style=\"font-style:italic\">" + goal.Title + "</div>'}, " + $"'{parentNode}']";
 
-            if (goal.Bets != null && goal.Bets.Count() >= 1)
+            if (goal.Bets.Count() >= 1)
             {
                 result = result + ", " + ProcessBets(goal, goal.NodeID);
             };

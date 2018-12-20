@@ -10,14 +10,13 @@ namespace LVT
         {
             NodeID = Guid.NewGuid().ToString();
             Title = title;
-            List<Measure> Measures = new List<Measure>();
-            List<Epic> Epics = new List<Epic>();
+            Measures = new List<Measure>();
+            Epics = new List<Epic>();
         }
 
         public string NodeID { get; }
         public string Title { get; set; }
         public List<Measure> Measures { get; set; }
         public List<Epic> Epics { get; set; }
-
     }
 }

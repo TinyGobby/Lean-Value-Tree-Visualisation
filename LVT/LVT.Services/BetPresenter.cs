@@ -9,16 +9,19 @@ namespace LVT.LVT.Services
     {
         private IInitiativePresenter _ip;
 
-        public BetPresenter(IInitiativePresenter ip)
+        public BetPresenter(IInitiativePresenter ip = null)
         {
-            _ip = ip;
+            if (ip == null)
+            {
+                _ip = new InitiativePresenter();
+            }
         }
 
         public string VisualizeToString(Bet bet, string parentNode)
         {
             string result = "[{ v: '" + bet.NodeID + "', f: 'Bet" + "<div style=\"font-style:italic\">" + bet.Title + "</div>'}, " + $"'{parentNode}']";
 
-            if (bet.Initiatives != null && bet.Initiatives.Count >= 1)
+            if (bet.Initiatives.Count >= 1)
             {
                 result = result + ", " + ProcessInitiatives(bet, bet.NodeID);
             };

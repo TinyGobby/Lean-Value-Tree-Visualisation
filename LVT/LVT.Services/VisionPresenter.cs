@@ -11,16 +11,19 @@ namespace LVT.LVT.Services
     {
         private IGoalPresenter _gp;
 
-        public VisionPresenter(IGoalPresenter gp)
+        public VisionPresenter(IGoalPresenter gp = null)
         {
-            _gp = gp;
+            if (gp == null)
+            {
+                _gp = new GoalPresenter();
+            }
         }
 
         public string VisualizeToString(Vision vision, string parentNode = "")
         {
             string result = "[[{ v: '" + vision.NodeID + "', f: 'Vision" + "<div style=\"font-style:italic\">" + vision.Title + "</div>'}, " + $"'{parentNode}']";
 
-            if (vision.Goals != null && vision.Goals.Count() >= 1)
+            if (vision.Goals.Count() >= 1)
             {
                 result = result + ", " + ProcessGoals(vision, vision.NodeID);
             };

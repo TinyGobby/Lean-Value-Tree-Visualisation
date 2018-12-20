@@ -16,6 +16,5 @@ namespace LVT
         public string NodeID { get; }
         public string Description { get; set; }
         public string Deadline { get; set; }
-
     }
 }

@@ -9,6 +9,19 @@ namespace LVT.Tests
 {
     class BetPresenterTests
     {
+        public Bet _testBet;
+        public BetPresenter _TBP;
+        public Initiative _testInitiative;
+        public Mock<IInitiativePresenter> _MIP;
+
+        [SetUp]
+        public void SetupForTest()
+        {
+            _TBP = new BetPresenter();
+            _testBet = new Bet("Test Bet Title");
+            _testInitiative = new Initiative("Test Initiative Title");
+            _MIP = new Mock<IInitiativePresenter>();
+        }
         //[Test]
         //TestBetVisualizeToStringOneInitiative()
         //{
@@ -30,18 +43,16 @@ namespace LVT.Tests
 
         //}
 
-        //[Test]
-        //public void ProcessInitiative_test()
-        //{
-        //    var mockIP = new Mock<IVisualizer<Initiative>>();
-        //    Initiative testInit = new Initiative("Inititaive Title");   
-        //    Bet testBet = new Bet("Test Bet");
-        //    BetPresenter testBP = new BetPresenter(mockIP);
-        //    string betNodeID = "Test Node ID";
+        [Test]
+        public void VisualiseToString_Bet_WithOneInitiative()
+        {
+            _testBet.Initiatives.Add(_testInitiative);
+            _MIP.Setup(mip => mip.VisualizeToString(_testInitiative, "Parent Node Test ID")).Returns("Test Initiative One of One Title");
             
-        //    mockIP.Setup(foo => foo.VisualizeToString(testInit, betNodeID)).Returns("StringOfInitiatives");
+            string result = _TBP.VisualizeToString(_testBet, _testBet.NodeID);
+            string expected = "[{ v: '" + _testInitiative.NodeID + "', f: 'Bet" + "<div style=\"font-style:italic\">" + _testBet.Title + "</div>'}, " + $"'{_testBet.NodeID}']" + "Test Initiative One of One Title";
 
-        //    ProcessInitiatives(testBet, betNodeID);
-        //}
+            Assert.AreEqual(expected, result);
+      }
     }
 }
