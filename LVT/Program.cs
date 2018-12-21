@@ -11,15 +11,20 @@ namespace LVT
     {
         static void Main(string[] args)
         {
+
+            RunFromSolution();
+        }
+
+        // the below should probably be moved to services
+
+        public static void RunFromSolution()
+        {
             //this takes an absolute path and needs to be adapted for each computer depending on where the file lives that you want to open - but this allows you to pass different template trees.
-            //will no longer be an issue when we start the program from the command line with the file location as argument
             //StreamReader file = File.OpenText(@"C:\Users\beckerfs\Documents\Projects\LVT\Lean-Value-Tree-Visualisation\LVT\SingleBranchLVT.json");
             StreamReader file = File.OpenText(@"C:\Users\beckerfs\Documents\Projects\LVT\Lean-Value-Tree-Visualisation\LVT\TwoGoalsTwoBetsLVT.json");
             LeanValueTree newTree = ParseLVTData(file);
             CreateLVTHtml(newTree);
         }
-
-        // the below should probably be moved to services
 
         public static LeanValueTree ParseLVTData(StreamReader file)
         {
