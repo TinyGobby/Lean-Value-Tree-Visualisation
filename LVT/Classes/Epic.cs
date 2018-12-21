@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace LVT
 {
@@ -16,6 +14,5 @@ namespace LVT
         public string NodeID { get; }
         public string Description { get; set; }
         public string Deadline { get; set; }
-
     }
 }

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace LVT
 {
@@ -10,12 +9,11 @@ namespace LVT
         {
             NodeID = Guid.NewGuid().ToString();
             Title = title;
-            List<Initiative> Initiatives = new List<Initiative>();
+            Initiatives = new List<Initiative>();
         }
 
         public string NodeID { get; }
         public string Title { get; set; }
         public List<Initiative> Initiatives { get; set; }
-
     }
 }

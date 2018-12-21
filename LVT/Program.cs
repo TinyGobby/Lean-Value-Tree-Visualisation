@@ -12,7 +12,6 @@ namespace LVT
         static void Main(string[] args)
         {
             //this takes an absolute path and needs to be adapted for each computer depending on where the file lives that you want to open - but this allows you to pass different template trees.
-            //see Tests for an alternative way that uses project resources instead - so tests can be run no matter on whose environment
             //will no longer be an issue when we start the program from the command line with the file location as argument
             //StreamReader file = File.OpenText(@"C:\Users\beckerfs\Documents\Projects\LVT\Lean-Value-Tree-Visualisation\LVT\SingleBranchLVT.json");
             StreamReader file = File.OpenText(@"C:\Users\beckerfs\Documents\Projects\LVT\Lean-Value-Tree-Visualisation\LVT\TwoGoalsTwoBetsLVT.json");
@@ -29,7 +28,7 @@ namespace LVT
         }
 
         public static void CreateLVTHtml(LeanValueTree tree)
-        {  
+        { 
             VisionPresenter VP = new VisionPresenter();
 
             Directory.CreateDirectory("C:\\temp");

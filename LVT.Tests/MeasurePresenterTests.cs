@@ -1,30 +1,30 @@
 ﻿using LVT.LVT.Services;
 using NUnit.Framework;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace LVT.Tests
 {
     class MeasurePresenterTests
     {
+        private MeasurePresenter _MP;
+        private Measure _testMeasure;
+
+        [SetUp]
+        public void SetupForTest()
+        {
+            _MP = new MeasurePresenter();
+            _testMeasure = new Measure("testDescription", "testDeadline", 5, "testUnits");
+        }
+
         [Test]
         public void MeasurePresenterTest()
         {
-            var MP = new MeasurePresenter();
-            var measure = new Measure("testDescription", "testDeadline", 5, "testUnits");
-            string ParentNode = "parentNode";
-            string result = MP.VisualizeToString(measure, ParentNode);
-            string NodeID = measure.NodeID;
-            string Description = measure.Description;
-            string Deadline = measure.Deadline;
-            int Amount = measure.Amount;
-            string Units = measure.Units;
- 
-            string expected = "[{ v: '" + measure.NodeID + "', f: 'Measure<div style=\"font-style:italic\">" + $"{Description}" + "</div>" +
-                                                                         "<div style=\"font-style:italic\">" + $"{Deadline}" + "</div>" +
-                                                                         "<div style=\"font-style:italic\">" + $"{Amount}" + "</div>" +
-                                                                         "<div style=\"font-style:italic\">" + $"{Units}" + "</div>" +
+            string ParentNode = "Parent Initiative NodeID";
+
+            string result = _MP.VisualizeToString(_testMeasure, ParentNode);
+            string expected = "[{ v: '" + _testMeasure.NodeID + "', f: 'Measure<div style=\"font-style:italic\">" + $"{_testMeasure.Description}" + "</div>" +
+                                                                         "<div style=\"font-style:italic\">" + $"{_testMeasure.Deadline}" + "</div>" +
+                                                                         "<div style=\"font-style:italic\">" + $"{_testMeasure.Amount}" + "</div>" +
+                                                                         "<div style=\"font-style:italic\">" + $"{_testMeasure.Units}" + "</div>" +
                                                                          "'}, " + $"'{ParentNode}']";
 
             Assert.AreEqual(expected, result);

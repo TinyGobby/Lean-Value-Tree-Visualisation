@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace LVT
 {
@@ -20,7 +18,5 @@ namespace LVT
             Amount = amount;
             Units = units;
         }
-
-
     }
 }
