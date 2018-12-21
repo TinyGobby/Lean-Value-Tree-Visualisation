@@ -35,7 +35,7 @@ namespace LVT.Tests
         }
 
         [Test]
-        public void VisualiseToString_Bet_NoMeasures_NoEpics()
+        public void VisualizeToString_Bet_NoMeasures_NoEpics()
         {
             string result = _IP.VisualizeToString(_testInitiative, _ParentNodeID);
             string expected = "[{ v: '" + _testInitiative.NodeID + "', f: 'Initiative" + "<div style=\"font-style:italic\">" + _testInitiative.Title + "</div>'}, " + $"'{_ParentNodeID}']";
@@ -44,7 +44,7 @@ namespace LVT.Tests
         }
 
         [Test]
-        public void VisualiseToString_Bet_OneMeasure_NoEpics()
+        public void VisualizeToString_Bet_OneMeasure_NoEpics()
         {
             _testInitiative.Measures.Add(_testMeasure);
 
@@ -56,7 +56,7 @@ namespace LVT.Tests
         }
 
         [Test]
-        public void VisualiseToString_Bet_OneEpic_NoEMeasure()
+        public void VisualizeToString_Bet_OneEpic_NoEMeasure()
         {
             _testInitiative.Epics.Add(_testEpic);
 
@@ -68,7 +68,7 @@ namespace LVT.Tests
         }
 
         [Test]
-        public void VisualiseToString_Bet_OneMeasure_OneEpic()
+        public void VisualizeToString_Bet_OneMeasure_OneEpic()
         {
             _testInitiative.Measures.Add(_testMeasure);
             _testInitiative.Epics.Add(_testEpic);
@@ -82,7 +82,7 @@ namespace LVT.Tests
         }
 
         [Test]
-        public void VisualiseToString_Bet_TwoMeasures_NoEpics()
+        public void VisualizeToString_Bet_TwoMeasures_NoEpics()
         {
             Enumerable.Range(0, 2).ToList().ForEach(count => _testInitiative.Measures.Add(_testMeasure));
 
@@ -95,7 +95,7 @@ namespace LVT.Tests
         }
 
         [Test]
-        public void VisualiseToString_Bet_TwoEpics_NoEMeasure()
+        public void VisualizeToString_Bet_TwoEpics_NoEMeasure()
         {
             Enumerable.Range(0, 2).ToList().ForEach(count => _testInitiative.Epics.Add(_testEpic));
 
@@ -108,7 +108,7 @@ namespace LVT.Tests
         }
 
         [Test]
-        public void VisualiseToString_Bet_TwoMeasures_TwoEpics()
+        public void VisualizeToString_Bet_TwoMeasures_TwoEpics()
         {
             Enumerable.Range(0, 2).ToList().ForEach(count => _testInitiative.Measures.Add(_testMeasure));
             Enumerable.Range(0, 2).ToList().ForEach(count => _testInitiative.Epics.Add(_testEpic));
@@ -124,7 +124,7 @@ namespace LVT.Tests
         }
 
         [Test]
-        public void VisualiseToString_Bet_FiveMeasures_NoEpics()
+        public void VisualizeToString_Bet_FiveMeasures_NoEpics()
         {
             Enumerable.Range(0, 5).ToList().ForEach(count => _testInitiative.Measures.Add(_testMeasure));
 
@@ -134,7 +134,7 @@ namespace LVT.Tests
         }
 
         [Test]
-        public void VisualiseToString_Bet_FiveEpics_NoMeasures()
+        public void VisualizeToString_Bet_FiveEpics_NoMeasures()
         {
             Enumerable.Range(0, 5).ToList().ForEach(count => _testInitiative.Epics.Add(_testEpic));
 
@@ -144,7 +144,7 @@ namespace LVT.Tests
         }
 
         [Test]
-        public void VisualiseToString_Bet_FiveMeasures_FiveEpics()
+        public void VisualizeToString_Bet_FiveMeasures_FiveEpics()
         {
             Enumerable.Range(0, 5).ToList().ForEach(count => _testInitiative.Measures.Add(_testMeasure));
             Enumerable.Range(0, 5).ToList().ForEach(count => _testInitiative.Epics.Add(_testEpic));

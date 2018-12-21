@@ -9,8 +9,8 @@ namespace LVT.Tests
     class BetPresenterTests
     {
         private Bet _testBet;
-        private Initiative _testInitiative;
         private BetPresenter _BP;
+        private Initiative _testInitiative;
         private string _ParentNodeID;
         private Mock<IInitiativePresenter> _MIP;
 
@@ -26,9 +26,8 @@ namespace LVT.Tests
                                                                                               .Returns("This mocked initiative presenter method has been called twice");
             _BP = new BetPresenter(_MIP.Object);
         }
-
         [Test]
-        public void VisualiseToString_Bet_NoInitiatives()
+        public void VisualizeToString_Bet_NoInitiatives()
         {           
             string result = _BP.VisualizeToString(_testBet, _ParentNodeID);
             string expected = "[{ v: '" + _testBet.NodeID + "', f: 'Bet" + "<div style=\"font-style:italic\">" + _testBet.Title + "</div>'}, " + $"'{_ParentNodeID}']";
@@ -37,7 +36,7 @@ namespace LVT.Tests
         }
 
         [Test]
-        public void VisualiseToString_Bet_WithOneInitiative()
+        public void VisualizeToString_Bet_WithOneInitiative()
         {
             _testBet.Initiatives.Add(_testInitiative);
 
@@ -49,7 +48,7 @@ namespace LVT.Tests
         }
 
         [Test]
-        public void VisualiseToString_Bet_WithTwoInitiatives()
+        public void VisualizeToString_Bet_WithTwoInitiatives()
         {
             Enumerable.Range(0, 2).ToList().ForEach(count => _testBet.Initiatives.Add(_testInitiative));
 
@@ -62,7 +61,7 @@ namespace LVT.Tests
         }
 
         [Test]
-        public void VisualiseToString_Bet_WithFiveInitiatives()
+        public void VisualizeToString_Bet_WithFiveInitiatives()
         {
             Enumerable.Range(0, 5).ToList().ForEach(count => _testBet.Initiatives.Add(_testInitiative));
             

@@ -9,8 +9,8 @@ namespace LVT.Tests
     class GoalPresenterTests
     {
         private Goal _testGoal;
-        private Bet _testBet;
         private GoalPresenter _GP;
+        private Bet _testBet;
         private string _ParentNodeID;
         private Mock<IBetPresenter> _MBP;
 
@@ -28,7 +28,7 @@ namespace LVT.Tests
         }
 
         [Test]
-        public void VisualiseToString_Goal_NoBets()
+        public void VisualizeToString_Goal_NoBets()
         {
             string result = _GP.VisualizeToString(_testGoal, _ParentNodeID);
             string expected = "[{ v: '" + _testGoal.NodeID + "', f: 'Goal" + "<div style=\"font-style:italic\">" + _testGoal.Title + "</div>'}, " + $"'{_ParentNodeID}']";
@@ -37,7 +37,7 @@ namespace LVT.Tests
         }
 
         [Test]
-        public void VisualiseToString_Goal_WithOneBet()
+        public void VisualizeToString_Goal_WithOneBet()
         {
             _testGoal.Bets.Add(_testBet);
 
@@ -49,7 +49,7 @@ namespace LVT.Tests
         }
 
         [Test]
-        public void VisualiseToString_Goal_WithTwoBets()
+        public void VisualizeToString_Goal_WithTwoBets()
         {
             Enumerable.Range(0, 2).ToList().ForEach(count => _testGoal.Bets.Add(_testBet));
 
@@ -62,7 +62,7 @@ namespace LVT.Tests
         }
 
         [Test]
-        public void VisualiseToString_Goal_WithFiveBets()
+        public void VisualizeToString_Goal_WithFiveBets()
         {
             Enumerable.Range(0, 5).ToList().ForEach(count => _testGoal.Bets.Add(_testBet));
 
