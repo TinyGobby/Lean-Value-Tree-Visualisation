@@ -12,10 +12,8 @@ namespace LVT.LVT.Services
 
         public GoalPresenter(IBetPresenter bp = null)
         {
-            if (bp == null)
-            {
-                _bp = new BetPresenter();
-            }
+            _bp = bp == null ? new BetPresenter() : bp;
+
         }
 
         public string VisualizeToString(Goal goal, string parentNode)

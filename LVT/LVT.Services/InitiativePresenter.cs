@@ -12,15 +12,8 @@ namespace LVT.LVT.Services
 
         public InitiativePresenter(IEpicPresenter ep = null, IMeasurePresenter mp = null)
         {
-            if (ep == null)
-            {
-                _ep = new EpicPresenter();
-            }
-
-            if (mp == null)
-            {
-                _mp = new MeasurePresenter();
-            }
+            _ep = ep == null ? new EpicPresenter() : ep;
+            _mp = mp == null ? new MeasurePresenter() : mp;
         }
 
         public string VisualizeToString(Initiative initiative, string parentNode)
@@ -36,7 +29,6 @@ namespace LVT.LVT.Services
             {
                 result = result + " , " + ProcessEpics(initiative, initiative.NodeID);
             };
-
             return result;
         }
 

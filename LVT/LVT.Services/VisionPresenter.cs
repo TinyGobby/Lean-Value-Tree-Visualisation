@@ -13,10 +13,8 @@ namespace LVT.LVT.Services
 
         public VisionPresenter(IGoalPresenter gp = null)
         {
-            if (gp == null)
-            {
-                _gp = new GoalPresenter();
-            }
+            _gp = gp == null ? new GoalPresenter() : gp;
+
         }
 
         public string VisualizeToString(Vision vision, string parentNode = "")
