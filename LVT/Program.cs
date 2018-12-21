@@ -1,9 +1,6 @@
-﻿using LVT.LVT.Interfaces;
-using LVT.LVT.Services;
+﻿using LVT.LVT.Services;
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 
 namespace LVT
 {
@@ -11,16 +8,13 @@ namespace LVT
     {
         static void Main(string[] args)
         {
-            CommandLineArg argsList = new CommandLineArg();
-            argsList.CheckCommandLineArgument(args);
-            StreamReader file = File.OpenText(args[0]);
-            JsonParser Parser = new JsonParser();
-            LeanValueTree newTree = Parser.ParseJsonLVTFromStream(file);
+            //RunFromSolution();
+            RunFromCommandLine(args);
         }
 
         // the below should probably be moved to services
       
-        public static void RunFromCommandLine()
+        public static void RunFromCommandLine(string[] args)
         {
             CommandLineArg argsList = new CommandLineArg();
             argsList.CheckCommandLineArgument(args);
