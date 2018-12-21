@@ -62,5 +62,15 @@ namespace LVT.Tests
 
             Assert.AreEqual(expected, result);
         }
+
+        [Test]
+        public void VisualizeToString_Vision_WithFiveGoals()
+        {
+            Enumerable.Range(0, 5).ToList().ForEach(count => _testVision.Goals.Add(_testGoal));
+
+            string result = _VP.VisualizeToString(_testVision, _ParentNodeID);
+
+            _MGP.Verify(mgp => mgp.VisualizeToString(It.IsAny<Goal>(), _testVision.NodeID), Times.Exactly(5));
+        }
     }
 }
