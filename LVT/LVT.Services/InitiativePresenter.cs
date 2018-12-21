@@ -12,8 +12,8 @@ namespace LVT.LVT.Services
 
         public InitiativePresenter(IEpicPresenter ep = null, IMeasurePresenter mp = null)
         {
-            _ep = ep == null ? new EpicPresenter() : ep;
-            _mp = mp == null ? new MeasurePresenter() : mp;
+            _ep = ep ?? new EpicPresenter();
+            _mp = mp ?? new MeasurePresenter();
         }
 
         public string VisualizeToString(Initiative initiative, string parentNode)

@@ -11,7 +11,7 @@ namespace LVT.LVT.Services
 
         public BetPresenter(IInitiativePresenter ip = null)
         {
-            _ip = ip == null ? new InitiativePresenter() : ip;
+            _ip = ip ?? new InitiativePresenter();
         }
 
         public string VisualizeToString(Bet bet, string parentNode)

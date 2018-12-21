@@ -26,6 +26,7 @@ namespace LVT.Tests
                                                                                               .Returns("This mocked initiative presenter method has been called twice");
             _BP = new BetPresenter(_MIP.Object);
         }
+
         [Test]
         public void VisualiseToString_Bet_NoInitiatives()
         {           

@@ -13,7 +13,7 @@ namespace LVT.LVT.Services
 
         public VisionPresenter(IGoalPresenter gp = null)
         {
-            _gp = gp == null ? new GoalPresenter() : gp;
+            _gp = gp ?? new GoalPresenter();
 
         }
 

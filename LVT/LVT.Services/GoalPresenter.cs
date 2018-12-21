@@ -2,7 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace LVT.LVT.Services
 {
@@ -12,7 +11,7 @@ namespace LVT.LVT.Services
 
         public GoalPresenter(IBetPresenter bp = null)
         {
-            _bp = bp == null ? new BetPresenter() : bp;
+            _bp = bp ?? new BetPresenter();
 
         }
 
