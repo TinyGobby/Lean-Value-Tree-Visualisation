@@ -11,11 +11,24 @@ namespace LVT
     {
         static void Main(string[] args)
         {
-
-            RunFromSolution();
+            CommandLineArg argsList = new CommandLineArg();
+            argsList.CheckCommandLineArgument(args);
+            StreamReader file = File.OpenText(args[0]);
+            JsonParser Parser = new JsonParser();
+            LeanValueTree newTree = Parser.ParseJsonLVTFromStream(file);
         }
 
         // the below should probably be moved to services
+      
+        public static void RunFromCommandLine()
+        {
+            CommandLineArg argsList = new CommandLineArg();
+            argsList.CheckCommandLineArgument(args);
+          
+            StreamReader file = File.OpenText(args[0]);
+            LeanValueTree newTree = ParseLVTData(file);
+            CreateLVTHtml(newTree);
+        }
 
         public static void RunFromSolution()
         {
