@@ -20,13 +20,13 @@ namespace LVT.LVT.Services
 
             if (bet.Initiatives.Count >= 1)
             {
-                result = result + ", " + ProcessInitiatives(bet, bet.NodeID);
+                result = result + ", " + ProcessInitiatives(bet);
             };
 
             return result;
         }
 
-        private string ProcessInitiatives(Bet bet, string nodeID)
+        private string ProcessInitiatives(Bet bet)
         {
             IEnumerable<String> initiativesStrings = bet.Initiatives.Select(initiative => _ip.VisualizeToString(initiative, bet.NodeID));
 

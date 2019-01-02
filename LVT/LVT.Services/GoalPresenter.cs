@@ -21,13 +21,13 @@ namespace LVT.LVT.Services
 
             if (goal.Bets.Count() >= 1)
             {
-                result = result + ", " + ProcessBets(goal, goal.NodeID);
+                result = result + ", " + ProcessBets(goal);
             };
 
             return result;
         }
 
-        private string ProcessBets(Goal goal, string nodeID)
+        private string ProcessBets(Goal goal)
         {
             IEnumerable<String> betsStrings = goal.Bets.Select(bet => _bp.VisualizeToString(bet, goal.NodeID));
 

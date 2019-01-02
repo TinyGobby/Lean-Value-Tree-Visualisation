@@ -22,24 +22,24 @@ namespace LVT.LVT.Services
 
             if (initiative.Measures.Count() >= 1)
             {
-                result = result + " , " + ProcessMeasures(initiative, initiative.NodeID);
+                result = result + " , " + ProcessMeasures(initiative);
             };
 
             if (initiative.Epics.Count() >= 1)
             {
-                result = result + " , " + ProcessEpics(initiative, initiative.NodeID);
+                result = result + " , " + ProcessEpics(initiative);
             };
             return result;
         }
 
-        public string ProcessMeasures(Initiative initiative, string initiativeTitle)
+        private string ProcessMeasures(Initiative initiative)
         {
             IEnumerable<String> measuresStrings = initiative.Measures.Select(measure => _mp.VisualizeToString(measure, initiative.NodeID)); ;
 
             return string.Join(", ", measuresStrings);
         }
 
-        private string ProcessEpics(Initiative initiative, string initiativeTitle)
+        private string ProcessEpics(Initiative initiative)
         {
             IEnumerable<String> epicsStrings = initiative.Epics.Select(epic => _ep.VisualizeToString(epic, initiative.NodeID));
 

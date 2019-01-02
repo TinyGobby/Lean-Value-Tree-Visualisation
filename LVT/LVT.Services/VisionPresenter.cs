@@ -21,13 +21,13 @@ namespace LVT.LVT.Services
 
             if (vision.Goals.Count() >= 1)
             {
-                result = result + ", " + ProcessGoals(vision, vision.NodeID);
+                result = result + ", " + ProcessGoals(vision);
             };
 
             return result + "]";
         }
 
-        private string ProcessGoals(Vision vision, string nodeID)
+        private string ProcessGoals(Vision vision)
         {
             IEnumerable<String> goalsStrings = vision.Goals.Select(goal => _gp.VisualizeToString(goal, vision.NodeID));
 
