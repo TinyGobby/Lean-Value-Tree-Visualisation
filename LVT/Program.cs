@@ -12,11 +12,16 @@ namespace LVT
 
         public static void RunFromCommandLine(string[] args)
         {
-            ReadAndWrite.CheckCommandLineArgument(args);
-          
-            StreamReader file = File.OpenText(args[0]);
-            LeanValueTree newTree = ReadAndWrite.ParseLVTData(file);
-            ReadAndWrite.CreateLVTHtml(newTree);
+            if (ReadAndWrite.IsValidArgument(args))
+            {
+                StreamReader file = File.OpenText(args[0]);
+                LeanValueTree newTree = ReadAndWrite.ParseLVTData(file);
+                ReadAndWrite.CreateLVTHtml(newTree);
+            }
+            else
+            {
+                ReadAndWrite.ShowErrorMessage(args);
+            }
         }
 
         public static void RunFromSolution()

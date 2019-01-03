@@ -4,28 +4,32 @@ using System.IO;
 
 namespace LVT
 {
-    public class ReadAndWrite
+    internal class ReadAndWrite
     {
-        public static void CheckCommandLineArgument(String[] args)
+        internal static bool IsValidArgument(String[] args)
+        {
+            return args.Length == 1 && args[0].ToLower().EndsWith("json");
+        }
+
+        internal static void ShowErrorMessage(String[] args)
         {
             if (args.Length == 0)
             {
-                Console.WriteLine("Please provide the location of the JSON file");
+                Console.WriteLine("Please provide the location of the JSON file you want to parse");
             }
-            else
+            else if (!args[0].ToLower().EndsWith("json"))
             {
-                Console.WriteLine(args[0]);
-                StreamReader file = File.OpenText(args[0]);
+                Console.WriteLine("File must be in JSON format");
             }
         }
 
-        public static LeanValueTree ParseLVTData(StreamReader file)
+        internal static LeanValueTree ParseLVTData(StreamReader file)
         {
             JsonParser Parser = new JsonParser();
             return Parser.ParseJsonLVTFromStream(file);
         }
 
-        public static void CreateLVTHtml(LeanValueTree tree)
+        internal static void CreateLVTHtml(LeanValueTree tree)
         {
             VisionPresenter VP = new VisionPresenter();
 
@@ -34,7 +38,7 @@ namespace LVT
             SaveToDisk(OrgaChart);
         }
 
-        public static void SaveToDisk(string chartdata)
+        internal static void SaveToDisk(string chartdata)
         {
             string content = Properties.Resources.TemplateHTMLHeader + chartdata + Properties.Resources.TemplateHTMLFooter;
             File.WriteAllText(@"C:\temp\LVT.html", content);
