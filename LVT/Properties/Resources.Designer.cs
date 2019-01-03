@@ -73,7 +73,7 @@ namespace LVT.Properties {
         /// <summary>
         ///   Looks up a localized string similar to );
         ///
-        ///            // Create the chart.
+        ///            // Create the chart using Google Charts.
         ///            var chart = new google.visualization.OrgChart(document.getElementById(&apos;chart_div&apos;));
         ///            // Draw the chart, setting the allowHtml option to true for the tooltips.
         ///            chart.draw(data, { allowHtml: true });
@@ -85,9 +85,9 @@ namespace LVT.Properties {
         ///&lt;/body&gt;
         ///&lt;/html&gt;.
         /// </summary>
-        internal static string TemplateHTMLFooter {
+        internal static string TemplateHTMLPageBottom {
             get {
-                return ResourceManager.GetString("TemplateHTMLFooter", resourceCulture);
+                return ResourceManager.GetString("TemplateHTMLPageBottom", resourceCulture);
             }
         }
         
@@ -107,9 +107,9 @@ namespace LVT.Properties {
         ///            var data = new google.visualization.DataTable();
         ///            dat [rest of string was truncated]&quot;;.
         /// </summary>
-        internal static string TemplateHTMLHeader {
+        internal static string TemplateHTMLPageTop {
             get {
-                return ResourceManager.GetString("TemplateHTMLHeader", resourceCulture);
+                return ResourceManager.GetString("TemplateHTMLPageTop", resourceCulture);
             }
         }
     }

@@ -23,6 +23,12 @@ namespace LVT
             }
         }
 
+        internal static void BuildTree(StreamReader file)
+        {
+            LeanValueTree newTree = ParseLVTData(file);
+            CreateLVTHtml(newTree);
+        }
+
         internal static LeanValueTree ParseLVTData(StreamReader file)
         {
             JsonParser Parser = new JsonParser();
@@ -40,7 +46,7 @@ namespace LVT
 
         internal static void SaveToDisk(string chartdata)
         {
-            string content = Properties.Resources.TemplateHTMLHeader + chartdata + Properties.Resources.TemplateHTMLFooter;
+            string content = Properties.Resources.TemplateHTMLPageTop + chartdata + Properties.Resources.TemplateHTMLPageBottom;
             File.WriteAllText(@"C:\temp\LVT.html", content);
             Console.WriteLine(@"Your LeanValueTree has been saved to C:\temp\LVT.html");
         }

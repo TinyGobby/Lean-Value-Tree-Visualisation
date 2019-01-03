@@ -1,4 +1,5 @@
 ﻿using System.IO;
+using System;
 
 namespace LVT
 {
@@ -14,9 +15,9 @@ namespace LVT
         {
             if (ReadAndWrite.IsValidArgument(args))
             {
+                Console.WriteLine($"Processing {args[0]}");
                 StreamReader file = File.OpenText(args[0]);
-                LeanValueTree newTree = ReadAndWrite.ParseLVTData(file);
-                ReadAndWrite.CreateLVTHtml(newTree);
+                ReadAndWrite.BuildTree(file);
             }
             else
             {
@@ -26,11 +27,10 @@ namespace LVT
 
         public static void RunFromSolution()
         {
-            //this takes an absolute path and needs to be adapted for each computer depending on where the file lives that you want to open - but this allows you to pass different template trees.
+            //This takes an absolute path. Copy the full path and file name of your .json file (for example: "C:\temp\Test.json")
             //StreamReader file = File.OpenText(@"C:\Users\beckerfs\Documents\Projects\LVT\Lean-Value-Tree-Visualisation\LVT\SingleBranchLVT.json");
             StreamReader file = File.OpenText(@"C:\Users\beckerfs\Documents\Projects\LVT\Lean-Value-Tree-Visualisation\LVT\TwoGoalsTwoBetsLVT.json");
-            LeanValueTree newTree = ReadAndWrite.ParseLVTData(file);
-            ReadAndWrite.CreateLVTHtml(newTree);
+            ReadAndWrite.BuildTree(file);
         }
     }
 }
