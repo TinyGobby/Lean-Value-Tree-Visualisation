@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Text;
 
 namespace LVT.LVT.Services
 {
@@ -9,7 +7,7 @@ namespace LVT.LVT.Services
     {
         internal static bool IsValidArgument(string[] args)
         {
-            return args.Length == 1 && args[0].ToLower().EndsWith(".json");
+            return args.Length == 1 && args[0].ToLower().EndsWith(".json") && File.Exists(args[0]);
         }
 
         internal static void ShowErrorMessage(string[] args)
@@ -27,8 +25,6 @@ namespace LVT.LVT.Services
                 Console.WriteLine("File must be in JSON format");
             }
         }
-
-
 
         //public static bool IsValidFilename(string filename)
         //{
