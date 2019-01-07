@@ -5,45 +5,20 @@ namespace LVT.LVT.Services
 {
     public class Validate
     {
-        internal static bool IsValidArgument(string[] args)
+        internal static void ValidateArgument(string file)
         {
-            return args.Length == 1 && args[0].ToLower().EndsWith(".json") && File.Exists(args[0]);
-        }
-
-        internal static void ShowErrorMessage(string[] args)
-        {
-            if (args.Length == 0)
+            if (!File.Exists(file))
             {
-                Console.WriteLine("Please provide the location of the JSON file you want to parse");
+                throw new FileNotFoundException();
             }
-            else if (!File.Exists(args[0]))
+            else if (file.ToLower().EndsWith(".json"))
             {
-                Console.WriteLine("This file does not exist. Please provide valid path and filename.");
+               throw new Exception("File must be in JSON format");
             }
-            else if (!args[0].ToLower().EndsWith(".json"))
+            else
             {
-                Console.WriteLine("File must be in JSON format");
+                throw new Exception("Something went wrong, please try again.");
             }
         }
-
-        //public static bool IsValidFilename(string filename)
-        //{
-        //    return filename != null && filename.ToLower().EndsWith(".json");
-        //}
-
-        //public static string ShowErrorMessageWeb(string filename)
-        //{
-        //    string message;
-
-        //    if (filename == null)
-        //    {
-        //        message = "Please select a JSON file";
-        //    }
-        //    else if (!filename.ToLower().EndsWith(".json"))
-        //    {
-        //        message = "File must be in JSON format";
-        //    }
-        //    return message;
-    //    }
     }
 }

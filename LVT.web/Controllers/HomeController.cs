@@ -8,7 +8,9 @@ using LVT.web.Models;
 using Microsoft.AspNetCore.Http;
 using System.IO;
 using Microsoft.AspNetCore.Html;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
 
 namespace LVT.web.Controllers
 {
@@ -22,25 +24,18 @@ namespace LVT.web.Controllers
         [HttpPost("UploadFiles")]
         public IActionResult UploadLVTData(IFormFile file)
         {
-            StreamReader jsondata = new StreamReader(file.OpenReadStream());
-            string LVT = ReadAndWrite.BuildTree(jsondata);
-            string FullHTML = ReadAndWrite.CreateFullHTML(LVT);
+            if (file == null)
+            {
+                return BadRequest("File required");
+            }
+            else
+            {
+                StreamReader jsondata = new StreamReader(file.OpenReadStream());
+                string LVT = ReadAndWrite.BuildTree(jsondata);
+                string FullHTML = ReadAndWrite.CreateFullHTML(LVT);
+                return Content(FullHTML, "text/html");
+            }
 
-            //var filePath = Path.GetTempFileName();
-
-            //if (file != null)
-            //{
-            //    using (stream = new FileStream(filePath, FileMode.Create))
-            //    {
-            //        await file.CopyToAsync(stream);
-            //    }
-            //    ReadAndWrite.BuildTree();
-
-            //}
-
-            //HtmlContentBuilder builder = new HtmlContentBuilder();
-            //var html = builder.AppendHtml(FullHTML);
-            return Content(FullHTML, "text/html");
         }
 
         public IActionResult About()

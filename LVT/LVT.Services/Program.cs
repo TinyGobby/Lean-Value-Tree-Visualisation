@@ -1,5 +1,6 @@
 ﻿using System.IO;
 using System;
+using System.Runtime.InteropServices;
 using LVT.LVT.Services;
 
 namespace LVT
@@ -9,23 +10,27 @@ namespace LVT
         static void Main(string[] args)
         {
             //RunFromSolution();
-            RunFromCommandLine(args);
+            try
+            {
+                RunFromCommandLine(args);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
         }
 
         public static void RunFromCommandLine(string[] args)
         {
-            if (Validate.IsValidArgument(args))
+            if (args.Length == 0)
             {
-                Console.WriteLine($"Processing {args[0]}");
-                StreamReader file = File.OpenText(args[0]);
-                string LVT = ReadAndWrite.BuildTree(file);
-                string FullHTML = ReadAndWrite.CreateFullHTML(LVT);
-                ReadAndWrite.SaveToDisk(FullHTML);
+                throw new NullReferenceException("Please provide the name and path of the file you want to open.");
             }
-            else
-            {
-                Validate.ShowErrorMessage(args);
-            }
+            Validate.ValidateArgument(args);
+            StreamReader file = File.OpenText(args[0]);
+            string LVT = ReadAndWrite.BuildTree(file);
+            string FullHTML = ReadAndWrite.CreateFullHTML(LVT);
+            ReadAndWrite.SaveToDisk(FullHTML);
         }
 
         public static void RunFromSolution()
