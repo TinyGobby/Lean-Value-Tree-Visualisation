@@ -19,13 +19,35 @@ This is a tool to create a visualisation of a Lean Value Tree from a json file. 
 
 
 ## Operating instructions
+### Console App
+The console app produces a .html file containing the LVT visualisation from data provided in a json file.
+This is saved to C:\temp\LVT.html.
 
 1) Clone the project from https://github.com/TinyGobby/Lean-Value-Tree-Visualisation. 
-2) In the command line navigate to the LVT file within the project.
-3) To build the tree with a json type:
-    dotnet run (path to json file)
-  
-NB for this to work it is vital that the tree you are building is formatted in the order outlined above.
+2) On the command line, navigate to the LVT folder within the project.
+3) On the command line, type:
+> dotnet run (path to json file, eg C:\temp\LVT.json)
+4) Follow the instructions on the command line.
+
+	
+### WebApp
+The WebApp allows you to select and open a .json file from your computer and display the data as a LVT in your browser.
+Please note that you need to use _Google Chrome_ for the programme to work.
+
+1) Clone the project from https://github.com/TinyGobby/Lean-Value-Tree-Visualisation
+2) On the command line, navigate to the LVT.web folder within the project.
+3) On the command line, type:
+> dotnet run
+4) Open Google Chrome and go to
+> https://localhost:5001
+5) Follow the instructions on the screen.
+6) To shut down the server, press:
+> Ctrl+C
+
+*NB for the programme to work the JSON file needs to follow a specific structure.*
+Please consult these examples:
+[SingleGoalLVT.json](LVT/SingleBranchLVT.json)
+[TwoGoalsTwoBetsLVT.json](LVT/TwoGoalsTwoBetsLVT.json)
 
 ## Contributers
 
