@@ -2,7 +2,6 @@
 
 This is a tool to create a visualisation of a Lean Value Tree from a json file. It will display a hierarchical tree structure in which nodes represent points in the tree. Our Lean Value Tree creates trees using the following structure:
 
-
 - one-or-more Goals, have
 - zero-or-more Bets, that have
 - zero-or-more Initiatives (Experiments), that have
@@ -44,13 +43,18 @@ Please note that you need to use _Google Chrome_ for the programme to work.
 6) To shut down the server, press:
 > Ctrl+C
 
-**NB for the programme to work the JSON file needs to follow a specific structure.**
+**NB for the programme to work the JSON file needs to follow a specific format and follow the structure outlined above!**
 
-Please consult these examples:
+Please refer to these examples:
 
 [SingleGoalLVT.json](LVT/SingleBranchLVT.json)
+This builds an LVT that contains a single Goal with a single Bet, Initiative, Measure and Epic.
 
 [TwoGoalsTwoBetsLVT.json](LVT/TwoGoalsTwoBetsLVT.json)
+This builds an LVT that contains two Goals with two Bets, which each have a single Initiative, Measures and Epics.
+
+Following this format, you can adjust the number of Goals, Bets, Initiatives, Mesaures and Epics your LVT should display.
+You cannot skip tiers - for example: if a Bet does not contain an Initiative, this branch cannot contain Measures or Epics. 
 
 ## Contributers
 
