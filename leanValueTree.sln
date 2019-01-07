@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.106
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LVT", "LVT\LVT.csproj", "{3C01F2E6-2195-42C9-A9E1-D6DE3E4788C6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LVT", "LVT\LVT.csproj", "{3C01F2E6-2195-42C9-A9E1-D6DE3E4788C6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LVT.Tests", "LVT.Tests\LVT.Tests.csproj", "{9BEC30BD-D9F4-4848-BACB-3729D71E5963}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LVT.Tests", "LVT.Tests\LVT.Tests.csproj", "{9BEC30BD-D9F4-4848-BACB-3729D71E5963}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LVT.Web", "LVT.web\LVT.Web.csproj", "{DBCBD6CF-8B4F-4867-939E-76CE791341B1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{9BEC30BD-D9F4-4848-BACB-3729D71E5963}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9BEC30BD-D9F4-4848-BACB-3729D71E5963}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9BEC30BD-D9F4-4848-BACB-3729D71E5963}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DBCBD6CF-8B4F-4867-939E-76CE791341B1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DBCBD6CF-8B4F-4867-939E-76CE791341B1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DBCBD6CF-8B4F-4867-939E-76CE791341B1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DBCBD6CF-8B4F-4867-939E-76CE791341B1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -117,66 +117,28 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="SingleBranchLVT" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\SingleBranchLVT.json;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="TemplateCSHTMLPageTop" xml:space="preserve">
+  <data name="testhtml" xml:space="preserve">
     <value>@{
-    ViewData["Title"] = "Your LVT";
+    ViewData["Title"] = "LVT Visualisation";
 }
-&lt;html lang="en" xmlns="http://www.w3.org/1999/xhtml"&gt;
-&lt;head&gt;
-    &lt;meta charset="utf-8" /&gt;
-    &lt;title&gt;LVT Visualisation&lt;/title&gt;
-    &lt;script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"&gt;&lt;/script&gt;
-    &lt;script type="text/javascript"&gt;
-        google.charts.load('current', { packages: ["orgchart"] });
-        google.charts.setOnLoadCallback(drawChart);
 
-        function drawChart() {
-            var data = new google.visualization.DataTable();
-            data.addColumn('string', 'Node');
-            data.addColumn('string', 'Content');
+&lt;div&gt;
 
-            data.addRows(</value>
-  </data>
-  <data name="TemplateHTMLPageBottom" xml:space="preserve">
-    <value>);
+    &lt;h2&gt;Create your LVT from JSON data&lt;/h2&gt;
+    &lt;form method="post" enctype="multipart/form-data" asp-controller="UploadFiles" asp-action="Index"&gt;
+        &lt;div class="form-group"&gt;
+            &lt;div class="col-md-10"&gt;
+                &lt;p&gt;Select the JSON file you want to visualise:&lt;/p&gt;
+                &lt;input type="file" name="file" /&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div class="form-group"&gt;
+            &lt;div class="col-md-10"&gt;
+                &lt;input type="submit" value="Upload" /&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/form&gt;
 
-            // Create the chart using Google Charts.
-            var chart = new google.visualization.OrgChart(document.getElementById('chart_div'));
-            // Draw the chart, setting the allowHtml option to true for the tooltips.
-            chart.draw(data, { allowHtml: true });
-        }
-    &lt;/script&gt;
-&lt;/head&gt;
-&lt;body&gt;
-    &lt;div id="chart_div"&gt;&lt;/div&gt;
-&lt;/body&gt;
-&lt;/html&gt;</value>
-    <comment>Provides the bottom half of the html required to render the LVT with Google Charts.  LVT Data is inserted before this. </comment>
-  </data>
-  <data name="TemplateHTMLPageTop" xml:space="preserve">
-    <value>&lt;!DOCTYPE html&gt;
-
-&lt;html lang="en" xmlns="http://www.w3.org/1999/xhtml"&gt;
-&lt;head&gt;
-    &lt;meta charset="utf-8" /&gt;
-    &lt;title&gt;LVT Visualisation&lt;/title&gt;
-    &lt;script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"&gt;&lt;/script&gt;
-    &lt;script type="text/javascript"&gt;
-        google.charts.load('current', { packages: ["orgchart"] });
-        google.charts.setOnLoadCallback(drawChart);
-
-        function drawChart() {
-            var data = new google.visualization.DataTable();
-            data.addColumn('string', 'Node');
-            data.addColumn('string', 'Content');
-
-            data.addRows(
-           // The LVT generator programme inserts the formatted string it creates here to provide the details required to allow Google Charts to create the Tree.
-</value>
-    <comment>Provides the top half of the html code required to render the LVT with Google Charts.  LVT Data is appended after this.</comment>
+&lt;/div&gt;</value>
   </data>
 </root>

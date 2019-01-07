@@ -4,29 +4,12 @@ using System.IO;
 
 namespace LVT
 {
-    internal class ReadAndWrite
+    public class ReadAndWrite
     {
-        internal static bool IsValidArgument(String[] args)
-        {
-            return args.Length == 1 && args[0].ToLower().EndsWith("json");
-        }
-
-        internal static void ShowErrorMessage(String[] args)
-        {
-            if (args.Length == 0)
-            {
-                Console.WriteLine("Please provide the location of the JSON file you want to parse");
-            }
-            else if (!args[0].ToLower().EndsWith("json"))
-            {
-                Console.WriteLine("File must be in JSON format");
-            }
-        }
-
-        internal static void BuildTree(StreamReader file)
+        public static string BuildTree(StreamReader file)
         {
             LeanValueTree newTree = ParseLVTData(file);
-            CreateLVTHtml(newTree);
+            return CreateLVTHtml(newTree);
         }
 
         internal static LeanValueTree ParseLVTData(StreamReader file)
@@ -35,18 +18,26 @@ namespace LVT
             return Parser.ParseJsonLVTFromStream(file);
         }
 
-        internal static void CreateLVTHtml(LeanValueTree tree)
+        internal static string CreateLVTHtml(LeanValueTree tree)
         {
             VisionPresenter VP = new VisionPresenter();
 
             Directory.CreateDirectory("C:\\temp");
-            string OrgaChart = VP.VisualizeToString(tree.Vision);
-            SaveToDisk(OrgaChart);
+            return VP.VisualizeToString(tree.Vision);
         }
 
-        internal static void SaveToDisk(string chartdata)
+        public static string CreateFullHTML(string LVTHTMLString)
         {
-            string content = Properties.Resources.TemplateHTMLPageTop + chartdata + Properties.Resources.TemplateHTMLPageBottom;
+            return Properties.Resources.TemplateHTMLPageTop + LVTHTMLString + Properties.Resources.TemplateHTMLPageBottom;
+        }
+
+        public static string CreateFullCSHTML(string LVTHTMLString)
+        {
+            return Properties.Resources.TemplateCSHTMLPageTop + LVTHTMLString + Properties.Resources.TemplateHTMLPageBottom;
+        }
+
+        internal static void SaveToDisk(string content)
+        {
             File.WriteAllText(@"C:\temp\LVT.html", content);
             Console.WriteLine(@"Your LeanValueTree has been saved to C:\temp\LVT.html");
         }

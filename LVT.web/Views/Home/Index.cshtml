@@ -1,0 +1,22 @@
+﻿@{
+    ViewData["Title"] = "LVT Visualisation";
+}
+
+<div>
+
+    <h2>Create your LVT from JSON data</h2>
+    <form method="post" enctype="multipart/form-data" asp-controller="UploadFiles" asp-action="Index">
+        <div class="form-group">
+            <div class="col-md-10">
+                <p>Select the JSON file you want to visualise:</p>
+                <input type="file" name="file" />
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-10">
+                <input type="submit" value="Upload" />
+            </div>
+        </div>
+    </form>
+
+</div>
