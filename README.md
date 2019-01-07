@@ -23,7 +23,7 @@ This is a tool to create a visualisation of a Lean Value Tree from a json file. 
 1) Clone the project from https://github.com/TinyGobby/Lean-Value-Tree-Visualisation. 
 2) In the command line navigate to the LVT file within the project.
 3) To build the tree with a json type:
-    dotnet run <path to json file>
+    dotnet run (path to json file>)
   
 NB for this to work it is vital that the tree you are building is formatted in the order outlined above.
 
