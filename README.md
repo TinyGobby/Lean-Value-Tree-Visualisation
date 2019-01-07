@@ -1,7 +1,7 @@
 # Lean-Value-Tree-Visualisation
 
 This is a tool to create a visualisation of a Lean Value Tree from a json file. It will display a hierarchical tree structure in which nodes represent points in the tree.
-It uses Google Charts' [Organization Chart](https://developers.google.com/chart/interactive/docs/gallery/orgchart) and Newtonsoft's [Json.NET Serializer](https://www.newtonsoft.com/json) to parse json files containing the LVT data.
+It uses Google Charts' [Organization Chart](https://developers.google.com/chart/interactive/docs/gallery/orgchart) to visualise the tree structure and Newtonsoft's [Json.NET Serializer](https://www.newtonsoft.com/json) to parse json files containing the LVT data.
 
 Our Lean Value Tree creates trees using the following structure:
 
@@ -34,7 +34,7 @@ This is saved to C:\temp\LVT.html and can be viewed in your browser.
 	
 ### WebApp
 The WebApp allows you to select and open a .json file from your computer and display the data as a LVT in your browser.
-Please note that you need to use _Google Chrome_ for the programme to work.
+Please note that you need to use **Google Chrome** for the programme to work.
 
 1) Clone the project from https://github.com/TinyGobby/Lean-Value-Tree-Visualisation
 2) On the command line, navigate to the LVT.web folder within the project.
@@ -51,10 +51,12 @@ Please note that you need to use _Google Chrome_ for the programme to work.
 Please refer to these examples:
 
 [SingleGoalLVT.json](LVT/SingleBranchLVT.json)
-This builds an LVT that contains a single Goal with a single Bet, Initiative, Measure and Epic.
+
+This builds a LeanValueTree that contains a single Goal with a single Bet, Initiative, Measure and Epic.
 
 [TwoGoalsTwoBetsLVT.json](LVT/TwoGoalsTwoBetsLVT.json)
-This builds an LVT that contains two Goals with two Bets, which each have a single Initiative, Measures and Epics.
+
+This builds a LeanValueTree that contains two Goals with two Bets, with a single Initiative, Measure and Epic each.
 
 Following this format, you can adjust the number of Goals, Bets, Initiatives, Mesaures and Epics your LVT should display.
 You cannot skip tiers - for example: if a Bet does not contain an Initiative, this branch cannot contain Measures or Epics. 

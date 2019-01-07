@@ -76,7 +76,7 @@ namespace LVT.Properties {
         ///            // Create the chart using Google Charts.
         ///            var chart = new google.visualization.OrgChart(document.getElementById(&apos;chart_div&apos;));
         ///            // Draw the chart, setting the allowHtml option to true for the tooltips.
-        ///            chart.draw(data, { allowHtml: true });
+        ///            chart.draw(data, { allowHtml: true, allowCollapse: true });
         ///        }
         ///    &lt;/script&gt;
         ///&lt;/head&gt;
