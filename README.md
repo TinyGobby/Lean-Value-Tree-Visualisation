@@ -25,7 +25,7 @@ This is a tool to create a visualisation of a Lean Value Tree from a json file. 
 3) To build the tree with a json type:
     dotnet run <path to json file>
   
-NB for this to work it is vital that the tree you are building is formatted in the above order.
+NB for this to work it is vital that the tree you are building is formatted in the order outlined above.
 
 ## Contributers
 
