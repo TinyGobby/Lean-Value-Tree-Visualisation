@@ -121,26 +121,6 @@
   <data name="SingleBranchLVT" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\SingleBranchLVT.json;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="TemplateCSHTMLPageTop" xml:space="preserve">
-    <value>@{
-    ViewData["Title"] = "Your LVT";
-}
-&lt;html lang="en" xmlns="http://www.w3.org/1999/xhtml"&gt;
-&lt;head&gt;
-    &lt;meta charset="utf-8" /&gt;
-    &lt;title&gt;LVT Visualisation&lt;/title&gt;
-    &lt;script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"&gt;&lt;/script&gt;
-    &lt;script type="text/javascript"&gt;
-        google.charts.load('current', { packages: ["orgchart"] });
-        google.charts.setOnLoadCallback(drawChart);
-
-        function drawChart() {
-            var data = new google.visualization.DataTable();
-            data.addColumn('string', 'Node');
-            data.addColumn('string', 'Content');
-
-            data.addRows(</value>
-  </data>
   <data name="TemplateHTMLPageBottom" xml:space="preserve">
     <value>);
 

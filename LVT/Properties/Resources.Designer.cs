@@ -71,28 +71,6 @@ namespace LVT.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to @{
-        ///    ViewData[&quot;Title&quot;] = &quot;Your LVT&quot;;
-        ///}
-        ///&lt;html lang=&quot;en&quot; xmlns=&quot;http://www.w3.org/1999/xhtml&quot;&gt;
-        ///&lt;head&gt;
-        ///    &lt;meta charset=&quot;utf-8&quot; /&gt;
-        ///    &lt;title&gt;LVT Visualisation&lt;/title&gt;
-        ///    &lt;script type=&quot;text/javascript&quot; src=&quot;https://www.gstatic.com/charts/loader.js&quot;&gt;&lt;/script&gt;
-        ///    &lt;script type=&quot;text/javascript&quot;&gt;
-        ///        google.charts.load(&apos;current&apos;, { packages: [&quot;orgchart&quot;] });
-        ///        google.charts.setOnLoadCallback(drawChart);
-        ///
-        ///        function drawChart() {
-        ///            var data = new google.visualization.Data [rest of string was truncated]&quot;;.
-        /// </summary>
-        internal static string TemplateCSHTMLPageTop {
-            get {
-                return ResourceManager.GetString("TemplateCSHTMLPageTop", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to );
         ///
         ///            // Create the chart using Google Charts.

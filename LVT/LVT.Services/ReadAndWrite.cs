@@ -31,12 +31,7 @@ namespace LVT
             return Properties.Resources.TemplateHTMLPageTop + LVTHTMLString + Properties.Resources.TemplateHTMLPageBottom;
         }
 
-        public static string CreateFullCSHTML(string LVTHTMLString)
-        {
-            return Properties.Resources.TemplateCSHTMLPageTop + LVTHTMLString + Properties.Resources.TemplateHTMLPageBottom;
-        }
-
-        internal static void SaveToDisk(string content)
+       internal static void SaveToDisk(string content)
         {
             File.WriteAllText(@"C:\temp\LVT.html", content);
             Console.WriteLine(@"Your LeanValueTree has been saved to C:\temp\LVT.html");
