@@ -26,7 +26,8 @@ namespace LVT
             {
                 throw new NullReferenceException("Please provide the name and path of the file you want to open.");
             }
-            Validate.ValidateArgument(args);
+
+            Validate.ValidateArgument(args[0]);
             StreamReader file = File.OpenText(args[0]);
             string LVT = ReadAndWrite.BuildTree(file);
             string FullHTML = ReadAndWrite.CreateFullHTML(LVT);
