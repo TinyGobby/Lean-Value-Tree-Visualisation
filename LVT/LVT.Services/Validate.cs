@@ -1,11 +1,13 @@
 ﻿using System;
 using System.IO;
+using System.Net;
+using System.Net.Http;
 
 namespace LVT.LVT.Services
 {
     public class Validate
     {
-        internal static void ValidateArgument(string file)
+        public static void ValidateArgument(string file)
         {
             if (!File.Exists(file))
             {
@@ -19,4 +21,5 @@ namespace LVT.LVT.Services
             return;
         }
     }
+
 }
