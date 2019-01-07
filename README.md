@@ -21,7 +21,7 @@ This is a tool to create a visualisation of a Lean Value Tree from a json file. 
 ## Operating instructions
 ### Console App
 The console app produces a .html file containing the LVT visualisation from data provided in a json file.
-This is saved to C:\temp\LVT.html.
+This is saved to C:\temp\LVT.html and can be viewed in your browser.
 
 1) Clone the project from https://github.com/TinyGobby/Lean-Value-Tree-Visualisation. 
 2) On the command line, navigate to the LVT folder within the project.
@@ -44,9 +44,12 @@ Please note that you need to use _Google Chrome_ for the programme to work.
 6) To shut down the server, press:
 > Ctrl+C
 
-*NB for the programme to work the JSON file needs to follow a specific structure.*
+**NB for the programme to work the JSON file needs to follow a specific structure.**
+
 Please consult these examples:
+
 [SingleGoalLVT.json](LVT/SingleBranchLVT.json)
+
 [TwoGoalsTwoBetsLVT.json](LVT/TwoGoalsTwoBetsLVT.json)
 
 ## Contributers
