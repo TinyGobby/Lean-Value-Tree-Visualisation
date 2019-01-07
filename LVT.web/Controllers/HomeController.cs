@@ -11,6 +11,9 @@ using Microsoft.AspNetCore.Html;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
+using LVT.LVT.Services;
+using System.Net.Http;
+using System.Threading;
 
 namespace LVT.web.Controllers
 {
@@ -26,16 +29,16 @@ namespace LVT.web.Controllers
         {
             if (file == null)
             {
-                return BadRequest("File required");
+                return BadRequest("Please select the JSON file you want to open.");
             }
             else
             {
                 StreamReader jsondata = new StreamReader(file.OpenReadStream());
                 string LVT = ReadAndWrite.BuildTree(jsondata);
                 string FullHTML = ReadAndWrite.CreateFullHTML(LVT);
+
                 return Content(FullHTML, "text/html");
             }
-
         }
 
         public IActionResult About()
