@@ -11,14 +11,12 @@ namespace LVT.LVT.Services
             {
                 throw new FileNotFoundException();
             }
-            else if (file.ToLower().EndsWith(".json"))
+            else if (!file.ToLower().EndsWith(".json"))
             {
                throw new Exception("File must be in JSON format");
             }
-            else
-            {
-                throw new Exception("Something went wrong, please try again.");
-            }
+
+            return;
         }
     }
 }
