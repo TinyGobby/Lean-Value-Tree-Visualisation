@@ -62,7 +62,7 @@ This builds a LeanValueTree that contains two Goals with two Bets, with a single
 Following this format, you can adjust the number of Goals, Bets, Initiatives, Mesaures and Epics your LVT should display.
 You cannot skip tiers - for example: if a Bet does not contain an Initiative, this branch cannot contain Measures or Epics. 
 
-## Contributers
+## Contributors
 
 - Freya Becker 
 - Patrick Harris

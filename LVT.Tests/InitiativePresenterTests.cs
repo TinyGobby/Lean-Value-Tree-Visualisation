@@ -11,10 +11,10 @@ namespace LVT.Tests
         private Initiative _testInitiative;
         private Measure _testMeasure;
         private Epic _testEpic;
-        private InitiativePresenter _IP;
+        private InitiativePresenter _initiativePresenter;
         private string _ParentNodeID;
-        private Mock<IEpicPresenter> _MEP;
-        private Mock<IMeasurePresenter> _MMP;
+        private Mock<IEpicPresenter> _mockEpicPresenter;
+        private Mock<IMeasurePresenter> _mockMeasurePresenter;
 
         [SetUp]
         public void SetupForTest()
@@ -24,20 +24,20 @@ namespace LVT.Tests
             _testEpic = new Epic("Test Epic Descritpition", "Test Epic Deadline");
             _testMeasure = new Measure("Test Measure Description", "Test Measure Deadline", 1, "Test Measure Units");
 
-            _MEP = new Mock<IEpicPresenter>();
-            _MEP.SetupSequence(mep => mep.VisualizeToString(_testEpic, _testInitiative.NodeID)).Returns("This Epic Presenter method has been mocked")
+            _mockEpicPresenter = new Mock<IEpicPresenter>();
+            _mockEpicPresenter.SetupSequence(mep => mep.VisualizeToString(_testEpic, _testInitiative.NodeID)).Returns("This Epic Presenter method has been mocked")
                                                                                               .Returns("This mocked Epic Presenter method has been called twice");
-            _MMP = new Mock<IMeasurePresenter>();
-            _MMP.SetupSequence(mmp => mmp.VisualizeToString(_testMeasure, _testInitiative.NodeID)).Returns("This Measure Presenter method has been mocked")
+            _mockMeasurePresenter = new Mock<IMeasurePresenter>();
+            _mockMeasurePresenter.SetupSequence(mmp => mmp.VisualizeToString(_testMeasure, _testInitiative.NodeID)).Returns("This Measure Presenter method has been mocked")
                                                                                                   .Returns("This mocked Measure Presenter method has been called twice");
 
-            _IP = new InitiativePresenter(_MEP.Object, _MMP.Object);
+            _initiativePresenter = new InitiativePresenter(_mockEpicPresenter.Object, _mockMeasurePresenter.Object);
         }
 
         [Test]
         public void VisualizeToString_Bet_NoMeasures_NoEpics()
         {
-            string result = _IP.VisualizeToString(_testInitiative, _ParentNodeID);
+            string result = _initiativePresenter.VisualizeToString(_testInitiative, _ParentNodeID);
             string expected = "[{ v: '" + _testInitiative.NodeID + "', f: 'Initiative" + "<div style=\"font-style:italic\">" + _testInitiative.Title + "</div>'}, " + $"'{_ParentNodeID}']";
 
             Assert.AreEqual(expected, result);
@@ -48,7 +48,7 @@ namespace LVT.Tests
         {
             _testInitiative.Measures.Add(_testMeasure);
 
-            string result = _IP.VisualizeToString(_testInitiative, _ParentNodeID);
+            string result = _initiativePresenter.VisualizeToString(_testInitiative, _ParentNodeID);
             string expected = "[{ v: '" + _testInitiative.NodeID + "', f: 'Initiative" + "<div style=\"font-style:italic\">" + _testInitiative.Title + "</div>'}, " + $"'{_ParentNodeID}']" + " , "
                                                                                        + "This Measure Presenter method has been mocked";
 
@@ -60,7 +60,7 @@ namespace LVT.Tests
         {
             _testInitiative.Epics.Add(_testEpic);
 
-            string result = _IP.VisualizeToString(_testInitiative, _ParentNodeID);
+            string result = _initiativePresenter.VisualizeToString(_testInitiative, _ParentNodeID);
             string expected = "[{ v: '" + _testInitiative.NodeID + "', f: 'Initiative" + "<div style=\"font-style:italic\">" + _testInitiative.Title + "</div>'}, " + $"'{_ParentNodeID}']" + " , "
                                                                                        + "This Epic Presenter method has been mocked";
 
@@ -73,7 +73,7 @@ namespace LVT.Tests
             _testInitiative.Measures.Add(_testMeasure);
             _testInitiative.Epics.Add(_testEpic);
 
-            string result = _IP.VisualizeToString(_testInitiative, _ParentNodeID);
+            string result = _initiativePresenter.VisualizeToString(_testInitiative, _ParentNodeID);
             string expected = "[{ v: '" + _testInitiative.NodeID + "', f: 'Initiative" + "<div style=\"font-style:italic\">" + _testInitiative.Title + "</div>'}, " + $"'{_ParentNodeID}']" + " , "
                                                                                        + "This Measure Presenter method has been mocked" + " , "
                                                                                        + "This Epic Presenter method has been mocked";
@@ -86,7 +86,7 @@ namespace LVT.Tests
         {
             Enumerable.Range(0, 2).ToList().ForEach(count => _testInitiative.Measures.Add(_testMeasure));
 
-            string result = _IP.VisualizeToString(_testInitiative, _ParentNodeID);
+            string result = _initiativePresenter.VisualizeToString(_testInitiative, _ParentNodeID);
             string expected = "[{ v: '" + _testInitiative.NodeID + "', f: 'Initiative" + "<div style=\"font-style:italic\">" + _testInitiative.Title + "</div>'}, " + $"'{_ParentNodeID}']" + " , "
                                                                                        + "This Measure Presenter method has been mocked" + ", "
                                                                                        + "This mocked Measure Presenter method has been called twice";
@@ -99,7 +99,7 @@ namespace LVT.Tests
         {
             Enumerable.Range(0, 2).ToList().ForEach(count => _testInitiative.Epics.Add(_testEpic));
 
-            string result = _IP.VisualizeToString(_testInitiative, _ParentNodeID);
+            string result = _initiativePresenter.VisualizeToString(_testInitiative, _ParentNodeID);
             string expected = "[{ v: '" + _testInitiative.NodeID + "', f: 'Initiative" + "<div style=\"font-style:italic\">" + _testInitiative.Title + "</div>'}, " + $"'{_ParentNodeID}']" + " , "
                                                                                        + "This Epic Presenter method has been mocked" + ", "
                                                                                        + "This mocked Epic Presenter method has been called twice";
@@ -113,7 +113,7 @@ namespace LVT.Tests
             Enumerable.Range(0, 2).ToList().ForEach(count => _testInitiative.Measures.Add(_testMeasure));
             Enumerable.Range(0, 2).ToList().ForEach(count => _testInitiative.Epics.Add(_testEpic));
 
-            string result = _IP.VisualizeToString(_testInitiative, _ParentNodeID);
+            string result = _initiativePresenter.VisualizeToString(_testInitiative, _ParentNodeID);
             string expected = "[{ v: '" + _testInitiative.NodeID + "', f: 'Initiative" + "<div style=\"font-style:italic\">" + _testInitiative.Title + "</div>'}, " + $"'{_ParentNodeID}']" + " , "
                                                                                        + "This Measure Presenter method has been mocked" + ", "
                                                                                        + "This mocked Measure Presenter method has been called twice" + " , "
@@ -123,14 +123,15 @@ namespace LVT.Tests
             Assert.AreEqual(expected, result);
         }
 
+        // Would this be an option to use Parametrized tests [TestCase]?
         [Test]
         public void VisualizeToString_Bet_FiveMeasures_NoEpics()
         {
             Enumerable.Range(0, 5).ToList().ForEach(count => _testInitiative.Measures.Add(_testMeasure));
 
-            _IP.VisualizeToString(_testInitiative, _ParentNodeID);
+            _initiativePresenter.VisualizeToString(_testInitiative, _ParentNodeID);
 
-            _MMP.Verify(mmp => mmp.VisualizeToString(It.IsAny<Measure>(), _testInitiative.NodeID), Times.Exactly(5));
+            _mockMeasurePresenter.Verify(mmp => mmp.VisualizeToString(It.IsAny<Measure>(), _testInitiative.NodeID), Times.Exactly(5));
         }
 
         [Test]
@@ -138,9 +139,9 @@ namespace LVT.Tests
         {
             Enumerable.Range(0, 5).ToList().ForEach(count => _testInitiative.Epics.Add(_testEpic));
 
-            _IP.VisualizeToString(_testInitiative, _ParentNodeID);
+            _initiativePresenter.VisualizeToString(_testInitiative, _ParentNodeID);
 
-            _MEP.Verify(mep => mep.VisualizeToString(It.IsAny<Epic>(), _testInitiative.NodeID), Times.Exactly(5));
+            _mockEpicPresenter.Verify(mep => mep.VisualizeToString(It.IsAny<Epic>(), _testInitiative.NodeID), Times.Exactly(5));
         }
 
         [Test]
@@ -149,10 +150,10 @@ namespace LVT.Tests
             Enumerable.Range(0, 5).ToList().ForEach(count => _testInitiative.Measures.Add(_testMeasure));
             Enumerable.Range(0, 5).ToList().ForEach(count => _testInitiative.Epics.Add(_testEpic));
 
-            _IP.VisualizeToString(_testInitiative, _ParentNodeID);
+            _initiativePresenter.VisualizeToString(_testInitiative, _ParentNodeID);
 
-            _MMP.Verify(mmp => mmp.VisualizeToString(It.IsAny<Measure>(), _testInitiative.NodeID), Times.Exactly(5));
-            _MEP.Verify(mep => mep.VisualizeToString(It.IsAny<Epic>(), _testInitiative.NodeID), Times.Exactly(5));
+            _mockMeasurePresenter.Verify(mmp => mmp.VisualizeToString(It.IsAny<Measure>(), _testInitiative.NodeID), Times.Exactly(5));
+            _mockEpicPresenter.Verify(mep => mep.VisualizeToString(It.IsAny<Epic>(), _testInitiative.NodeID), Times.Exactly(5));
         }
     }
 }

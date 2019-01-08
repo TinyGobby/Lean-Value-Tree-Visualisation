@@ -5,13 +5,13 @@ namespace LVT.Tests
 {
     class EpicPresenterTests
     {
-        private EpicPresenter _EP;
+        private EpicPresenter _epicPresenter;
         private Epic _testEpic;
 
         [SetUp]
         public void SetupForTest()
         {
-            _EP = new EpicPresenter();
+            _epicPresenter = new EpicPresenter();
             _testEpic = new Epic("testDescription", "testDeadline");
         }
 
@@ -20,7 +20,7 @@ namespace LVT.Tests
         {
             string ParentNode = "Parent Initiative NodeID";
 
-            string result = _EP.VisualizeToString(_testEpic, ParentNode);
+            string result = _epicPresenter.VisualizeToString(_testEpic, ParentNode);
             string expected = "[{ v: '" + _testEpic.NodeID + "', f: 'Epic" + "<div style=\"font-style:italic\">" + $"{_testEpic.Description}" + "</div>" +
                                                                    "<div style=\"font-style:italic\">" + $"{_testEpic.Deadline}" + "</div>" +
                                                                    "'}, " + $"'{ParentNode}']";

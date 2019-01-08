@@ -9,10 +9,10 @@ namespace LVT.Tests
     class BetPresenterTests
     {
         private Bet _testBet;
-        private BetPresenter _BP;
+        private BetPresenter _betPresenter;
         private Initiative _testInitiative;
         private string _ParentNodeID;
-        private Mock<IInitiativePresenter> _MIP;
+        private Mock<IInitiativePresenter> _mockInitiativePresenter;
 
         [SetUp]
         public void SetupForTest()
@@ -21,15 +21,15 @@ namespace LVT.Tests
             _ParentNodeID = "Parent Goal Node Test ID";
             _testInitiative = new Initiative("Test Initiative Title");
 
-            _MIP = new Mock<IInitiativePresenter>();
-            _MIP.SetupSequence(mip => mip.VisualizeToString(_testInitiative, _testBet.NodeID)).Returns("This initiative presenter method has been mocked")
+            _mockInitiativePresenter = new Mock<IInitiativePresenter>();
+            _mockInitiativePresenter.SetupSequence(mip => mip.VisualizeToString(_testInitiative, _testBet.NodeID)).Returns("This initiative presenter method has been mocked")
                                                                                               .Returns("This mocked initiative presenter method has been called twice");
-            _BP = new BetPresenter(_MIP.Object);
+            _betPresenter = new BetPresenter(_mockInitiativePresenter.Object);
         }
         [Test]
         public void VisualizeToString_Bet_NoInitiatives()
         {           
-            string result = _BP.VisualizeToString(_testBet, _ParentNodeID);
+            string result = _betPresenter.VisualizeToString(_testBet, _ParentNodeID);
             string expected = "[{ v: '" + _testBet.NodeID + "', f: 'Bet" + "<div style=\"font-style:italic\">" + _testBet.Title + "</div>'}, " + $"'{_ParentNodeID}']";
 
             Assert.AreEqual(expected, result);
@@ -40,7 +40,7 @@ namespace LVT.Tests
         {
             _testBet.Initiatives.Add(_testInitiative);
 
-            string result = _BP.VisualizeToString(_testBet, _ParentNodeID);
+            string result = _betPresenter.VisualizeToString(_testBet, _ParentNodeID);
             string expected = "[{ v: '" + _testBet.NodeID + "', f: 'Bet" + "<div style=\"font-style:italic\">" + _testBet.Title + "</div>'}, " + $"'{_ParentNodeID}'], "
                                                                          + "This initiative presenter method has been mocked";
 
@@ -52,7 +52,7 @@ namespace LVT.Tests
         {
             Enumerable.Range(0, 2).ToList().ForEach(count => _testBet.Initiatives.Add(_testInitiative));
 
-            string result = _BP.VisualizeToString(_testBet, _ParentNodeID);
+            string result = _betPresenter.VisualizeToString(_testBet, _ParentNodeID);
             string expected = "[{ v: '" + _testBet.NodeID + "', f: 'Bet" + "<div style=\"font-style:italic\">" + _testBet.Title + "</div>'}, " + $"'{_ParentNodeID}'], "
                                                                          + "This initiative presenter method has been mocked" + ", "
                                                                          + "This mocked initiative presenter method has been called twice";
@@ -65,9 +65,9 @@ namespace LVT.Tests
         {
             Enumerable.Range(0, 5).ToList().ForEach(count => _testBet.Initiatives.Add(_testInitiative));
             
-            _BP.VisualizeToString(_testBet, _ParentNodeID);
+            _betPresenter.VisualizeToString(_testBet, _ParentNodeID);
             
-            _MIP.Verify(mip => mip.VisualizeToString(It.IsAny<Initiative>(), _testBet.NodeID), Times.Exactly(5));
+            _mockInitiativePresenter.Verify(mip => mip.VisualizeToString(It.IsAny<Initiative>(), _testBet.NodeID), Times.Exactly(5));
         }
     }
 }

@@ -9,10 +9,10 @@ namespace LVT.Tests
     class GoalPresenterTests
     {
         private Goal _testGoal;
-        private GoalPresenter _GP;
+        private GoalPresenter _goalPresenter;
         private Bet _testBet;
         private string _ParentNodeID;
-        private Mock<IBetPresenter> _MBP;
+        private Mock<IBetPresenter> _mockBetPresenter;
 
         [SetUp]
         public void SetupForTest()
@@ -21,16 +21,16 @@ namespace LVT.Tests
             _ParentNodeID = "Parent Vision Node Test ID";
             _testBet = new Bet("Test Bet Title");
 
-            _MBP = new Mock<IBetPresenter>();
-            _MBP.SetupSequence(mbp => mbp.VisualizeToString(_testBet, _testGoal.NodeID)).Returns("This BetPresenter method has been mocked")
+            _mockBetPresenter = new Mock<IBetPresenter>();
+            _mockBetPresenter.SetupSequence(mbp => mbp.VisualizeToString(_testBet, _testGoal.NodeID)).Returns("This BetPresenter method has been mocked")
                                                                                         .Returns("This mocked BetPresenter method has been called twice");
-            _GP = new GoalPresenter(_MBP.Object);
+            _goalPresenter = new GoalPresenter(_mockBetPresenter.Object);
         }
 
         [Test]
         public void VisualizeToString_Goal_NoBets()
         {
-            string result = _GP.VisualizeToString(_testGoal, _ParentNodeID);
+            string result = _goalPresenter.VisualizeToString(_testGoal, _ParentNodeID);
             string expected = "[{ v: '" + _testGoal.NodeID + "', f: 'Goal" + "<div style=\"font-style:italic\">" + _testGoal.Title + "</div>'}, " + $"'{_ParentNodeID}']";
 
             Assert.AreEqual(expected, result);
@@ -41,7 +41,7 @@ namespace LVT.Tests
         {
             _testGoal.Bets.Add(_testBet);
 
-            string result = _GP.VisualizeToString(_testGoal, _ParentNodeID);
+            string result = _goalPresenter.VisualizeToString(_testGoal, _ParentNodeID);
             string expected = "[{ v: '" + _testGoal.NodeID + "', f: 'Goal" + "<div style=\"font-style:italic\">" + _testGoal.Title + "</div>'}, " + $"'{_ParentNodeID}'], "
                                                                            + "This BetPresenter method has been mocked";
 
@@ -53,7 +53,7 @@ namespace LVT.Tests
         {
             Enumerable.Range(0, 2).ToList().ForEach(count => _testGoal.Bets.Add(_testBet));
 
-            string result = _GP.VisualizeToString(_testGoal, _ParentNodeID);
+            string result = _goalPresenter.VisualizeToString(_testGoal, _ParentNodeID);
             string expected = "[{ v: '" + _testGoal.NodeID + "', f: 'Goal" + "<div style=\"font-style:italic\">" + _testGoal.Title + "</div>'}, " + $"'{_ParentNodeID}'], "
                                                                            + "This BetPresenter method has been mocked" + ", "
                                                                            + "This mocked BetPresenter method has been called twice";
@@ -66,9 +66,9 @@ namespace LVT.Tests
         {
             Enumerable.Range(0, 5).ToList().ForEach(count => _testGoal.Bets.Add(_testBet));
 
-            string result = _GP.VisualizeToString(_testGoal, _ParentNodeID);
+            string result = _goalPresenter.VisualizeToString(_testGoal, _ParentNodeID);
            
-            _MBP.Verify(mbp => mbp.VisualizeToString(It.IsAny<Bet>(), _testGoal.NodeID), Times.Exactly(5));
+            _mockBetPresenter.Verify(mbp => mbp.VisualizeToString(It.IsAny<Bet>(), _testGoal.NodeID), Times.Exactly(5));
         }
     }
 }

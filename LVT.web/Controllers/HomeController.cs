@@ -1,20 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using LVT.web.Models;
 using Microsoft.AspNetCore.Http;
 using System.IO;
-using Microsoft.AspNetCore.Html;
-using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.Extensions.Logging;
-using Newtonsoft.Json;
 using LVT.LVT.Services;
-using System.Net.Http;
-using System.Threading;
-using Microsoft.EntityFrameworkCore.Query.ExpressionTranslators.Internal;
 
 namespace LVT.web.Controllers
 {
