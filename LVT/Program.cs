@@ -22,12 +22,9 @@ namespace LVT
 
         public static void RunFromCommandLine(string[] args)
         {
-            if (args.Length == 0)
-            {
-                throw new NullReferenceException("Please provide the name and path of the file you want to open.");
-            }
+            string filename = args.Length == 0 ? null : args[0];
 
-            Validate.ValidateArgument(args[0]);
+            Validate.ValidateArgument(filename);
             StreamReader file = File.OpenText(args[0]);
             string LVT = ReadAndWrite.BuildTree(file);
             string FullHTML = ReadAndWrite.CreateFullHTML(LVT);

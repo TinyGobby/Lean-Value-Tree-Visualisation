@@ -14,6 +14,7 @@ using Newtonsoft.Json;
 using LVT.LVT.Services;
 using System.Net.Http;
 using System.Threading;
+using Microsoft.EntityFrameworkCore.Query.ExpressionTranslators.Internal;
 
 namespace LVT.web.Controllers
 {
@@ -27,17 +28,20 @@ namespace LVT.web.Controllers
         [HttpPost("UploadFiles")]
         public IActionResult UploadLVTData(IFormFile file)
         {
-            if (file == null)
+            string filename = file?.FileName;
+
+            try
             {
-                return BadRequest("Please select the JSON file you want to open.");
-            }
-            else
-            {
+                Validate.ValidateFile(filename);
                 StreamReader jsondata = new StreamReader(file.OpenReadStream());
                 string LVT = ReadAndWrite.BuildTree(jsondata);
                 string FullHTML = ReadAndWrite.CreateFullHTML(LVT);
 
-                return Content(FullHTML, "text/html");
+                return Content(FullHTML, "text/html"); ;
+            }
+            catch (Exception e)
+            {
+                return Ok(e.Message);
             }
         }
 
