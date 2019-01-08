@@ -63,6 +63,16 @@ namespace LVT.Tests.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
+        internal static byte[] Minimal {
+            get {
+                object obj = ResourceManager.GetObject("Minimal", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
         internal static byte[] TestLVT {
             get {
                 object obj = ResourceManager.GetObject("TestLVT", resourceCulture);

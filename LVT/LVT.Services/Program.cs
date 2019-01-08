@@ -30,8 +30,10 @@ namespace LVT
             Validate.ValidateArgument(args[0]);
             StreamReader file = File.OpenText(args[0]);
             string LVT = ReadAndWrite.BuildTree(file);
+            Console.WriteLine(LVT);
             string FullHTML = ReadAndWrite.CreateFullHTML(LVT);
             ReadAndWrite.SaveToDisk(FullHTML);
+            Console.ReadLine();
         }
 
         public static void RunFromSolution()

@@ -1,10 +1,11 @@
 ﻿using LVT.LVT.Services;
+using LVT.LVT.Interfaces;
 using System;
 using System.IO;
 
 namespace LVT
 {
-    public class ReadAndWrite
+    public class ReadAndWrite 
     {
         public static string BuildTree(StreamReader file)
         {
@@ -29,11 +30,6 @@ namespace LVT
         public static string CreateFullHTML(string LVTHTMLString)
         {
             return Properties.Resources.TemplateHTMLPageTop + LVTHTMLString + Properties.Resources.TemplateHTMLPageBottom;
-        }
-
-        public static string CreateFullCSHTML(string LVTHTMLString)
-        {
-            return Properties.Resources.TemplateCSHTMLPageTop + LVTHTMLString + Properties.Resources.TemplateHTMLPageBottom;
         }
 
         internal static void SaveToDisk(string content)

@@ -1,9 +1,10 @@
-﻿using System;
+﻿using LVT.LVT.Interfaces;
+using System;
 using System.Collections.Generic;
 
 namespace LVT
 {
-    public class Vision
+    public class Vision : IVision
     {
         public Vision (string title)
         {
