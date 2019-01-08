@@ -29,20 +29,21 @@ namespace LVT.web.Controllers
         public IActionResult UploadLVTData(IFormFile file)
         {
             string filename = file?.FileName;
+            string FullHTML;
 
             try
             {
-                Validate.ValidateFile(filename);
+                Validate.ValidateFilename(filename);
                 StreamReader jsondata = new StreamReader(file.OpenReadStream());
                 string LVT = ReadAndWrite.BuildTree(jsondata);
-                string FullHTML = ReadAndWrite.CreateFullHTML(LVT);
-
-                return Content(FullHTML, "text/html"); ;
+                FullHTML = ReadAndWrite.CreateFullHTML(LVT);
             }
             catch (Exception e)
             {
                 return Ok(e.Message);
             }
+
+            return Content(FullHTML, "text/html");
         }
 
         public IActionResult About()
