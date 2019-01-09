@@ -18,7 +18,18 @@ namespace LVT.LVT.Services
 
         public string VisualizeToString(Initiative initiative, string parentNode)
         {
-            string result = "[{ v: '" + initiative.NodeID + "', f: 'Initiative" + "<div style=\"font-style:italic\">" + initiative.Title + "</div>'}, " + $"'{parentNode}']";
+            //string result = "[{ v: '" + initiative.NodeID + "', f: 'Initiative" + "<div style=\"font-style:italic\">" + initiative.Title + "</div>'}, " + $"'{parentNode}']";
+
+            string result = ConstantsGoogleChartsString.OpenerOrgChartDataString +
+                            ConstantsGoogleChartsString.OrgChartNodeIDWrapper +
+                            initiative.NodeID +
+                            ConstantsGoogleChartsString.OrgChartNodeHeaderWrapper +
+                            initiative.GetType().Name +
+                            ConstantsGoogleChartsString.OpenerOrgChartContentStylerFontItalic +
+                            initiative.Title +
+                            ConstantsGoogleChartsString.ClosingOrgChartContentStyler +
+                            parentNode +
+                            ConstantsGoogleChartsString.ClosingOrgChartDataString;
 
             if (initiative.Measures.Count() >= 1)
             {

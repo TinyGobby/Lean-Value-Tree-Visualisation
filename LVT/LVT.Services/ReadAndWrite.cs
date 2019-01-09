@@ -20,10 +20,11 @@ namespace LVT
 
         internal static string CreateLVTHtml(LeanValueTree tree)
         {
-            VisionPresenter VP = new VisionPresenter();
-
+            //VisionPresenter VP = new VisionPresenter();
+            GoogleOrgChartPresenter presenter = new GoogleOrgChartPresenter();
             Directory.CreateDirectory("C:\\temp");
-            return VP.VisualizeToString(tree.Vision);
+            //return VP.VisualizeToString(tree.Vision);
+            return presenter.VisualizeToStringVision(tree.Vision);
         }
 
         public static string CreateFullHTML(string LVTHTMLString)

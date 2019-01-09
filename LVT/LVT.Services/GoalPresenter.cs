@@ -12,12 +12,22 @@ namespace LVT.LVT.Services
         public GoalPresenter(IBetPresenter bp = null)
         {
             _bp = bp ?? new BetPresenter();
-
         }
 
         public string VisualizeToString(Goal goal, string parentNode)
         {
-            string result = "[{ v: '" + goal.NodeID + "', f: 'Goal" + "<div style=\"font-style:italic\">" + goal.Title + "</div>'}, " + $"'{parentNode}']";
+            //string result = "[{ v: '" + goal.NodeID + "', f: 'Goal" + "<div style=\"font-style:italic\">" + goal.Title + "</div>'}, " + $"'{parentNode}']";
+
+            string result = ConstantsGoogleChartsString.OpenerOrgChartDataString +
+                            ConstantsGoogleChartsString.OrgChartNodeIDWrapper +
+                            goal.NodeID +
+                            ConstantsGoogleChartsString.OrgChartNodeHeaderWrapper +
+                            goal.GetType().Name +
+                            ConstantsGoogleChartsString.OpenerOrgChartContentStylerFontItalic +
+                            goal.Title +
+                            ConstantsGoogleChartsString.ClosingOrgChartContentStyler +
+                            parentNode +
+                            ConstantsGoogleChartsString.ClosingOrgChartDataString;
 
             if (goal.Bets.Count() >= 1)
             {

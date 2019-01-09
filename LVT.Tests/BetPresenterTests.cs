@@ -23,14 +23,14 @@ namespace LVT.Tests
 
             _mockInitiativePresenter = new Mock<IInitiativePresenter>();
             _mockInitiativePresenter.SetupSequence(mip => mip.VisualizeToString(_testInitiative, _testBet.NodeID)).Returns("This initiative presenter method has been mocked")
-                                                                                              .Returns("This mocked initiative presenter method has been called twice");
+                                                                                                                  .Returns("This mocked initiative presenter method has been called twice");
             _betPresenter = new BetPresenter(_mockInitiativePresenter.Object);
         }
         [Test]
         public void VisualizeToString_Bet_NoInitiatives()
         {           
             string result = _betPresenter.VisualizeToString(_testBet, _ParentNodeID);
-            string expected = "[{ v: '" + _testBet.NodeID + "', f: 'Bet" + "<div style=\"font-style:italic\">" + _testBet.Title + "</div>'}, " + $"'{_ParentNodeID}']";
+            string expected = "[{ v: '" + _testBet.NodeID + "', f: '" + _testBet.GetType().Name + "<div style=\"font-style:italic\">" + _testBet.Title + "</div>'}, " + $"'{_ParentNodeID}']";
 
             Assert.AreEqual(expected, result);
         }

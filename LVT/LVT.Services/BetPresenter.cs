@@ -16,7 +16,16 @@ namespace LVT.LVT.Services
 
         public string VisualizeToString(Bet bet, string parentNode)
         {
-            string result = "[{ v: '" + bet.NodeID + "', f: 'Bet" + "<div style=\"font-style:italic\">" + bet.Title + "</div>'}, " + $"'{parentNode}']";
+            string result = ConstantsGoogleChartsString.OpenerOrgChartDataString +
+                            ConstantsGoogleChartsString.OrgChartNodeIDWrapper +
+                            bet.NodeID +
+                            ConstantsGoogleChartsString.OrgChartNodeHeaderWrapper +
+                            bet.GetType().Name +
+                            ConstantsGoogleChartsString.OpenerOrgChartContentStylerFontItalic +
+                            bet.Title +
+                            ConstantsGoogleChartsString.ClosingOrgChartContentStyler + 
+                            parentNode + 
+                            ConstantsGoogleChartsString.ClosingOrgChartDataString;
 
             if (bet.Initiatives.Count >= 1)
             {
