@@ -7,21 +7,27 @@ namespace LVT.Tests
     {
         private EpicPresenter _epicPresenter;
         private Epic _testEpic;
+        private string _parentNodeID;
+        private string _expectedEpicOrgChartString;
 
         [SetUp]
         public void SetupForTest()
         {
             _epicPresenter = new EpicPresenter();
             _testEpic = new Epic("testDescription", "testDeadline");
+            _parentNodeID = "Parent Initiative NodeID";
+            _expectedEpicOrgChartString =
+                $"[{{ v:'{_testEpic.NodeID}', f:'{_testEpic.GetType().Name}<div style=\"font-style:italic\">{_testEpic.Description}</div><div style=\"font-style:italic\">{_testEpic.Deadline}</div>'}}, '{_parentNodeID}']";
         }
 
         [Test]
         public void EpicPresenterReturnsCorrectOrgChartString()
         {
-            string parentNodeID = "Parent Initiative NodeID";
+            //act
+            string result = _epicPresenter.VisualizeToString(_testEpic, _parentNodeID);
 
-            string result = _epicPresenter.VisualizeToString(_testEpic, parentNodeID);
-            string expected = $"[{{ v:'{_testEpic.NodeID}', f:'{_testEpic.GetType().Name}<div style=\"font-style:italic\">{_testEpic.Description}</div><div style=\"font-style:italic\">{_testEpic.Deadline}</div>'}}, '{parentNodeID}']";
+            //assert
+            string expected = $"{_expectedEpicOrgChartString}";
 
             Assert.AreEqual(expected, result);
         }
