@@ -11,14 +11,14 @@ namespace LVT.Tests
         private Vision _testVision;
         private Goal _testGoal;
         private VisionPresenter _visionPresenter;
-        private string _ParentNodeID;
+        private string _parentNodeID;
         private Mock<IGoalPresenter> _mockGoalPresenter;
 
         [SetUp]
         public void SetupForTest()
         {
             _testVision = new Vision("Test Vision Title");
-            _ParentNodeID = "Parent LVT Node Test ID";
+            _parentNodeID = "Parent LVT Node Test ID";
             _testGoal = new Goal("Test Goal Title");
 
             _mockGoalPresenter = new Mock<IGoalPresenter>();
@@ -28,21 +28,21 @@ namespace LVT.Tests
         }
 
         [Test]
-        public void VisualizeToString_Vision_NoGoals()
+        public void VisualizeToString_Vision_ReturnsCorrectOrgChartString_WithNoGoals()
         {
-            string result = _visionPresenter.VisualizeToString(_testVision, _ParentNodeID);
-            string expected = "[" + "[{ v: '" + _testVision.NodeID + "', f: 'Vision" + "<div style=\"font-style:italic\">" + _testVision.Title + "</div>'}, " + $"'{_ParentNodeID}']" + "]";
+            string result = _visionPresenter.VisualizeToString(_testVision, _parentNodeID);
+            string expected = $"[[{{ v:'{_testVision.NodeID}', f:'{_testVision.GetType().Name}<div style=\"font-style:italic\">{_testVision.Title}</div>'}}, '']]";
 
             Assert.AreEqual(expected, result);
         }
 
         [Test]
-        public void VisualizeToString_Vision_WithOneGoal()
+        public void VisualizeToString_Vision_ReturnsCorrectOrgChartString_WithOneGoal()
         {
             _testVision.Goals.Add(_testGoal);
 
-            string result = _visionPresenter.VisualizeToString(_testVision, _ParentNodeID);
-            string expected = "[" + "[{ v: '" + _testVision.NodeID + "', f: 'Vision" + "<div style=\"font-style:italic\">" + _testVision.Title + "</div>'}, " + $"'{_ParentNodeID}']" + ", "
+            string result = _visionPresenter.VisualizeToString(_testVision, _parentNodeID);
+            string expected = $"[[{{ v:'{_testVision.NodeID}', f:'{_testVision.GetType().Name}<div style=\"font-style:italic\">{_testVision.Title}</div>'}}, ''], "
                                                                                      + "This GoalPresenter method has been mocked" 
                                                                                      + "]";
 
@@ -50,12 +50,12 @@ namespace LVT.Tests
         }
 
         [Test]
-        public void VisualizeToString_Vision_WithTwoGoals()
+        public void VisualizeToString_Vision_ReturnsCorrectOrgChartString_WithTwoGoals()
         {
             Enumerable.Range(0, 2).ToList().ForEach(count => _testVision.Goals.Add(_testGoal));
 
-            string result = _visionPresenter.VisualizeToString(_testVision, _ParentNodeID);
-            string expected = "[" + "[{ v: '" + _testVision.NodeID + "', f: 'Vision" + "<div style=\"font-style:italic\">" + _testVision.Title + "</div>'}, " + $"'{_ParentNodeID}']" + ", "
+            string result = _visionPresenter.VisualizeToString(_testVision, _parentNodeID);
+            string expected = $"[[{{ v:'{_testVision.NodeID}', f:'{_testVision.GetType().Name}<div style=\"font-style:italic\">{_testVision.Title}</div>'}}, ''], "
                                                                                      + "This GoalPresenter method has been mocked" + ", "
                                                                                      + "This mocked GoalPresenter method has been called twice"
                                                                                      + "]";
@@ -64,11 +64,11 @@ namespace LVT.Tests
         }
 
         [Test]
-        public void VisualizeToString_Vision_WithFiveGoals()
+        public void VisualizeToString_Vision_CallsVisualizeToStringGoal_FiveTimes_WithFiveGoals()
         {
             Enumerable.Range(0, 5).ToList().ForEach(count => _testVision.Goals.Add(_testGoal));
 
-            string result = _visionPresenter.VisualizeToString(_testVision, _ParentNodeID);
+            string result = _visionPresenter.VisualizeToString(_testVision, _parentNodeID);
 
             _mockGoalPresenter.Verify(mgp => mgp.VisualizeToString(It.IsAny<Goal>(), _testVision.NodeID), Times.Exactly(5));
         }

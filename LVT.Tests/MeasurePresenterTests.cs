@@ -16,16 +16,12 @@ namespace LVT.Tests
         }
 
         [Test]
-        public void MeasurePresenterTest()
+        public void EpicPresenterReturnsCorrectOrgChartString()
         {
-            string ParentNode = "Parent Initiative NodeID";
+            string parentNodeID = "Parent Initiative NodeID";
 
-            string result = _measurePresenter.VisualizeToString(_testMeasure, ParentNode);
-            string expected = "[{ v: '" + _testMeasure.NodeID + "', f: 'Measure<div style=\"font-style:italic\">" + $"{_testMeasure.Description}" + "</div>" +
-                                                                         "<div style=\"font-style:italic\">" + $"{_testMeasure.Deadline}" + "</div>" +
-                                                                         "<div style=\"font-style:italic\">" + $"{_testMeasure.Amount}" + "</div>" +
-                                                                         "<div style=\"font-style:italic\">" + $"{_testMeasure.Units}" + "</div>" +
-                                                                         "'}, " + $"'{ParentNode}']";
+            string result = _measurePresenter.VisualizeToString(_testMeasure, parentNodeID);
+            string expected = $"[{{ v:'{_testMeasure.NodeID}', f:'{_testMeasure.GetType().Name}<div style=\"font-style:italic\">{_testMeasure.Description}</div><div style=\"font-style:italic\">{_testMeasure.Deadline}</div><div style=\"font-style:italic\">{_testMeasure.Amount}</div><div style=\"font-style:italic\">{_testMeasure.Units}</div>'}}, '{parentNodeID}']";
 
             Assert.AreEqual(expected, result);
         }

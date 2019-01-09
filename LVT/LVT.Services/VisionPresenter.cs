@@ -17,14 +17,14 @@ namespace LVT.LVT.Services
 
         public string VisualizeToString(Vision vision, string parentNode = "")
         {
-            string result = "[[{ v: '" + vision.NodeID + "', f: 'Vision" + "<div style=\"font-style:italic\">" + vision.Title + "</div>'}, " + $"'{parentNode}']";
+            string result = $"[{{ v:'{vision.NodeID}', f:'{vision.GetType().Name}<div style=\"font-style:italic\">{vision.Title}</div>'}}, '']";
 
             if (vision.Goals.Count() >= 1)
             {
                 result = result + ", " + ProcessGoals(vision);
             };
 
-            return result + "]";
+            return $"[{result}]";
         }
 
         private string ProcessGoals(Vision vision)

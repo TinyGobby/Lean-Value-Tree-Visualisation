@@ -16,14 +16,12 @@ namespace LVT.Tests
         }
 
         [Test]
-        public void EpicPresenterTest()
+        public void EpicPresenterReturnsCorrectOrgChartString()
         {
-            string ParentNode = "Parent Initiative NodeID";
+            string parentNodeID = "Parent Initiative NodeID";
 
-            string result = _epicPresenter.VisualizeToString(_testEpic, ParentNode);
-            string expected = "[{ v: '" + _testEpic.NodeID + "', f: 'Epic" + "<div style=\"font-style:italic\">" + $"{_testEpic.Description}" + "</div>" +
-                                                                   "<div style=\"font-style:italic\">" + $"{_testEpic.Deadline}" + "</div>" +
-                                                                   "'}, " + $"'{ParentNode}']";
+            string result = _epicPresenter.VisualizeToString(_testEpic, parentNodeID);
+            string expected = $"[{{ v:'{_testEpic.NodeID}', f:'{_testEpic.GetType().Name}<div style=\"font-style:italic\">{_testEpic.Description}</div><div style=\"font-style:italic\">{_testEpic.Deadline}</div>'}}, '{parentNodeID}']";
 
             Assert.AreEqual(expected, result);
         }

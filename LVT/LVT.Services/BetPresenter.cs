@@ -14,9 +14,9 @@ namespace LVT.LVT.Services
             _ip = ip ?? new InitiativePresenter();
         }
 
-        public string VisualizeToString(Bet bet, string parentNode)
+        public string VisualizeToString(Bet bet, string parentNodeID)
         {
-            string result = "[{ v: '" + bet.NodeID + "', f: 'Bet" + "<div style=\"font-style:italic\">" + bet.Title + "</div>'}, " + $"'{parentNode}']";
+            string result = $"[{{ v:'{bet.NodeID}', f:'{bet.GetType().Name}<div style=\"font-style:italic\">{bet.Title}</div>'}}, '{parentNodeID}']";
 
             if (bet.Initiatives.Count >= 1)
             {

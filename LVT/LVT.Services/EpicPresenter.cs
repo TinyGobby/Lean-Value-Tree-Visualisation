@@ -4,11 +4,9 @@ namespace LVT.LVT.Services
 {
     public class EpicPresenter : IEpicPresenter
     {
-        public string VisualizeToString(Epic epic, string parentNode)
+        public string VisualizeToString(Epic epic, string parentNodeID)
         {
-            return "[{ v: '" + epic.NodeID + "', f: 'Epic" + "<div style=\"font-style:italic\">" + $"{epic.Description}" + "</div>" +
-                                                             "<div style=\"font-style:italic\">" + $"{epic.Deadline}" + "</div>" +
-                                                             "'}, " + $"'{parentNode}']";
+            return $"[{{ v:'{epic.NodeID}', f:'{epic.GetType().Name}<div style=\"font-style:italic\">{epic.Description}</div><div style=\"font-style:italic\">{epic.Deadline}</div>'}}, '{parentNodeID}']";
         }       
     }
 }

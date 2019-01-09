@@ -16,9 +16,9 @@ namespace LVT.LVT.Services
             _mp = mp ?? new MeasurePresenter();
         }
 
-        public string VisualizeToString(Initiative initiative, string parentNode)
+        public string VisualizeToString(Initiative initiative, string parentNodeID)
         {
-            string result = "[{ v: '" + initiative.NodeID + "', f: 'Initiative" + "<div style=\"font-style:italic\">" + initiative.Title + "</div>'}, " + $"'{parentNode}']";
+            string result = $"[{{ v:'{initiative.NodeID}', f:'{initiative.GetType().Name}<div style=\"font-style:italic\">{initiative.Title}</div>'}}, '{parentNodeID}']";
 
             if (initiative.Measures.Count() >= 1)
             {

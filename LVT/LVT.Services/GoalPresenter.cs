@@ -15,9 +15,9 @@ namespace LVT.LVT.Services
 
         }
 
-        public string VisualizeToString(Goal goal, string parentNode)
+        public string VisualizeToString(Goal goal, string parentNodeID)
         {
-            string result = "[{ v: '" + goal.NodeID + "', f: 'Goal" + "<div style=\"font-style:italic\">" + goal.Title + "</div>'}, " + $"'{parentNode}']";
+            string result = $"[{{ v:'{goal.NodeID}', f:'{goal.GetType().Name}<div style=\"font-style:italic\">{goal.Title}</div>'}}, '{parentNodeID}']";
 
             if (goal.Bets.Count() >= 1)
             {

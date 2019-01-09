@@ -11,14 +11,14 @@ namespace LVT.Tests
         private Goal _testGoal;
         private GoalPresenter _goalPresenter;
         private Bet _testBet;
-        private string _ParentNodeID;
+        private string _parentNodeID;
         private Mock<IBetPresenter> _mockBetPresenter;
 
         [SetUp]
         public void SetupForTest()
         {
             _testGoal = new Goal("Test Goal Title");
-            _ParentNodeID = "Parent Vision Node Test ID";
+            _parentNodeID = "Parent Vision Node Test ID";
             _testBet = new Bet("Test Bet Title");
 
             _mockBetPresenter = new Mock<IBetPresenter>();
@@ -28,45 +28,45 @@ namespace LVT.Tests
         }
 
         [Test]
-        public void VisualizeToString_Goal_NoBets()
+        public void VisualizeToString_Goal_ReturnsCorrectOrgChartString_WithNoBets()
         {
-            string result = _goalPresenter.VisualizeToString(_testGoal, _ParentNodeID);
-            string expected = "[{ v: '" + _testGoal.NodeID + "', f: 'Goal" + "<div style=\"font-style:italic\">" + _testGoal.Title + "</div>'}, " + $"'{_ParentNodeID}']";
+            string result = _goalPresenter.VisualizeToString(_testGoal, _parentNodeID);
+            string expected = $"[{{ v:'{_testGoal.NodeID}', f:'{_testGoal.GetType().Name}<div style=\"font-style:italic\">{_testGoal.Title}</div>'}}, '{_parentNodeID}']";
 
             Assert.AreEqual(expected, result);
         }
 
         [Test]
-        public void VisualizeToString_Goal_WithOneBet()
+        public void VisualizeToString_Goal_ReturnsCorrectOrgChartString_WithOneBet()
         {
             _testGoal.Bets.Add(_testBet);
 
-            string result = _goalPresenter.VisualizeToString(_testGoal, _ParentNodeID);
-            string expected = "[{ v: '" + _testGoal.NodeID + "', f: 'Goal" + "<div style=\"font-style:italic\">" + _testGoal.Title + "</div>'}, " + $"'{_ParentNodeID}'], "
-                                                                           + "This BetPresenter method has been mocked";
+            string result = _goalPresenter.VisualizeToString(_testGoal, _parentNodeID);
+            string expected = $"[{{ v:'{_testGoal.NodeID}', f:'{_testGoal.GetType().Name}<div style=\"font-style:italic\">{_testGoal.Title}</div>'}}, '{_parentNodeID}'], "
+                              + "This BetPresenter method has been mocked";
 
             Assert.AreEqual(expected, result);
         }
 
         [Test]
-        public void VisualizeToString_Goal_WithTwoBets()
+        public void VisualizeToString_Goal_ReturnsCorrectOrgChartString_WithTwoBets()
         {
             Enumerable.Range(0, 2).ToList().ForEach(count => _testGoal.Bets.Add(_testBet));
 
-            string result = _goalPresenter.VisualizeToString(_testGoal, _ParentNodeID);
-            string expected = "[{ v: '" + _testGoal.NodeID + "', f: 'Goal" + "<div style=\"font-style:italic\">" + _testGoal.Title + "</div>'}, " + $"'{_ParentNodeID}'], "
-                                                                           + "This BetPresenter method has been mocked" + ", "
-                                                                           + "This mocked BetPresenter method has been called twice";
+            string result = _goalPresenter.VisualizeToString(_testGoal, _parentNodeID);
+            string expected = $"[{{ v:'{_testGoal.NodeID}', f:'{_testGoal.GetType().Name}<div style=\"font-style:italic\">{_testGoal.Title}</div>'}}, '{_parentNodeID}'], "
+                              + "This BetPresenter method has been mocked, "
+                              + "This mocked BetPresenter method has been called twice";
 
             Assert.AreEqual(expected, result);
         }
 
         [Test]
-        public void VisualizeToString_Goal_WithFiveBets()
+        public void VisualizeToString_Goal_CallsVisualizeToStringBet_FiveTimes_WithFiveBets()
         {
             Enumerable.Range(0, 5).ToList().ForEach(count => _testGoal.Bets.Add(_testBet));
 
-            string result = _goalPresenter.VisualizeToString(_testGoal, _ParentNodeID);
+            string result = _goalPresenter.VisualizeToString(_testGoal, _parentNodeID);
            
             _mockBetPresenter.Verify(mbp => mbp.VisualizeToString(It.IsAny<Bet>(), _testGoal.NodeID), Times.Exactly(5));
         }
