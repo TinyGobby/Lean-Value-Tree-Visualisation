@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Text;
-
-namespace LVT.LVT.Services
+﻿namespace LVT.LVT.Services
 {
     public class Presenter
     {
@@ -13,21 +8,21 @@ namespace LVT.LVT.Services
             return $"[{{ v:'{nodeID}', f:'{nodeHeader}<div style=\"font-style:italic\">{nodeTitle}</div>'}}, '']";
         }
         // for goal, bet, initiative
-        public string BuildOrgChartDataString(string nodeID, string nodeHeader, string nodeTitle, string parentNode)
+        public string BuildOrgChartDataString(string nodeID, string nodeHeader, string nodeTitle, string parentNodeID)
         {
-            return $"[{{ v:'{nodeID}', f:'{nodeHeader}<div style=\"font-style:italic\">{nodeTitle}</div>'}}, '{parentNode}']";
+            return $"[{{ v:'{nodeID}', f:'{nodeHeader}<div style=\"font-style:italic\">{nodeTitle}</div>'}}, '{parentNodeID}']";
         }
 
         // for measure
-        public string BuildOrgChartDataString(string nodeID, string nodeHeader, string nodeDescription, string nodeDeadline, int nodeAmount, string nodeUnits, string parentNode)
+        public string BuildOrgChartDataString(string nodeID, string nodeHeader, string nodeDescription, string nodeDeadline, int nodeAmount, string nodeUnits, string parentNodeID)
         {
-            return $"[{{ v:'{nodeID}', f:'{nodeHeader}<div style=\"font-style:italic\">{nodeDescription}</div><div style=\"font-style:italic\">{nodeDeadline}</div><div style=\"font-style:italic\">{nodeAmount}</div><div style=\"font-style:italic\">{nodeUnits}</div>'}}, '{parentNode}']";
+            return $"[{{ v:'{nodeID}', f:'{nodeHeader}<div style=\"font-style:italic\">{nodeDescription}</div><div style=\"font-style:italic\">{nodeDeadline}</div><div style=\"font-style:italic\">{nodeAmount}</div><div style=\"font-style:italic\">{nodeUnits}</div>'}}, '{parentNodeID}']";
         }
 
         // for epic
-        public string BuildOrgChartDataString(string nodeID, string nodeHeader, string nodeDescription, string nodeDeadline, string parentNode)
+        public string BuildOrgChartDataString(string nodeID, string nodeHeader, string nodeDescription, string nodeDeadline, string parentNodeID)
         {
-            return $"[{{ v:'{nodeID}', f:'{nodeHeader}<div style=\"font-style:italic\">{nodeDescription}</div><div style=\"font-style:italic\">{nodeDeadline}</div>'}}, '{parentNode}']";
+            return $"[{{ v:'{nodeID}', f:'{nodeHeader}<div style=\"font-style:italic\">{nodeDescription}</div><div style=\"font-style:italic\">{nodeDeadline}</div>'}}, '{parentNodeID}']";
         }
     }
 }
