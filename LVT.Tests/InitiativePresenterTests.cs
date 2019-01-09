@@ -15,6 +15,7 @@ namespace LVT.Tests
         private string _parentNodeID;
         private Mock<IEpicPresenter> _mockEpicPresenter;
         private Mock<IMeasurePresenter> _mockMeasurePresenter;
+        private string _expectedInitiativeOrgChartString;
 
         [SetUp]
         public void SetupForTest()
@@ -32,13 +33,17 @@ namespace LVT.Tests
                                                                                                   .Returns("This mocked Measure Presenter method has been called twice");
 
             _initiativePresenter = new InitiativePresenter(_mockEpicPresenter.Object, _mockMeasurePresenter.Object);
+            _expectedInitiativeOrgChartString = $"[{{ v:'{_testInitiative.NodeID}', f:'{_testInitiative.GetType().Name}<div style=\"font-style:italic\">{_testInitiative.Title}</div>'}}, '{_parentNodeID}']";
         }
 
         [Test]
         public void VisualizeToString_Initiative_ReturnsCorrectOrgChartString_WithNoMeasures_NoEpics()
         {
-            string result = _initiativePresenter.VisualizeToString(_testInitiative, _parentNodeID);
-            string expected = $"[{{ v:'{_testInitiative.NodeID}', f:'{_testInitiative.GetType().Name}<div style=\"font-style:italic\">{_testInitiative.Title}</div>'}}, '{_parentNodeID}']";
+            //act
+            var result = _initiativePresenter.VisualizeToString(_testInitiative, _parentNodeID);
+
+            //assert
+            var expected = $"{_expectedInitiativeOrgChartString}";
 
             Assert.AreEqual(expected, result);
         }
@@ -46,11 +51,15 @@ namespace LVT.Tests
         [Test]
         public void VisualizeToString_Initiative_ReturnsCorrectOrgChartString_WithOneMeasure_NoEpics()
         {
+            //arrange
             _testInitiative.Measures.Add(_testMeasure);
 
-            string result = _initiativePresenter.VisualizeToString(_testInitiative, _parentNodeID);
-            string expected = $"[{{ v:'{_testInitiative.NodeID}', f:'{_testInitiative.GetType().Name}<div style=\"font-style:italic\">{_testInitiative.Title}</div>'}}, '{_parentNodeID}'] , " +
-                              "This Measure Presenter method has been mocked";
+            //act
+            var result = _initiativePresenter.VisualizeToString(_testInitiative, _parentNodeID);
+
+            //assert
+            var expected = $"{_expectedInitiativeOrgChartString} , "
+                           + "This Measure Presenter method has been mocked";
 
             Assert.AreEqual(expected, result);
         }
@@ -58,11 +67,15 @@ namespace LVT.Tests
         [Test]
         public void VisualizeToString_Initiative_ReturnsCorrectOrgChartString_WithOneEpic_NoMeasure()
         {
+            //arrange
             _testInitiative.Epics.Add(_testEpic);
 
-            string result = _initiativePresenter.VisualizeToString(_testInitiative, _parentNodeID);
-            string expected = $"[{{ v:'{_testInitiative.NodeID}', f:'{_testInitiative.GetType().Name}<div style=\"font-style:italic\">{_testInitiative.Title}</div>'}}, '{_parentNodeID}'] , " +
-                              "This Epic Presenter method has been mocked";
+            //act
+            var result = _initiativePresenter.VisualizeToString(_testInitiative, _parentNodeID);
+
+            //assert
+            var expected = $"{_expectedInitiativeOrgChartString} , "
+                           + "This Epic Presenter method has been mocked";
 
             Assert.AreEqual(expected, result);
         }
@@ -70,13 +83,17 @@ namespace LVT.Tests
         [Test]
         public void VisualizeToString_Initiative_ReturnsCorrectOrgChartString_WithOneMeasure_OneEpic()
         {
+            //arrange
             _testInitiative.Measures.Add(_testMeasure);
             _testInitiative.Epics.Add(_testEpic);
 
-            string result = _initiativePresenter.VisualizeToString(_testInitiative, _parentNodeID);
-            string expected = $"[{{ v:'{_testInitiative.NodeID}', f:'{_testInitiative.GetType().Name}<div style=\"font-style:italic\">{_testInitiative.Title}</div>'}}, '{_parentNodeID}'] , " +
-                              "This Measure Presenter method has been mocked , " +
-                              "This Epic Presenter method has been mocked";
+            //act
+            var result = _initiativePresenter.VisualizeToString(_testInitiative, _parentNodeID);
+
+            //assert
+            var expected = $"{_expectedInitiativeOrgChartString} , "
+                           + "This Measure Presenter method has been mocked , "
+                           + "This Epic Presenter method has been mocked";
 
             Assert.AreEqual(expected, result);
         }
@@ -84,12 +101,17 @@ namespace LVT.Tests
         [Test]
         public void VisualizeToString_Initiative_ReturnsCorrectOrgChartString_WithTwoMeasures_NoEpics()
         {
+            //arrange
             Enumerable.Range(0, 2).ToList().ForEach(count => _testInitiative.Measures.Add(_testMeasure));
 
-            string result = _initiativePresenter.VisualizeToString(_testInitiative, _parentNodeID);
-            string expected = $"[{{ v:'{_testInitiative.NodeID}', f:'{_testInitiative.GetType().Name}<div style=\"font-style:italic\">{_testInitiative.Title}</div>'}}, '{_parentNodeID}'] , " +
-                              "This Measure Presenter method has been mocked, " +
-                              "This mocked Measure Presenter method has been called twice";
+            //act
+            var result = _initiativePresenter.VisualizeToString(_testInitiative, _parentNodeID);
+
+            //assert
+            var expected = $"{_expectedInitiativeOrgChartString} , "
+                           + "This Measure Presenter method has been mocked, "
+                           + "This mocked Measure Presenter method has been called twice";
+
 
             Assert.AreEqual(expected, result);
         }
@@ -97,12 +119,16 @@ namespace LVT.Tests
         [Test]
         public void VisualizeToString_Initiative_ReturnsCorrectOrgChartString_WithTwoEpics_NoMeasure()
         {
+            //arrange
             Enumerable.Range(0, 2).ToList().ForEach(count => _testInitiative.Epics.Add(_testEpic));
 
-            string result = _initiativePresenter.VisualizeToString(_testInitiative, _parentNodeID);
-            string expected = $"[{{ v:'{_testInitiative.NodeID}', f:'{_testInitiative.GetType().Name}<div style=\"font-style:italic\">{_testInitiative.Title}</div>'}}, '{_parentNodeID}'] , " +
-                              "This Epic Presenter method has been mocked, " +
-                              "This mocked Epic Presenter method has been called twice";
+            //act
+            var result = _initiativePresenter.VisualizeToString(_testInitiative, _parentNodeID);
+
+            //assert
+            var expected = $"{_expectedInitiativeOrgChartString} , "
+                           + "This Epic Presenter method has been mocked, "
+                           + "This mocked Epic Presenter method has been called twice";
 
             Assert.AreEqual(expected, result);
         }
@@ -110,15 +136,19 @@ namespace LVT.Tests
         [Test]
         public void VisualizeToString_Initiative_ReturnsCorrectOrgChartString_WithTwoMeasures_TwoEpics()
         {
+            //arrange
             Enumerable.Range(0, 2).ToList().ForEach(count => _testInitiative.Measures.Add(_testMeasure));
             Enumerable.Range(0, 2).ToList().ForEach(count => _testInitiative.Epics.Add(_testEpic));
 
-            string result = _initiativePresenter.VisualizeToString(_testInitiative, _parentNodeID);
-            string expected = $"[{{ v:'{_testInitiative.NodeID}', f:'{_testInitiative.GetType().Name}<div style=\"font-style:italic\">{_testInitiative.Title}</div>'}}, '{_parentNodeID}'] , " +
-                              "This Measure Presenter method has been mocked, " +
-                              "This mocked Measure Presenter method has been called twice , " + 
-                              "This Epic Presenter method has been mocked, " +
-                              "This mocked Epic Presenter method has been called twice";
+            //act
+            var result = _initiativePresenter.VisualizeToString(_testInitiative, _parentNodeID);
+
+            //assert
+            var expected = $"{_expectedInitiativeOrgChartString} , "
+                           + "This Measure Presenter method has been mocked, "
+                           + "This mocked Measure Presenter method has been called twice , "
+                           + "This Epic Presenter method has been mocked, "
+                           + "This mocked Epic Presenter method has been called twice";
 
             Assert.AreEqual(expected, result);
         }
@@ -127,10 +157,13 @@ namespace LVT.Tests
         [Test]
         public void VisualizeToString_Initiative_CallsVisualizeToStringMeasure_FiveTimes_WithFiveMeasures_NoEpics()
         {
+            //act
             Enumerable.Range(0, 5).ToList().ForEach(count => _testInitiative.Measures.Add(_testMeasure));
 
+            //arrange
             _initiativePresenter.VisualizeToString(_testInitiative, _parentNodeID);
 
+            //assert
             _mockMeasurePresenter.Verify(mmp => mmp.VisualizeToString(It.IsAny<Measure>(), _testInitiative.NodeID), Times.Exactly(5));
             _mockEpicPresenter.Verify(mep => mep.VisualizeToString(It.IsAny<Epic>(), _testInitiative.NodeID), Times.Exactly(0));
         }
@@ -138,10 +171,13 @@ namespace LVT.Tests
         [Test]
         public void VisualizeToString_Initiative_CallsVisualizeToStringEpic_FiveTimes_WithFiveEpics_NoMeasures()
         {
+            //arrange
             Enumerable.Range(0, 5).ToList().ForEach(count => _testInitiative.Epics.Add(_testEpic));
 
+            //act
             _initiativePresenter.VisualizeToString(_testInitiative, _parentNodeID);
 
+            //assert
             _mockEpicPresenter.Verify(mep => mep.VisualizeToString(It.IsAny<Epic>(), _testInitiative.NodeID), Times.Exactly(5));
             _mockMeasurePresenter.Verify(mmp => mmp.VisualizeToString(It.IsAny<Measure>(), _testInitiative.NodeID), Times.Exactly(0));
         }
@@ -149,11 +185,14 @@ namespace LVT.Tests
         [Test]
         public void VisualizeToString_Initiative_CallsVisualizeToStringMeasureAndEpic_FiveTimes_WithFiveMeasures_FiveEpics()
         {
+            //arrange
             Enumerable.Range(0, 5).ToList().ForEach(count => _testInitiative.Measures.Add(_testMeasure));
             Enumerable.Range(0, 5).ToList().ForEach(count => _testInitiative.Epics.Add(_testEpic));
 
+            //act
             _initiativePresenter.VisualizeToString(_testInitiative, _parentNodeID);
 
+            //assert
             _mockMeasurePresenter.Verify(mmp => mmp.VisualizeToString(It.IsAny<Measure>(), _testInitiative.NodeID), Times.Exactly(5));
             _mockEpicPresenter.Verify(mep => mep.VisualizeToString(It.IsAny<Epic>(), _testInitiative.NodeID), Times.Exactly(5));
         }
