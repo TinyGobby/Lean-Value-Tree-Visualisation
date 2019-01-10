@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using LVT.LVT.Interfaces;
 
 namespace LVT
 {
-    public class Vision
+    public class Vision : Node
     {
         public Vision (string title)
         {
@@ -14,6 +15,11 @@ namespace LVT
 
         public string NodeID { get; }
         public string Title { get; set; }
-        public List<Goal> Goals { get; set; }  
+        public List<Goal> Goals { get; set; }
+
+        public string ID => NodeID;
+        public string Content1 => Title;
+        public string Header => GetType().Name;
+
     }
 }

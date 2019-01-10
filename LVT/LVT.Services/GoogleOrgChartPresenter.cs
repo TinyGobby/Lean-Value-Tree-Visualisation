@@ -7,34 +7,26 @@ namespace LVT.LVT.Services
     {
         public string VisualizeToStringVision(Vision vision)
         {
-            var nodeID = vision.NodeID;
-            var nodeHeader = vision.GetType().Name;
-            var nodeTitle = vision.Title;
-
             var goalsStrings = new List<string>();
 
-            var result = BuildOrgChartDataString(nodeID, nodeHeader, nodeTitle);
+            var result = BuildOrgChartDataString(vision);
 
             if (vision.Goals.Count() >= 1)
             {
                 foreach (var goal in vision.Goals)
                 {
-                    goalsStrings.Add(VisualizeToStringGoal(goal, nodeID));
+                    goalsStrings.Add(VisualizeToStringGoal(goal, vision.NodeID));
                 }
             }
 
             return $"[{result}, {string.Join(", ", goalsStrings)}]";
         }
 
-        internal string VisualizeToStringGoal(Goal goal, string parentNode)
+        internal string VisualizeToStringGoal(Goal goal, Vision parentNode)
         {
-            var nodeID = goal.NodeID;
-            var nodeHeader = goal.GetType().Name;
-            var nodeTitle = goal.Title;
-
             var betsStrings = new List<string>();
 
-            var result = BuildOrgChartDataString(nodeID, nodeHeader, nodeTitle, parentNode);
+            var result = BuildOrgChartDataString(goal, parentNode);
 
             if (goal.Bets.Count() >= 1)
             {
