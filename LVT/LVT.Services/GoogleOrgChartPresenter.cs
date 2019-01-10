@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using LVT.Classes;
 
 namespace LVT.LVT.Services
 {
@@ -39,7 +41,12 @@ namespace LVT.LVT.Services
             return $"{result}, {string.Join(", ", betsStrings)}";
         }
 
-        internal string VisualizeToStringBet(Bet bet, string parentNode)
+        internal string VisualizeToStringVision(Vision vision)
+        {
+            throw new NotImplementedException();
+        }
+
+        internal string VisualizeToStringBet(BetOld bet, string parentNode)
         {
             var nodeID = bet.NodeID;
             var nodeHeader = bet.GetType().Name;
@@ -60,7 +67,7 @@ namespace LVT.LVT.Services
             return $"{result}, {string.Join(", ", initiativesStrings)}";
         }
 
-        public string VisualizeToStringInitiative(Initiative initiative, string parentNode)
+        public string VisualizeToStringInitiative(InitiativeOld initiative, string parentNode)
         {
             var nodeID = initiative.NodeID;
             var nodeHeader = initiative.GetType().Name;
@@ -90,7 +97,7 @@ namespace LVT.LVT.Services
             return $"{result}, {string.Join(", ", measuresStrings)}, {string.Join(", ", epicsStrings)}";
         }
 
-        public string VisualizeToStringMeasure(Measure measure, string parentNode)
+        public string VisualizeToStringMeasure(MeasureOld measure, string parentNode)
         {
             var nodeID = measure.NodeID;
             var nodeHeader = measure.GetType().Name;
@@ -103,7 +110,7 @@ namespace LVT.LVT.Services
                 parentNode);
         }
 
-        public string VisualizeToStringEpic(Epic epic, string parentNode)
+        public string VisualizeToStringEpic(EpicOld epic, string parentNode)
         {
             var nodeID = epic.NodeID;
             var nodeHeader = epic.GetType().Name;

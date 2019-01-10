@@ -1,21 +1,22 @@
-﻿using System;
+﻿using LVT.LVT.Interfaces;
 using System.Collections.Generic;
 
-namespace LVT
+namespace LVT.Classes
 {
-    public class Initiative
+    class Initiative : Goal
     {
-        public Initiative(string title)
+        public Initiative(string title) : base(title)
         {
-            NodeID = Guid.NewGuid().ToString();
-            Title = title;
-            Measures = new List<Measure>();
-            Epics = new List<Epic>();
+            ContentLineOne = title;
+            Subnodes = new List<Measure>();
+            Subnodes2 = new List<Epic>();
         }
 
-        public string NodeID { get; }
-        public string Title { get; set; }
-        public List<Measure> Measures { get; set; }
-        public List<Epic> Epics { get; set; }
+        public string Id { get; private set; }
+        public string Type { get; private set; }
+        public string ContentLineOne { get; private set; }
+
+        public IEnumerable<INode> Subnodes { get; private set; }
+        public IEnumerable<INode> Subnodes2 { get; private set; }
     }
 }

@@ -6,13 +6,13 @@ namespace LVT.Tests
     class EpicPresenterTests
     {
         private EpicPresenter _epicPresenter;
-        private Epic _testEpic;
+        private EpicOld _testEpic;
 
         [SetUp]
         public void SetupForTest()
         {
             _epicPresenter = new EpicPresenter();
-            _testEpic = new Epic("testDescription", "testDeadline");
+            _testEpic = new EpicOld("testDescription", "testDeadline");
         }
 
         [Test]

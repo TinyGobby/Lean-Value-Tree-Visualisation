@@ -15,7 +15,7 @@ namespace LVT.LVT.Services
 
         }
 
-        public string VisualizeToString(Vision vision, string parentNode = "")
+        public string VisualizeToString(VisionOld vision, string parentNode = "")
         {
             string result = "[[{ v: '" + vision.NodeID + "', f: 'Vision" + "<div style=\"font-style:italic\">" + vision.Title + "</div>'}, " + $"'{parentNode}']";
 
@@ -27,7 +27,7 @@ namespace LVT.LVT.Services
             return result + "]";
         }
 
-        private string ProcessGoals(Vision vision)
+        private string ProcessGoals(VisionOld vision)
         {
             IEnumerable<String> goalsStrings = vision.Goals.Select(goal => _gp.VisualizeToString(goal, vision.NodeID));
 

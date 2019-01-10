@@ -1,26 +1,20 @@
-﻿using System;
+﻿using LVT.LVT.Interfaces;
 using System.Collections.Generic;
-using LVT.LVT.Interfaces;
 
-namespace LVT
+namespace LVT.Classes
 {
     public class Goal : Node
     {
-        public Goal(string title)
+        public Goal(string title) : base(title)
         {
-            NodeID = Guid.NewGuid().ToString();
-            Title = title;
-            Bets = new List<Node>();
+            ContentLineOne = title;
+            Subnodes = new List<Bet>();
         }
 
-        public string NodeID { get; }
-        public string Title { get; set; }
-        public List<Node> Bets { get; set; }
+        public string Id { get; private set; }
+        public string Type { get; private set; }
+        public string ContentLineOne { get; private set; }
 
-        public string ID => NodeID;
-        public string Content1 => Title;
-        public string Header => GetType().Name;
-        public List<Node> Subnodes => Bets;
-
+        public List<Bet> Subnodes { get; private set; }
     }
 }

@@ -6,11 +6,11 @@ namespace LVT
 {
     public class ReadAndWrite
     {
-        public static string BuildTree(StreamReader file)
-        {
-            LeanValueTree newTree = ParseLVTData(file);
-            return CreateLVTHtml(newTree);
-        }
+        //public static string BuildTree(StreamReader file)
+        //{
+        //    LeanValueTree newTree = ParseLVTData(file);
+        //    return CreateLVTHtml(newTree);
+        //}
 
         internal static LeanValueTree ParseLVTData(StreamReader file)
         {
@@ -18,14 +18,14 @@ namespace LVT
             return Parser.ParseJsonLVTFromStream(file);
         }
 
-        internal static string CreateLVTHtml(LeanValueTree tree)
-        {
-            //VisionPresenter VP = new VisionPresenter();
-            GoogleOrgChartPresenter presenter = new GoogleOrgChartPresenter();
-            Directory.CreateDirectory("C:\\temp");
-            //return VP.VisualizeToString(tree.Vision);
-            return presenter.VisualizeToStringVision(tree.Vision);
-        }
+        //internal static string CreateLVTHtml(LeanValueTree tree)
+        //{
+        //    //VisionPresenter VP = new VisionPresenter();
+        //    //GoogleOrgChartPresenter presenter = new GoogleOrgChartPresenter();
+        //    Directory.CreateDirectory("C:\\temp");
+        //    //return VP.VisualizeToString(tree.Vision);
+        //    return presenter.VisualizeToStringVision(tree.Vision);
+        //}
 
         public static string CreateFullHTML(string LVTHTMLString)
         {

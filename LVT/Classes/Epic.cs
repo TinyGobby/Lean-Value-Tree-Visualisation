@@ -1,18 +1,26 @@
-﻿using System;
+﻿using LVT.LVT.Interfaces;
+using System.Collections.Generic;
 
-namespace LVT
+namespace LVT.Classes
 {
-    public class Epic
+    class Epic : Node
     {
-        public Epic(string description, string deadline)
+        public Epic(string description, string deadline) : base(description)
         {
-            NodeID = Guid.NewGuid().ToString();
-            Description = description;
-            Deadline = deadline;
+            ContentLineOne = description;
+            ContentLineTwo = deadline;
         }
 
-        public string NodeID { get; }
-        public string Description { get; set; }
-        public string Deadline { get; set; }
+        public string Id { get; private set; }
+        public string Type { get; private set; }
+        public string ContentLineOne { get; private set; }
+        public string ContentLineTwo { get; private set; }
+
+        private readonly IEnumerable<INode> Subnodes;
+
+        public IEnumerable<INode> GetSubnodes()
+        {
+            return null;
+        }        
     }
 }

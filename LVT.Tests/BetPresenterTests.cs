@@ -8,18 +8,18 @@ namespace LVT.Tests
 {
     class BetPresenterTests
     {
-        private Bet _testBet;
+        private BetOld _testBet;
         private BetPresenter _betPresenter;
-        private Initiative _testInitiative;
+        private InitiativeOld _testInitiative;
         private string _ParentNodeID;
         private Mock<IInitiativePresenter> _mockInitiativePresenter;
 
         [SetUp]
         public void SetupForTest()
         {
-            _testBet = new Bet("Test Bet Title");
+            _testBet = new BetOld("Test Bet Title");
             _ParentNodeID = "Parent Goal Node Test ID";
-            _testInitiative = new Initiative("Test Initiative Title");
+            _testInitiative = new InitiativeOld("Test Initiative Title");
 
             _mockInitiativePresenter = new Mock<IInitiativePresenter>();
             _mockInitiativePresenter.SetupSequence(mip => mip.VisualizeToString(_testInitiative, _testBet.NodeID)).Returns("This initiative presenter method has been mocked")
@@ -67,7 +67,7 @@ namespace LVT.Tests
             
             _betPresenter.VisualizeToString(_testBet, _ParentNodeID);
             
-            _mockInitiativePresenter.Verify(mip => mip.VisualizeToString(It.IsAny<Initiative>(), _testBet.NodeID), Times.Exactly(5));
+            _mockInitiativePresenter.Verify(mip => mip.VisualizeToString(It.IsAny<InitiativeOld>(), _testBet.NodeID), Times.Exactly(5));
         }
     }
 }

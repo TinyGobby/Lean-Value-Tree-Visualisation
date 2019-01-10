@@ -7,6 +7,24 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Classes\OldClasses\**" />
+    <Compile Remove="LVT.Services\OldPresenters\**" />
+    <Compile Remove="obj\**" />
+    <EmbeddedResource Remove="Classes\OldClasses\**" />
+    <EmbeddedResource Remove="LVT.Services\OldPresenters\**" />
+    <EmbeddedResource Remove="obj\**" />
+    <None Remove="Classes\OldClasses\**" />
+    <None Remove="LVT.Services\OldPresenters\**" />
+    <None Remove="obj\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="LVT.Interfaces\IPresenter.cs" />
+    <Compile Remove="LVT.Services\GoogleOrgChartPresenter.cs" />
+    <Compile Remove="LVT.Services\Presenter.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="CommandLineParser" Version="2.3.0" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.1" />
   </ItemGroup>

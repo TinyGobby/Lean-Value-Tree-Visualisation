@@ -33,9 +33,9 @@ namespace LVT.LVT.Services
             return $"[{{ v:'{vision.NodeID}', f:'{vision.GetType().Name}<div style=\"font-style:italic\">{vision.Title}</div>'}}, '']";
         }
         // for goal, bet, initiative
-        public string BuildOrgChartDataString(Node node, Node parentNode)
+        public string BuildOrgChartDataString(INode node, INode parentNode)
         {
-            return $"[{{ v:'{node.ID}', f:'{node.Header}<div style=\"font-style:italic\">{node.Content1}</div>'}}, '{parentNode.ID}']";
+            return $"[{{ v:'{node.ID}', f:'{node.Header}<div style=\"font-style:italic\">{node.GetContent1()}</div>'}}, '{parentNode.ID}']";
         }
 
         // for measure

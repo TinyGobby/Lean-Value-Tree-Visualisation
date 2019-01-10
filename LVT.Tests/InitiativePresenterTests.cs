@@ -8,9 +8,9 @@ namespace LVT.Tests
 {
     class InitiativePresenterTests
     {
-        private Initiative _testInitiative;
-        private Measure _testMeasure;
-        private Epic _testEpic;
+        private InitiativeOld _testInitiative;
+        private MeasureOld _testMeasure;
+        private EpicOld _testEpic;
         private InitiativePresenter _initiativePresenter;
         private string _ParentNodeID;
         private Mock<IEpicPresenter> _mockEpicPresenter;
@@ -19,10 +19,10 @@ namespace LVT.Tests
         [SetUp]
         public void SetupForTest()
         {
-            _testInitiative = new Initiative("Test Initiative Title");
+            _testInitiative = new InitiativeOld("Test Initiative Title");
             _ParentNodeID = "Parent Bet Node Test ID";
-            _testEpic = new Epic("Test Epic Descritpition", "Test Epic Deadline");
-            _testMeasure = new Measure("Test Measure Description", "Test Measure Deadline", 1, "Test Measure Units");
+            _testEpic = new EpicOld("Test Epic Descritpition", "Test Epic Deadline");
+            _testMeasure = new MeasureOld("Test Measure Description", "Test Measure Deadline", 1, "Test Measure Units");
 
             _mockEpicPresenter = new Mock<IEpicPresenter>();
             _mockEpicPresenter.SetupSequence(mep => mep.VisualizeToString(_testEpic, _testInitiative.NodeID)).Returns("This Epic Presenter method has been mocked")
@@ -131,7 +131,7 @@ namespace LVT.Tests
 
             _initiativePresenter.VisualizeToString(_testInitiative, _ParentNodeID);
 
-            _mockMeasurePresenter.Verify(mmp => mmp.VisualizeToString(It.IsAny<Measure>(), _testInitiative.NodeID), Times.Exactly(5));
+            _mockMeasurePresenter.Verify(mmp => mmp.VisualizeToString(It.IsAny<MeasureOld>(), _testInitiative.NodeID), Times.Exactly(5));
         }
 
         [Test]
@@ -141,7 +141,7 @@ namespace LVT.Tests
 
             _initiativePresenter.VisualizeToString(_testInitiative, _ParentNodeID);
 
-            _mockEpicPresenter.Verify(mep => mep.VisualizeToString(It.IsAny<Epic>(), _testInitiative.NodeID), Times.Exactly(5));
+            _mockEpicPresenter.Verify(mep => mep.VisualizeToString(It.IsAny<EpicOld>(), _testInitiative.NodeID), Times.Exactly(5));
         }
 
         [Test]
@@ -152,8 +152,8 @@ namespace LVT.Tests
 
             _initiativePresenter.VisualizeToString(_testInitiative, _ParentNodeID);
 
-            _mockMeasurePresenter.Verify(mmp => mmp.VisualizeToString(It.IsAny<Measure>(), _testInitiative.NodeID), Times.Exactly(5));
-            _mockEpicPresenter.Verify(mep => mep.VisualizeToString(It.IsAny<Epic>(), _testInitiative.NodeID), Times.Exactly(5));
+            _mockMeasurePresenter.Verify(mmp => mmp.VisualizeToString(It.IsAny<MeasureOld>(), _testInitiative.NodeID), Times.Exactly(5));
+            _mockEpicPresenter.Verify(mep => mep.VisualizeToString(It.IsAny<EpicOld>(), _testInitiative.NodeID), Times.Exactly(5));
         }
     }
 }

@@ -1,22 +1,30 @@
-﻿using System;
+﻿using LVT.LVT.Interfaces;
+using System.Collections.Generic;
 
-namespace LVT
+namespace LVT.Classes
 {
-    public class Measure
+    class Measure : Epic
     {
-        public string NodeID { get; }
-        public string Description { get; set; }
-        public string Deadline { get; set; }
-        public int Amount { get; set; }
-        public string Units { get; set; }
-
-        public Measure(string description, string deadline, int amount, string units)
+        public Measure(string description, string deadline, string amount, string units) : base(description, deadline)
         {
-            NodeID = Guid.NewGuid().ToString();
-            Description = description;
-            Deadline = deadline;
-            Amount = amount;
-            Units = units;
+            ContentLineOne = description;
+            ContentLineTwo = deadline;
+            ContentLineThree = amount;
+            ContentLineFour = units;
+        }
+
+        public string Id { get; private set; }
+        public string Type { get; private set; }
+        public string ContentLineOne { get; private set; }
+        public string ContentLineTwo { get; private set; }
+        public string ContentLineThree { get; private set; }
+        public string ContentLineFour { get; private set; }
+
+        private readonly IEnumerable<INode> Subnodes;
+
+        public IEnumerable<INode> GetSubnodes()
+        {
+            return null;
         }
     }
 }

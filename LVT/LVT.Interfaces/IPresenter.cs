@@ -6,10 +6,10 @@
      string VisualizeToString(T toVisualise, string parentNode);
     }
 
-    public interface IMeasurePresenter : IPresenter<Measure> { }
-    public interface IEpicPresenter : IPresenter<Epic> { }
-    public interface IInitiativePresenter : IPresenter<Initiative> { }
-    public interface IBetPresenter : IPresenter<Bet> { }
+    public interface IMeasurePresenter : IPresenter<MeasureOld> { }
+    public interface IEpicPresenter : IPresenter<EpicOld> { }
+    public interface IInitiativePresenter : IPresenter<InitiativeOld> { }
+    public interface IBetPresenter : IPresenter<BetOld> { }
     public interface IGoalPresenter : IPresenter<Goal> { }
-    public interface IVisionPresenter : IPresenter<Vision> { }
+    public interface IVisionPresenter : IPresenter<VisionOld> { }
 }

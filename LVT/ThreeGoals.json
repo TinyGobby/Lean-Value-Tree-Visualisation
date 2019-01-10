@@ -1,0 +1,84 @@
+{
+    "vision": {
+        "title": "visionTitle",
+      "goals": [
+        {
+          "title": "goal1Title",
+          "bets": [
+            {
+              "title": "g2bet1Title",
+              "initiatives": [
+                {
+                  "title": "g2b1initiativeTitle",
+                  "measures": [
+                    {
+                      "description": "g2b1i1measureDescription",
+                      "deadline": "measureDeadline",
+                      "amount": 1,
+                      "units": "measureUnits"
+                    }
+                  ],
+                  "epics": [
+                    {
+                      "description": "g2b1i1epicDescription",
+                      "deadline": "epicDeadline"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "goalBetween1and2Title"
+            },
+            {
+              "title": "goal2Title",
+              "bets": [
+                {
+                  "title": "g2bet1Title",
+                  "initiatives": [
+                    {
+                      "title": "g2b1initiativeTitle",
+                      "measures": [
+                        {
+                          "description": "g2b1i1measureDescription",
+                          "deadline": "measureDeadline",
+                          "amount": 1,
+                          "units": "measureUnits"
+                        }
+                      ],
+                      "epics": [
+                        {
+                          "description": "g2b1i1epicDescription",
+                          "deadline": "epicDeadline"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "title": "g2bet2Title",
+                  "initiatives": [
+                    {
+                      "title": "g2b2initiativeTitle",
+                      "measures": [
+                        {
+                          "description": "g2b2i1measureDescription",
+                          "deadline": "measureDeadline",
+                          "amount": 1,
+                          "units": "measureUnits"
+                        }
+                      ],
+                      "epics": [
+                        {
+                          "description": "g2b2i1epicDescription",
+                          "deadline": "epicDeadline"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+}

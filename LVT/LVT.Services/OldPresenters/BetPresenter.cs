@@ -14,7 +14,7 @@ namespace LVT.LVT.Services
             _ip = ip ?? new InitiativePresenter();
         }
 
-        public string VisualizeToString(Bet bet, string parentNode)
+        public string VisualizeToString(BetOld bet, string parentNode)
         {
             string result = ConstantsGoogleChartsString.OpenerOrgChartDataString +
                             ConstantsGoogleChartsString.OrgChartNodeIDWrapper +
@@ -35,7 +35,7 @@ namespace LVT.LVT.Services
             return result;
         }
 
-        private string ProcessInitiatives(Bet bet)
+        private string ProcessInitiatives(BetOld bet)
         {
             IEnumerable<String> initiativesStrings = bet.Initiatives.Select(initiative => _ip.VisualizeToString(initiative, bet.NodeID));
 

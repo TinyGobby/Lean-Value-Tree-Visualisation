@@ -6,13 +6,13 @@ namespace LVT.Tests
     class MeasurePresenterTests
     {
         private MeasurePresenter _measurePresenter;
-        private Measure _testMeasure;
+        private MeasureOld _testMeasure;
 
         [SetUp]
         public void SetupForTest()
         {
             _measurePresenter = new MeasurePresenter();
-            _testMeasure = new Measure("testDescription", "testDeadline", 5, "testUnits");
+            _testMeasure = new MeasureOld("testDescription", "testDeadline", 5, "testUnits");
         }
 
         [Test]

@@ -1,4 +1,6 @@
-﻿namespace LVT
+﻿using LVT.Classes;
+
+namespace LVT
 {
     public class LeanValueTree
     {

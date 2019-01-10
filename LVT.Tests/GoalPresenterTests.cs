@@ -10,7 +10,7 @@ namespace LVT.Tests
     {
         private Goal _testGoal;
         private GoalPresenter _goalPresenter;
-        private Bet _testBet;
+        private BetOld _testBet;
         private string _ParentNodeID;
         private Mock<IBetPresenter> _mockBetPresenter;
 
@@ -19,7 +19,7 @@ namespace LVT.Tests
         {
             _testGoal = new Goal("Test Goal Title");
             _ParentNodeID = "Parent Vision Node Test ID";
-            _testBet = new Bet("Test Bet Title");
+            _testBet = new BetOld("Test Bet Title");
 
             _mockBetPresenter = new Mock<IBetPresenter>();
             _mockBetPresenter.SetupSequence(mbp => mbp.VisualizeToString(_testBet, _testGoal.NodeID)).Returns("This BetPresenter method has been mocked")
@@ -68,7 +68,7 @@ namespace LVT.Tests
 
             string result = _goalPresenter.VisualizeToString(_testGoal, _ParentNodeID);
            
-            _mockBetPresenter.Verify(mbp => mbp.VisualizeToString(It.IsAny<Bet>(), _testGoal.NodeID), Times.Exactly(5));
+            _mockBetPresenter.Verify(mbp => mbp.VisualizeToString(It.IsAny<BetOld>(), _testGoal.NodeID), Times.Exactly(5));
         }
     }
 }

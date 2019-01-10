@@ -1,0 +1,34 @@
+{
+    "vision": {
+        "title": "visionTitle",
+      "goals": [
+        {
+          "title": "goalTitle",
+          "bets": [
+            {
+              "title": "betTitle",
+              "initiatives": [
+                {
+                  "title": "initiativeTitle",
+                  "measures": [
+                    {
+                      "description": "measureDescription",
+                      "deadline": "measureDeadline",
+                      "amount": "1",
+                      "units": "measureUnits"
+                    }
+                  ],
+                  "epics": [
+                    {
+                      "description": "epicDescription",
+                      "deadline": "epicDeadline"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+}
